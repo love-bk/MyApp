@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/theme_bg_color"
+    tools:context="gjj.com.myapp.mynotice.views.MyNoticeDetailActivity">
+
+    <include layout="@layout/toolbar"/>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none"
+        >
+
+        <LinearLayout
+            android:id="@+id/layout_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_margin="10dp"
+            >
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/titleName_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:background="@drawable/border_all"
+                    android:text="通知标题"
+                    />
+
+                <EditText
+                    android:id="@+id/noticeTitle_et"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/titleName_tv"
+                    android:background="@drawable/border_all"
+                    android:hint="请输入标题"
+                    android:textCursorDrawable="@drawable/cursor"
+                    />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/subtitle_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:text="收件人"
+                    />
+
+                <TextView
+                    android:id="@+id/ddresseeaTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/subtitle_tv"
+                    android:text="选择收件人"
+                    android:textColor="@color/select_addressee"
+                    android:drawableRight="@mipmap/enter"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/projectType_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:text="发件人"
+                    />
+
+                <TextView
+                    android:id="@+id/addressorTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/projectType_tv"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/projectFidelity_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:layout_alignParentTop="true"
+                    android:text="时间"/>
+
+                <TextView
+                    android:id="@+id/timeTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/projectFidelity_tv"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/projectFrom_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:layout_height="match_parent"
+                    android:text="内容"
+                    />
+
+                <EditText
+                    android:id="@+id/content_et"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/projectFrom_tv"
+                    android:layout_height="match_parent"
+                    android:hint="请输入内容"
+                    android:inputType="textMultiLine"
+                    android:minLines="12"
+                    android:textCursorDrawable="@drawable/cursor"
+
+                    />
+            </RelativeLayout>
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style"
+                android:padding="10dp">
+
+                <Button
+                    android:id="@+id/send"
+                    style="@style/CommonBtn_style"
+                    android:layout_centerInParent="true"
+                    android:text="发送"/>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

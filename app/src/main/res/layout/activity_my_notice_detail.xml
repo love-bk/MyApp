@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/theme_bg_color"
+    tools:context="gjj.com.myapp.mynotice.views.MyNoticeDetailActivity">
+
+    <include layout="@layout/toolbar"/>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            >
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/titleName_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:background="@drawable/border_all"
+                    android:text="通知标题"
+                    />
+
+                <TextView
+                    android:id="@+id/noticeTitle_Tv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/titleName_tv"
+                    android:background="@drawable/border_all"
+                    />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/subtitle_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:text="收件人"
+                    />
+
+                <TextView
+                    android:id="@+id/ddresseeaTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/subtitle_tv"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/projectType_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:text="发件人"
+                    />
+
+                <TextView
+                    android:id="@+id/addressorTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/projectType_tv"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/projectFidelity_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:layout_alignParentTop="true"
+                    android:text="时间"/>
+
+                <TextView
+                    android:id="@+id/timeTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/projectFidelity_tv"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/projectFrom_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:layout_height="match_parent"
+                    android:text="内容"
+                   />
+
+                <TextView
+                    android:id="@+id/content_tv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/projectFrom_tv"
+                    android:layout_height="match_parent"
+                    android:text="哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈"
+                    />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#edeaea">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        >
+
+    <RelativeLayout
+        style="@style/ProjectDetailRL_style">
+
+        <TextView
+            android:id="@+id/name_tv"
+            style="@style/ProjectDetailTv_style"
+            android:background="@drawable/border_all"
+            android:text="姓名"
+            />
+
+        <TextView
+            android:id="@+id/nameTv"
+            style="@style/ProjectDetailValueTv_style"
+            android:layout_toRightOf="@id/name_tv"
+            android:background="@drawable/border_all"
+            />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        style="@style/ProjectDetailRL_style">
+
+        <TextView
+            android:id="@+id/sex_tv"
+            style="@style/ProjectDetailTv_style"
+            android:text="性别"
+            />
+
+        <TextView
+            android:id="@+id/sexTv"
+            style="@style/ProjectDetailValueTv_style"
+            android:layout_toRightOf="@id/sex_tv"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/ProjectDetailRL_style">
+
+        <TextView
+            android:id="@+id/worker_num_tv"
+            style="@style/ProjectDetailTv_style"
+            android:text="职工号"
+            />
+
+        <TextView
+            android:id="@+id/worker_numTv"
+            style="@style/ProjectDetailValueTv_style"
+            android:layout_toRightOf="@id/worker_num_tv"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/ProjectDetailRL_style">
+
+        <TextView
+            android:id="@+id/department_tv"
+            style="@style/ProjectDetailTv_style"
+            android:layout_alignParentTop="true"
+            android:text="部门"/>
+
+        <TextView
+            android:id="@+id/departmentTv"
+            style="@style/ProjectDetailValueTv_style"
+            android:layout_toRightOf="@id/department_tv"
+            />
+    </RelativeLayout>
+        <RelativeLayout
+            style="@style/ProjectDetailRL_style"
+            android:background="@drawable/border"
+            android:padding="10dp">
+            <Button
+                android:id="@+id/mystudent_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/login_btn_selector"
+                android:layout_centerHorizontal="true"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:text="我的学生"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+</RelativeLayout>

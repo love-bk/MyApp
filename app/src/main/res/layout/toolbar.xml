@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar
+    android:id="@+id/toolbar"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:fitsSystemWindows="true"
+    android:background="@color/title_bg_color"
+    app:contentInsetStart="0dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/back_iv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:src="@mipmap/return_normal"
+                            android:visibility="gone"/>
+                        <TextView
+                            android:id="@+id/title_tv"
+                            style="@style/title_style"
+                            android:text="标题"
+                            android:layout_centerHorizontal="true"/>
+                </RelativeLayout>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_height="?attr/actionBarSize"
+            app:tabIndicatorColor="@color/title_textcolor"
+            app:tabMode="scrollable"
+            android:background="@color/title_bg_color"
+            app:tabSelectedTextColor="@color/tabSelectedTextColor"
+            app:tabTextAppearance="@style/MyTabTextAppearance"
+            app:tabTextColor="@color/title_textcolor"
+            android:visibility="gone"
+            />
+</FrameLayout>
+
+</android.support.v7.widget.Toolbar>

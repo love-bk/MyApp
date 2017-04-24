@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#edeaea"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/new_message_rl"
+        style="@style/MyNoticeRL_style">
+        <ImageView
+            android:id="@+id/new_message_tv"
+            android:src="@mipmap/new_message"
+            style="@style/MyNoticeIv_style"
+           />
+        <TextView
+           style="@style/MyNoticeTv_style"
+            android:text="我要发布通知"
+            android:layout_toRightOf="@id/new_message_tv"
+            />
+    </RelativeLayout>
+
+     <RelativeLayout
+         android:id="@+id/forward_message_rl"
+        style="@style/MyNoticeRL_style">
+        <ImageView
+            android:id="@+id/forward_message_tv"
+            android:src="@mipmap/forward_message"
+            style="@style/MyNoticeIv_style"
+           />
+        <TextView
+           style="@style/MyNoticeTv_style"
+            android:text="我发布的通知"
+            android:layout_toRightOf="@id/forward_message_tv"
+            />
+    </RelativeLayout>
+
+     <RelativeLayout
+         android:id="@+id/get_message_rl"
+        style="@style/MyNoticeRL_style">
+        <ImageView
+            android:id="@+id/get_message_tv"
+            android:src="@mipmap/get_message"
+            style="@style/MyNoticeIv_style"
+           />
+        <TextView
+           style="@style/MyNoticeTv_style"
+            android:text="我收到的通知"
+            android:layout_toRightOf="@id/get_message_tv"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>

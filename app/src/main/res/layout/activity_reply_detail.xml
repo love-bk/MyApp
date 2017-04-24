@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="gjj.com.myapp.myreply.views.ReplyDetailActivity">
+
+    <include layout="@layout/toolbar"/>
+        <ScrollView
+            android:id="@+id/replyScrollView"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="none"
+            android:fillViewport="true"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                >
+
+                <RelativeLayout
+                    style="@style/ProjectDetailRL_style">
+
+                    <TextView
+                        android:id="@+id/titleName_tv"
+                        style="@style/ProjectDetailTv_style"
+                        android:background="@drawable/border_all"
+                        android:text="答辩小组"
+                        />
+
+                    <TextView
+                        android:id="@+id/replyTeamName_tv"
+                        style="@style/ProjectDetailValueTv_style"
+                        android:layout_toRightOf="@id/titleName_tv"
+                        android:background="@drawable/border_all"
+                        />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    style="@style/ProjectDetailRL_style">
+
+                    <TextView
+                        android:id="@+id/subtitle_tv"
+                        style="@style/ProjectDetailTv_style"
+                        android:text="答辩组长"
+                        />
+
+                    <TextView
+                        android:id="@+id/replyLeader_tv"
+                        style="@style/ProjectDetailValueTv_style"
+                        android:layout_toRightOf="@id/subtitle_tv"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    style="@style/ProjectDetailRL_style">
+
+                    <TextView
+                        android:id="@+id/projectType_tv"
+                        style="@style/ProjectDetailTv_style"
+                        android:text="答辩成员"
+                        />
+
+                    <TextView
+                        android:id="@+id/replyMember_tv"
+                        style="@style/ProjectDetailValueTv_style"
+                        android:layout_toRightOf="@id/projectType_tv"
+                        />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    style="@style/ProjectDetailRL_style">
+
+                    <TextView
+                        android:id="@+id/projectFidelity_tv"
+                        style="@style/ProjectDetailTv_style"
+                        android:layout_alignParentTop="true"
+                        android:text="答辩地点"/>
+
+                    <TextView
+                        android:id="@+id/replyPlace_tv"
+                        style="@style/ProjectDetailValueTv_style"
+                        android:layout_toRightOf="@id/projectFidelity_tv"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    style="@style/ProjectDetailRL_style">
+
+                    <TextView
+                        android:id="@+id/major_tv"
+                        style="@style/ProjectDetailTv_style"
+                        android:text="答辩专业"/>
+
+                    <TextView
+                        android:id="@+id/replyMajorTv"
+                        style="@style/ProjectDetailValueTv_style"
+                        android:layout_toRightOf="@id/major_tv"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    style="@style/ProjectDetailRL_style">
+
+                    <TextView
+                        android:id="@+id/projectFrom_tv"
+                        style="@style/ProjectDetailTv_style"
+                        android:text="开始时间"
+                        />
+
+                    <TextView
+                        android:id="@+id/startTimeTv"
+                        style="@style/ProjectDetailValueTv_style"
+                        android:layout_toRightOf="@id/projectFrom_tv"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    style="@style/ProjectDetailRL_style">
+
+                    <TextView
+                        android:id="@+id/year_tv"
+                        style="@style/ProjectDetailTv_style"
+                        android:text="结束时间"
+                        />
+
+                    <TextView
+                        android:id="@+id/endTimeTv"
+                        style="@style/ProjectDetailValueTv_style"
+                        android:layout_toRightOf="@id/year_tv"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    style="@style/ProjectDetailRL_style">
+
+                    <TextView
+                        style="@style/ProjectDetailTv_style"
+                        android:layout_width="match_parent"
+                        android:text="答辩学生"
+                        android:textColor="#f00"
+                        android:textStyle="bold"
+                        />
+                </RelativeLayout>
+                <RelativeLayout
+                    android:background="@drawable/border"
+                    style="@style/ProjectDetailRL_style"
+                    android:padding="10dp">
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/replyStudentRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </android.support.v7.widget.RecyclerView>
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+</LinearLayout>

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/theme_bg_color"
+    tools:context="gjj.com.myapp.myreply.views.ReplyScoreDetailActivity">
+    <include layout="@layout/toolbar"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="10dp"
+        android:layout_marginTop="20dp"
+        >
+
+        <RelativeLayout
+            style="@style/ProjectDetailRL_style">
+
+            <TextView
+                android:id="@+id/name_tv"
+                style="@style/ProjectDetailTv_style"
+                android:background="@drawable/border_all"
+                android:text="题目"
+                />
+
+            <TextView
+                android:id="@+id/nameTv"
+                style="@style/ProjectDetailValueTv_style"
+                android:layout_toRightOf="@id/name_tv"
+                android:background="@drawable/border_all"
+                />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            style="@style/ProjectDetailRL_style">
+
+            <TextView
+                android:id="@+id/sex_tv"
+                style="@style/ProjectDetailTv_style"
+                android:text="姓名"
+                />
+
+            <TextView
+                android:id="@+id/sexTv"
+                style="@style/ProjectDetailValueTv_style"
+                android:layout_toRightOf="@id/sex_tv"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/ProjectDetailRL_style">
+
+            <TextView
+                android:id="@+id/worker_num_tv"
+                style="@style/ProjectDetailTv_style"
+                android:text="班级"
+                />
+
+            <TextView
+                android:id="@+id/worker_numTv"
+                style="@style/ProjectDetailValueTv_style"
+                android:layout_toRightOf="@id/worker_num_tv"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            style="@style/ProjectDetailRL_style">
+
+            <TextView
+                android:id="@+id/department_tv"
+                style="@style/ProjectDetailTv_style"
+                android:layout_alignParentTop="true"
+                android:text="学号"/>
+
+            <TextView
+                android:id="@+id/departmentTv"
+                style="@style/ProjectDetailValueTv_style"
+                android:layout_toRightOf="@id/department_tv"
+                />
+        </RelativeLayout>
+        <RelativeLayout
+            style="@style/ProjectDetailRL_style"
+            android:background="@drawable/border"
+            android:padding="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="16sp"
+                android:textColor="@android:color/black"
+                android:text="答辩环节评分项（每项各占10分,总计40分）"/>
+        </RelativeLayout>
+         <RelativeLayout
+            style="@style/ProjectDetailRL_style"
+            android:background="@drawable/border"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/score01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textSize="16sp"
+                android:text="1.完成任务书规定的要求与水平评分"/>
+             <TextView
+                 android:id="@+id/score01_tv"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentRight="true"
+                 android:textSize="16sp"
+                 android:textColor="@android:color/holo_red_dark"
+                 android:text="10"/>
+        </RelativeLayout>
+         <RelativeLayout
+            style="@style/ProjectDetailRL_style"
+            android:background="@drawable/border"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/score02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textSize="16sp"
+                android:text="2.论文与实物的质量评分"/>
+             <TextView
+                 android:id="@+id/score02_tv"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentRight="true"
+                 android:textSize="16sp"
+                 android:textColor="@android:color/holo_red_dark"
+                 android:text="10"/>
+        </RelativeLayout>
+         <RelativeLayout
+            style="@style/ProjectDetailRL_style"
+            android:background="@drawable/border"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/score03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textSize="16sp"
+                android:text="3.论文内容的答辩陈述评分"/>
+             <TextView
+                 android:id="@+id/score03_tv"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentRight="true"
+                 android:textSize="16sp"
+                 android:textColor="@android:color/holo_red_dark"
+                 android:text="10"/>
+        </RelativeLayout>
+         <RelativeLayout
+            style="@style/ProjectDetailRL_style"
+            android:background="@drawable/border"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/score04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textSize="16sp"
+                android:text="4.回答问题的正确性评分"/>
+             <TextView
+                 android:id="@+id/score04_tv"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentRight="true"
+                 android:textSize="16sp"
+                 android:textColor="@android:color/holo_red_dark"
+                 android:text="10"/>
+        </RelativeLayout>
+        <RelativeLayout
+            style="@style/ProjectDetailRL_style"
+            android:background="@drawable/border"
+            android:padding="10dp">
+            <TextView
+                android:id="@+id/total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:textSize="16sp"
+                android:text="总计"/>
+            <TextView
+                android:id="@+id/total_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:textSize="16sp"
+                android:textColor="@android:color/holo_red_dark"
+                android:text="40"/>
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+</LinearLayout>

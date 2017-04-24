@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    tools:context="gjj.com.myapp.myproject.ProjectDetailActivity">
+    <include layout="@layout/toolbar"/>
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:scrollbars="none"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="10dp"
+            >
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/titleName_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:background="@drawable/border_all"
+                    android:text="@string/title"
+                    />
+
+                <TextView
+                    android:id="@+id/title_Tv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/titleName_tv"
+                    android:background="@drawable/border_all"
+                    />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/subtitle_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:text="@string/subTitle"
+                    />
+
+                <TextView
+                    android:id="@+id/subtitleTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/subtitle_tv"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/projectType_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:text="@string/projectType"
+                    />
+
+                <TextView
+                    android:id="@+id/projectTypeTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/projectType_tv"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/projectFidelity_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/projectFidelity"/>
+
+                <TextView
+                    android:id="@+id/projectFidelityTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/projectFidelity_tv"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/projectFrom_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:text="@string/projectFrom"
+                    />
+
+                <TextView
+                    android:id="@+id/projectFromTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/projectFrom_tv"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/year_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:text="@string/year"
+                    />
+
+                <TextView
+                    android:id="@+id/yearTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/year_tv"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/major_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/major"/>
+
+                <TextView
+                    android:id="@+id/majorTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/major_tv"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/approveState_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:text="@string/approveState"
+                    />
+
+                <TextView
+                    android:id="@+id/approveStateTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/approveState_tv"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/student_name_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:text="@string/student_name"
+                    />
+
+                <TextView
+                    android:id="@+id/student_nameTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/student_name_tv"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/content_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:text="@string/content"
+                    />
+
+                <TextView
+                    android:id="@+id/contentTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/content_tv"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/basicRequirement_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:text="@string/basicRequirement"
+                    />
+
+                <TextView
+                    android:id="@+id/basicRequirementTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/basicRequirement_tv"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/basicSkill_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:text="@string/basicSkill"
+                    />
+
+                <TextView
+                    android:id="@+id/basicSkillTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/basicSkill_tv"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                style="@style/ProjectDetailRL_style">
+
+                <TextView
+                    android:id="@+id/reference_tv"
+                    style="@style/ProjectDetailTv_style"
+                    android:text="@string/reference"
+                    />
+
+                <TextView
+                    android:id="@+id/referenceTv"
+                    style="@style/ProjectDetailValueTv_style"
+                    android:layout_toRightOf="@id/reference_tv"
+                    />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
