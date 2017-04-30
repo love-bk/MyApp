@@ -38,8 +38,9 @@ public class LoginPresenter extends BasePresenter<LoginView> {
 //                        tutorDao.insert(tutor);
                         //将获取到的数据添加到缓存
                         ACache.get((LoginActivity)mvpView).put(Constants.TUTOR,tutor);
-                        Gson gson = new Gson();
-                        mvpView.loginSuccess(gson.fromJson(tutor, Tutor.class));
+//                        Gson gson = new Gson();
+//                        gson.fromJson(tutor, Tutor.class)
+//                        mvpView.loginSuccess();
                     }
 
                     @Override
