@@ -31,7 +31,6 @@ public class GraduateProject {
     private Integer correctnessScoreByGroup;       //回答问题的正确性评分
     private Integer qualityScoreBtGroup;           //论文与实务的质量评分
     private Integer replyScoreByGroup;             //论文内容的答辩陈述评分
-    private Integer serverId;                      //服务器端的id
     private String remark;                         //指导老师的评语
     private Integer student_id;                     //选该题目学生的id
     private String student_name;                     //选该题目学生的姓名
@@ -43,17 +42,18 @@ public class GraduateProject {
     private String replyStation;
 
 
-    @Generated(hash = 1159598178)
+
+    @Generated(hash = 2060373895)
     public GraduateProject(Long id, String year, String title, String subTitle,
             String category, String projectType, String projectFidelity,
             String projectFrom, Integer replyGroup_id, String content,
             String basicRequirement, String basicSkill, String reference,
             String major, Integer version, Integer completenessScoreByGroup,
             Integer correctnessScoreByGroup, Integer qualityScoreBtGroup,
-            Integer replyScoreByGroup, Integer serverId, String remark,
-            Integer student_id, String student_name, Integer tutor_id,
-            boolean isAllow, boolean isSubmit, boolean isSave,
-            boolean isAuditByDirector, String replyStation) {
+            Integer replyScoreByGroup, String remark, Integer student_id,
+            String student_name, Integer tutor_id, boolean isAllow,
+            boolean isSubmit, boolean isSave, boolean isAuditByDirector,
+            String replyStation) {
         this.id = id;
         this.year = year;
         this.title = title;
@@ -73,7 +73,6 @@ public class GraduateProject {
         this.correctnessScoreByGroup = correctnessScoreByGroup;
         this.qualityScoreBtGroup = qualityScoreBtGroup;
         this.replyScoreByGroup = replyScoreByGroup;
-        this.serverId = serverId;
         this.remark = remark;
         this.student_id = student_id;
         this.student_name = student_name;
@@ -88,6 +87,7 @@ public class GraduateProject {
     @Generated(hash = 1800086101)
     public GraduateProject() {
     }
+
 
 
     public void setStudent_id(Integer student_id) {
@@ -282,14 +282,6 @@ public class GraduateProject {
         this.replyScoreByGroup = replyScoreByGroup;
     }
 
-    public Integer getServerId() {
-        return serverId;
-    }
-
-    public void setServerId(Integer serverId) {
-        this.serverId = serverId;
-    }
-
     public int getStudent_id() {
         return student_id;
     }
@@ -339,37 +331,7 @@ public class GraduateProject {
         this.year = year;
     }
 
-    @Override
-    public String toString() {
-        return "GraduateProject{" +
-                "id=" + id +
-                ", year='" + year + '\'' +
-                ", title='" + title + '\'' +
-                ", subTitle='" + subTitle + '\'' +
-                ", category='" + category + '\'' +
-                ", projectType='" + projectType + '\'' +
-                ", projectFidelity='" + projectFidelity + '\'' +
-                ", projectFrom='" + projectFrom + '\'' +
-                ", content='" + content + '\'' +
-                ", basicRequirement='" + basicRequirement + '\'' +
-                ", basicSkill='" + basicSkill + '\'' +
-                ", reference='" + reference + '\'' +
-                ", major='" + major + '\'' +
-                ", version=" + version +
-                ", completenessScoreByGroup=" + completenessScoreByGroup +
-                ", correctnessScoreByGroup=" + correctnessScoreByGroup +
-                ", qualityScoreBtGroup=" + qualityScoreBtGroup +
-                ", replyScoreByGroup=" + replyScoreByGroup +
-                ", serverId=" + serverId +
-                ", remark='" + remark + '\'' +
-                ", student_id='" + student_id + '\'' +
-                ", tutor_id='" + tutor_id + '\'' +
-                ", isAllow=" + isAllow +
-                ", isSubmit=" + isSubmit +
-                ", isSave=" + isSave +
-                ", isAuditByDirector=" + isAuditByDirector +
-                '}';
-    }
+
 
     public Long getId() {
         return this.id;

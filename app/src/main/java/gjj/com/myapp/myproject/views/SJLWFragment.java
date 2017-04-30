@@ -3,7 +3,9 @@ package gjj.com.myapp.myproject.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,19 +20,22 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import gjj.com.myapp.R;
-import gjj.com.myapp.myproject.adapter.SJLWRecyclerViewAdapter;
 import gjj.com.myapp.myproject.ProjectDetailActivity;
+import gjj.com.myapp.myproject.adapter.SJLWRecyclerViewAdapter;
 import gjj.com.myapp.utils.Constants;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class SJLWFragment extends Fragment {
+public class SJLWFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
 
     @BindView(R.id.recyclerView)
     RecyclerView mRecyclerView;
+    @BindView(R.id.swipe_refresh)
+    SwipeRefreshLayout mSwipeRefresh;
     private List<String> mData = new ArrayList<>();
+
     public SJLWFragment() {
         // Required empty public constructor
     }
@@ -58,14 +63,14 @@ public class SJLWFragment extends Fragment {
             @Override
             public void onItemClick(View view, int position) {
                 startActivity(new Intent(getActivity(), ProjectDetailActivity.class));
-                Toast.makeText(getActivity(), "点击了第"+position+"条", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "点击了第" + position + "条", Toast.LENGTH_SHORT).show();
             }
         });
         mRecyclerView.setAdapter(mAdapter);
 
         int categoryFlag = getArguments().getInt(Constants.SUBJECT_CATEGORY, -1);
-        if (categoryFlag != -1){
-            switch (categoryFlag){
+        if (categoryFlag != -1) {
+            switch (categoryFlag) {
                 case 0://设计
                     initData(1);
                     mAdapter.addList(mData);
@@ -78,6 +83,13 @@ public class SJLWFragment extends Fragment {
                     break;
             }
         }
+
+        mSwipeRefresh.setOnRefreshListener(this);
+        //为SwipeRefreshLayout设置刷新时的颜色变化，最多可以设置4种
+        mSwipeRefresh.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
         return view;
     }
 
@@ -86,5 +98,21 @@ public class SJLWFragment extends Fragment {
         for (int i = 1; i < 100; i++) {
             mData.add("pager" + pager + " 第" + i + "个item");
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //结束后停止刷新
+                mSwipeRefresh.setRefreshing(false);
+            }
+        }, 3000);
     }
 }

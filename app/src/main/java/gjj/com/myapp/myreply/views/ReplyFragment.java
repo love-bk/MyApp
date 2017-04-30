@@ -3,7 +3,9 @@ package gjj.com.myapp.myreply.views;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -17,17 +19,18 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import gjj.com.myapp.R;
-import gjj.com.myapp.myproject.adapter.SJLWRecyclerViewAdapter;
 import gjj.com.myapp.myreply.adapter.ReplyRecyclerViewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ReplyFragment extends Fragment {
+public class ReplyFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
 
     @BindView(R.id.replyRecyclerView)
     RecyclerView mReplyRecyclerView;
+    @BindView(R.id.reply_swipe_refresh)
+    SwipeRefreshLayout mReplySwipeRefresh;
     private List<String> mData = new ArrayList<>();
 
     public ReplyFragment() {
@@ -51,6 +54,7 @@ public class ReplyFragment extends Fragment {
             }
         });
         mReplyRecyclerView.setAdapter(mAdapter);
+        mReplySwipeRefresh.setOnRefreshListener(this);
         return view;
     }
 
@@ -58,12 +62,24 @@ public class ReplyFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
     }
 
     private void initData() {
         mData = new ArrayList<>();
         for (int i = 1; i < 11; i++) {
-            mData.add("pager"+ " 第" + i + "个item");
+            mData.add("pager" + " 第" + i + "个item");
         }
+    }
+
+    @Override
+    public void onRefresh() {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                //结束后停止刷新
+                mReplySwipeRefresh.setRefreshing(false);
+            }
+        }, 3000);
     }
 }
