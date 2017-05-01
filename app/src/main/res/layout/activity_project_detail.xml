@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/title_bg_color"
+    android:fitsSystemWindows="true"
     android:gravity="center_horizontal"
     tools:context="gjj.com.myapp.myproject.ProjectDetailActivity">
     <include layout="@layout/toolbar"/>
@@ -13,6 +15,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:scrollbars="none"
+        android:background="@color/theme_bg_color"
         >
 
         <LinearLayout

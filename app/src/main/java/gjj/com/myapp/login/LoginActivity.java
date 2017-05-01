@@ -1,4 +1,4 @@
-package gjj.com.myapp.login.views;
+package gjj.com.myapp.login;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,14 +19,12 @@ import gjj.com.myapp.HomeActivity;
 import gjj.com.myapp.R;
 import gjj.com.myapp.baseframework.mvp.MvpActivity;
 import gjj.com.myapp.baseframework.retrofit.ApiStores;
-import gjj.com.myapp.login.presenter.LoginPresenter;
+import gjj.com.myapp.presenter.LoginPresenter;
 import gjj.com.myapp.model.Tutor;
 import gjj.com.myapp.model.User;
 import gjj.com.myapp.utils.KeyBoardHelper;
 import gjj.com.myapp.utils.SPUtil;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import gjj.com.myapp.views.LoginView;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.scalars.ScalarsConverterFactory;

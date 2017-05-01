@@ -4,16 +4,8 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-
-import gjj.com.myapp.MyApplication;
 import gjj.com.myapp.baseframework.mvp.BasePresenter;
-import gjj.com.myapp.baseframework.retrofit.ApiCallback;
-import gjj.com.myapp.login.views.LoginActivity;
-import gjj.com.myapp.login.views.LoginView;
 import gjj.com.myapp.model.Tutor;
-import gjj.com.myapp.model.User;
 import gjj.com.myapp.myinfo.views.InfoFragment;
 import gjj.com.myapp.myinfo.views.MyInfoView;
 import gjj.com.myapp.myinfo.views.MyStudentActivity;

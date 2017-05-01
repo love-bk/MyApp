@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/title_bg_color"
+    android:fitsSystemWindows="true"
     tools:context="gjj.com.myapp.myreply.views.ReplyDetailActivity">
 
     <include layout="@layout/toolbar"/>
@@ -15,6 +17,7 @@
             android:layout_weight="1"
             android:scrollbars="none"
             android:fillViewport="true"
+            android:background="@color/theme_bg_color"
             >
 
             <LinearLayout

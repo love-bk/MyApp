@@ -15,7 +15,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import gjj.com.myapp.R;
 import gjj.com.myapp.model.Student;
-import gjj.com.myapp.myproject.adapter.SJLWRecyclerViewAdapter;
+import gjj.com.myapp.myproject.adapter.ProjectRecyclerViewAdapter;
 
 /**
  * Created by 高娟娟 on 2017/4/3.
@@ -26,7 +26,7 @@ public class MyStudentListAdapter extends RecyclerView.Adapter<MyStudentListAdap
     private Context mContext;
     private List<Student> mData = new ArrayList<>();
     private LayoutInflater mInflater;
-    private SJLWRecyclerViewAdapter.OnItemClickListener mOnItemClickListener;
+    private ProjectRecyclerViewAdapter.OnItemClickListener mOnItemClickListener;
 
 
     public MyStudentListAdapter(Context context, List<Student> list) {
@@ -39,7 +39,7 @@ public class MyStudentListAdapter extends RecyclerView.Adapter<MyStudentListAdap
         void onItemClick(View view, int position);
     }
 
-    public void setOnItemClickListener(SJLWRecyclerViewAdapter.OnItemClickListener mOnItemClickListener) {
+    public void setOnItemClickListener(ProjectRecyclerViewAdapter.OnItemClickListener mOnItemClickListener) {
         this.mOnItemClickListener = mOnItemClickListener;
     }
 

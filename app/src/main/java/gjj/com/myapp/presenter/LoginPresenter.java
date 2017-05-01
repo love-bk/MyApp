@@ -1,18 +1,10 @@
-package gjj.com.myapp.login.presenter;
+package gjj.com.myapp.presenter;
 
 
-import android.content.Context;
-
-import com.google.gson.Gson;
-
-import gjj.com.myapp.MyApplication;
 import gjj.com.myapp.baseframework.mvp.BasePresenter;
 import gjj.com.myapp.baseframework.retrofit.ApiCallback;
-import gjj.com.myapp.greendao.gen.TutorDao;
-import gjj.com.myapp.login.views.LoginActivity;
-import gjj.com.myapp.login.views.LoginView;
-import gjj.com.myapp.model.MainModel;
-import gjj.com.myapp.model.Tutor;
+import gjj.com.myapp.login.LoginActivity;
+import gjj.com.myapp.views.LoginView;
 import gjj.com.myapp.model.User;
 import gjj.com.myapp.utils.ACache;
 import gjj.com.myapp.utils.Constants;

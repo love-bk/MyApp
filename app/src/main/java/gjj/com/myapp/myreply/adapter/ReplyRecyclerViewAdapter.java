@@ -14,7 +14,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import gjj.com.myapp.R;
-import gjj.com.myapp.myproject.adapter.SJLWRecyclerViewAdapter;
 
 /**
  * Created by 高娟娟 on 2017/4/4.

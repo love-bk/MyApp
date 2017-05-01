@@ -1,4 +1,4 @@
-package gjj.com.myapp.login.views;
+package gjj.com.myapp.views;
 
 import gjj.com.myapp.baseframework.mvp.BaseView;
 import gjj.com.myapp.model.MainModel;

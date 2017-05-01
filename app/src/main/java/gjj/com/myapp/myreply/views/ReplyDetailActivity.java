@@ -17,7 +17,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import gjj.com.myapp.R;
 import gjj.com.myapp.baseframework.base.BaseActivity;
-import gjj.com.myapp.myproject.adapter.SJLWRecyclerViewAdapter;
 import gjj.com.myapp.myreply.adapter.ReplyStudentRecyclerViewAdapter;
 
 public class ReplyDetailActivity extends BaseActivity {

@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,7 +19,7 @@ import gjj.com.myapp.R;
  * Created by 高娟娟 on 2017/3/24.
  */
 
-public class SJLWRecyclerViewAdapter extends RecyclerView.Adapter<SJLWRecyclerViewAdapter.MyViewHolder> {
+public class ProjectRecyclerViewAdapter extends RecyclerView.Adapter<ProjectRecyclerViewAdapter.MyViewHolder> {
 
 
     private Context mContext;
@@ -29,7 +28,7 @@ public class SJLWRecyclerViewAdapter extends RecyclerView.Adapter<SJLWRecyclerVi
     private OnItemClickListener mOnItemClickListener;
 
 
-    public SJLWRecyclerViewAdapter(Context context, List<String> list) {
+    public ProjectRecyclerViewAdapter(Context context, List<String> list) {
         this.mContext = context;
         this.mData = list;
         mInflater = LayoutInflater.from(mContext);
