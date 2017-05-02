@@ -35,7 +35,7 @@
                             android:layout_centerVertical="true"
                             android:src="@drawable/setting_selector"
                             android:clickable="true"
-                            android:padding="12dp"
+                            android:padding="10dp"
                             android:visibility="gone"/>
                 </RelativeLayout>
 

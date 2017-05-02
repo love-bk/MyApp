@@ -1,11 +1,17 @@
 package gjj.com.myapp;
 
+import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,7 +21,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import gjj.com.myapp.baseframework.base.BaseActivity;
+import butterknife.OnClick;
 import gjj.com.myapp.baseframework.mvp.MvpActivity;
 import gjj.com.myapp.myinfo.views.InfoFragment;
 import gjj.com.myapp.mynotice.views.NoticeFragment;
@@ -25,7 +31,7 @@ import gjj.com.myapp.myreply.views.ReplyFragment;
 import gjj.com.myapp.presenter.HomePresenter;
 import gjj.com.myapp.views.HomeView;
 
-public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView {
+public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView, View.OnClickListener {
 
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
@@ -35,8 +41,11 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
     TextView mTitleTv;
     @BindView(R.id.setting_iv)
     ImageView settingIv;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
     private List<Fragment> mFragmentList = new ArrayList<>();
     private long exitTime = 0;
+    private PopupWindow mPopupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +141,7 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
         if (0 == currentItem) {
             settingIv.setVisibility(View.VISIBLE);
             mTitleTv.setText("我的课题");
+
         } else {
             settingIv.setVisibility(View.GONE);
             switch (currentItem) {
@@ -171,4 +181,60 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
     }
 
 
+    @OnClick({R.id.setting_iv})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.setting_iv:
+                //弹出自定义overflow
+                popUpMyOverFlow();
+                break;
+
+        }
+    }
+
+    //弹出自定义的Popwindow
+    private void popUpMyOverFlow() {
+        //获取状态栏高度
+        Rect frame = new Rect();
+        getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
+        //状态栏高度+toolbar的高度
+        int yOffset = frame.top + mToolbar.getHeight();
+        if (null == mPopupWindow) {
+            //初始化PopupWindow的布局
+            View popView = getLayoutInflater().inflate(R.layout.action_overflow_popwindow, null);
+            //popView即popupWindow的布局，true设置focusable
+            mPopupWindow = new PopupWindow(popView,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    true);
+            //必须设置BackgroundDrawable后setOutsideTouchable（true）才会有效
+            mPopupWindow.setBackgroundDrawable(new ColorDrawable());
+            //点击外部关闭
+            mPopupWindow.setOutsideTouchable(true);
+            //设置一个动画
+            mPopupWindow.setAnimationStyle(android.R.style.Animation_Dialog);
+            //设置Gravity，让他显示在右上角
+            mPopupWindow.showAtLocation(mToolbar, Gravity.RIGHT | Gravity.TOP, 20, yOffset);
+            //设置item的点击监听
+            popView.findViewById(R.id.ll_item1).setOnClickListener(this);
+            popView.findViewById(R.id.ll_item2).setOnClickListener(this);
+        } else {
+            mPopupWindow.showAtLocation(mToolbar, Gravity.RIGHT | Gravity.TOP, 20, yOffset);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.ll_item1:
+                Toast.makeText(mActivity, "点击了全部", Toast.LENGTH_SHORT).show();
+                mPopupWindow.dismiss();
+                break;
+            case R.id.ll_item2:
+                Toast.makeText(mActivity, "点击了显示论文", Toast.LENGTH_SHORT).show();
+                mPopupWindow.dismiss();
+                break;
+        }
+
+    }
 }

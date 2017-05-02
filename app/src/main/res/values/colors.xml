@@ -19,5 +19,6 @@
     <color name="login_input_color">#FF020202</color>
     <color name="theme_bg_color">#edeaea</color>
     <color name="pressed_color">#E9E9E9</color>
-
+    <color name="color_96c1ec">#2395c6</color>
+    <color name="color_c6cace">#c62395c6</color>
 </resources>

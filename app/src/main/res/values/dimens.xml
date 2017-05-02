@@ -2,5 +2,5 @@
 <resources>
     <dimen name="padding_top">0dp</dimen>
     <dimen name="title_height">60dp</dimen>
-    <dimen name="title_textsize">20sp</dimen>
+    <dimen name="title_textsize">24sp</dimen>
 </resources>

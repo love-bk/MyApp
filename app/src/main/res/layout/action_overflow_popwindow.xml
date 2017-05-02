@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#96c1ec">
+
+    <LinearLayout
+        android:id="@+id/ll_item1"
+        style="@style/Ll_Style">
+
+        <TextView
+            style="@style/Popwindow_Style"
+            android:text="显示全部"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c9c2c2"/>
+    <LinearLayout
+        android:id="@+id/ll_item2"
+        style="@style/Ll_Style">
+
+        <TextView
+            style="@style/Popwindow_Style"
+            android:text="显示论文"/>
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>
