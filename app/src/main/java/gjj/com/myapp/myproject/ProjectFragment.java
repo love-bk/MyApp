@@ -1,6 +1,7 @@
 package gjj.com.myapp.myproject;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -19,18 +20,20 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import gjj.com.myapp.HomeActivity;
 import gjj.com.myapp.R;
 import gjj.com.myapp.baseframework.mvp.MvpFragment;
 import gjj.com.myapp.model.GraduateProject;
 import gjj.com.myapp.myproject.adapter.ProjectRecyclerViewAdapter;
 import gjj.com.myapp.presenter.ProjectPresenter;
 import gjj.com.myapp.utils.Constants;
+import gjj.com.myapp.utils.SPUtil;
 import gjj.com.myapp.views.ProjectView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProjectFragment extends MvpFragment<ProjectPresenter> implements SwipeRefreshLayout.OnRefreshListener,ProjectView{
+public class ProjectFragment extends MvpFragment<ProjectPresenter> implements SwipeRefreshLayout.OnRefreshListener,ProjectView, HomeActivity.MenuClickCallBack {
 
 
     @BindView(R.id.recyclerView)
@@ -38,18 +41,15 @@ public class ProjectFragment extends MvpFragment<ProjectPresenter> implements Sw
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefresh;
     private List<String> mData = new ArrayList<>();
+    private ProjectRecyclerViewAdapter mAdapter;
 
 
     public ProjectFragment() {
-        // Required empty public constructor
     }
 
     public static ProjectFragment newInstance(int position) {
 
-        Bundle args = new Bundle();
-        args.putInt(Constants.SUBJECT_CATEGORY, position);
         ProjectFragment fragment = new ProjectFragment();
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -58,9 +58,17 @@ public class ProjectFragment extends MvpFragment<ProjectPresenter> implements Sw
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_project, container, false);
         ButterKnife.bind(this, view);
+        initWidget();
+        return view;
+    }
+
+    /**
+     * 初始化控件
+     */
+    private void initWidget() {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        ProjectRecyclerViewAdapter mAdapter = new ProjectRecyclerViewAdapter(getActivity(), mData);
+        mAdapter = new ProjectRecyclerViewAdapter(getActivity());
         mAdapter.setOnItemClickListener(new ProjectRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -69,23 +77,6 @@ public class ProjectFragment extends MvpFragment<ProjectPresenter> implements Sw
             }
         });
         mRecyclerView.setAdapter(mAdapter);
-        initData(1);
-        mAdapter.addList(mData);
-//        int categoryFlag = getArguments().getInt(Constants.SUBJECT_CATEGORY, -1);
-//        if (categoryFlag != -1) {
-//            switch (categoryFlag) {
-//                case 0://设计
-//                    initData(1);
-//                    mAdapter.addList(mData);
-//                    break;
-//                case 1://论文
-//                    initData(2);
-//                    mAdapter.addList(mData);
-//                    break;
-//                default:
-//                    break;
-//            }
-//        }
 
         mSwipeRefresh.setOnRefreshListener(this);
         //为SwipeRefreshLayout设置刷新时的颜色变化，最多可以设置4种
@@ -93,19 +84,21 @@ public class ProjectFragment extends MvpFragment<ProjectPresenter> implements Sw
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);
-        return view;
+
     }
 
-    private void initData(int pager) {
-        mData = new ArrayList<>();
-        for (int i = 1; i < 10; i++) {
-            mData.add("pager" + pager + " 第" + i + "个item");
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof HomeActivity){
+            ((HomeActivity) context).setMenuClickCallBack(this);
         }
     }
 
     @Override
     protected void initData() {
-
+        mvpPresenter.loadProjectFromDB();
     }
 
     @Override
@@ -113,23 +106,31 @@ public class ProjectFragment extends MvpFragment<ProjectPresenter> implements Sw
         return new ProjectPresenter(this);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-    }
 
+    /**
+     * 下拉之后加载数据
+     */
     @Override
     public void onRefresh() {
-        mvpPresenter.loadLoginData("1");
+        mvpPresenter.loadProjectData(String.valueOf(SPUtil.getTutorIdfromSP(mActivity)));
     }
 
+    /**
+     * 数据加载成功
+     * @param projects
+     */
     @Override
     public void loadSucceed(List<GraduateProject> projects) {
         if (projects != null) {
             Toast.makeText(mActivity, "数据加载成功"+projects.size(), Toast.LENGTH_SHORT).show();
+            mAdapter.addList(projects);
         }
     }
 
+    /**
+     * 数据加载失败
+     * @param msg
+     */
     @Override
     public void loadFail(String msg) {
         Toast.makeText(mActivity, "数据加载失败", Toast.LENGTH_SHORT).show();
@@ -140,8 +141,26 @@ public class ProjectFragment extends MvpFragment<ProjectPresenter> implements Sw
 //        mSwipeRefresh.setRefreshing(true);
     }
 
+    /**
+     * 隐藏下拉刷新的动画
+     */
     @Override
     public void hideLoading() {
         mSwipeRefresh.setRefreshing(false);
+    }
+
+    @Override
+    public void changerCategory(String category) {
+        switch (category){
+            case Constants.ALL:
+                Toast.makeText(mActivity, "点击了全部", Toast.LENGTH_SHORT).show();
+                break;
+            case Constants.DESIGN:
+                Toast.makeText(mActivity, "点击了设计", Toast.LENGTH_SHORT).show();
+                break;
+            case Constants.PAGE:
+                Toast.makeText(mActivity, "点击了论文", Toast.LENGTH_SHORT).show();
+                break;
+        }
     }
 }

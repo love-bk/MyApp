@@ -14,5 +14,9 @@ public class Constants {
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
     public static final String TUTORID = "tutorid";
+    public static final String DESIGN = "设计";
+    public static final String PAGE = "论文";
+    public static final String ALL = "all";
     public static  long tutorId = 1;
+
 }

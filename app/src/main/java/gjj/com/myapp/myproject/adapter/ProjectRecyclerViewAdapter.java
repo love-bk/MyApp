@@ -14,6 +14,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import gjj.com.myapp.R;
+import gjj.com.myapp.model.GraduateProject;
+import gjj.com.myapp.utils.Constants;
 
 /**
  * Created by 高娟娟 on 2017/3/24.
@@ -23,14 +25,13 @@ public class ProjectRecyclerViewAdapter extends RecyclerView.Adapter<ProjectRecy
 
 
     private Context mContext;
-    private List<String> mData = new ArrayList<>();
+    private List<GraduateProject> mData = new ArrayList<>();
     private LayoutInflater mInflater;
     private OnItemClickListener mOnItemClickListener;
 
 
-    public ProjectRecyclerViewAdapter(Context context, List<String> list) {
+    public ProjectRecyclerViewAdapter(Context context) {
         this.mContext = context;
-        this.mData = list;
         mInflater = LayoutInflater.from(mContext);
     }
 
@@ -69,7 +70,7 @@ public class ProjectRecyclerViewAdapter extends RecyclerView.Adapter<ProjectRecy
         return mData.size();
     }
 
-    public void addList(List<String> list) {
+    public void addList(List<GraduateProject> list) {
         mData.clear();
         mData.addAll(list);
         notifyDataSetChanged();
@@ -90,11 +91,14 @@ public class ProjectRecyclerViewAdapter extends RecyclerView.Adapter<ProjectRecy
             ButterKnife.bind(this, itemView);
         }
 
-        public void setData(String s, int position) {
-            mTvInfo.setText(mData.get(position));
-            mSerialNumberTv.setText(String.valueOf(position + 1));
-            mSubTitle.setText("副--"+String.valueOf(position + 1));
-
+        public void setData(GraduateProject project, int position) {
+            mTvInfo.setText(project.getTitle());
+            if (Constants.DESIGN.equals(project.getCategory())){
+                mSerialNumberTv.setText(Constants.DESIGN);
+            }else{
+                mSerialNumberTv.setText(Constants.PAGE);
+            }
+            mSubTitle.setText(project.getSubTitle());
         }
     }
 

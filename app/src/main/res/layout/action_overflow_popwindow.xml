@@ -8,7 +8,8 @@
 
     <LinearLayout
         android:id="@+id/ll_item1"
-        style="@style/Ll_Style">
+        style="@style/Ll_Style"
+        android:visibility="gone">
 
         <TextView
             style="@style/Popwindow_Style"
@@ -21,6 +22,19 @@
         android:background="#c9c2c2"/>
     <LinearLayout
         android:id="@+id/ll_item2"
+        style="@style/Ll_Style">
+
+        <TextView
+            style="@style/Popwindow_Style"
+            android:text="显示设计"/>
+
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c9c2c2"/>
+    <LinearLayout
+        android:id="@+id/ll_item3"
         style="@style/Ll_Style">
 
         <TextView

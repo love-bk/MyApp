@@ -21,7 +21,7 @@ public class ProjectPresenter extends BasePresenter<ProjectView> {
     }
 
 
-    public void loadLoginData(String tutorId) {
+    public void loadProjectData(String tutorId) {
         mvpView.showLoading();
         addSubscription(mApiStores.loadProject(tutorId), new ApiCallback<String>() {
             @Override
@@ -43,5 +43,11 @@ public class ProjectPresenter extends BasePresenter<ProjectView> {
                 mvpView.hideLoading();
             }
         });
+    }
+
+    public void loadProjectFromDB() {
+        //从数据库中获取数据
+
+//        mvpView.loadSucceed(null);
     }
 }

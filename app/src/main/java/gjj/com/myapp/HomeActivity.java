@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -29,6 +30,7 @@ import gjj.com.myapp.myproject.adapter.MainFragmentPageAdapter;
 import gjj.com.myapp.myproject.ProjectFragment;
 import gjj.com.myapp.myreply.views.ReplyFragment;
 import gjj.com.myapp.presenter.HomePresenter;
+import gjj.com.myapp.utils.Constants;
 import gjj.com.myapp.views.HomeView;
 
 public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView, View.OnClickListener {
@@ -46,6 +48,10 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
     private List<Fragment> mFragmentList = new ArrayList<>();
     private long exitTime = 0;
     private PopupWindow mPopupWindow;
+    private MenuClickCallBack menuClickCallBack;
+    private LinearLayout ll_item1;
+    private LinearLayout ll_item2;
+    private LinearLayout ll_item3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -216,8 +222,12 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
             //设置Gravity，让他显示在右上角
             mPopupWindow.showAtLocation(mToolbar, Gravity.RIGHT | Gravity.TOP, 20, yOffset);
             //设置item的点击监听
-            popView.findViewById(R.id.ll_item1).setOnClickListener(this);
-            popView.findViewById(R.id.ll_item2).setOnClickListener(this);
+            ll_item1 = (LinearLayout) popView.findViewById(R.id.ll_item1);
+            ll_item1.setOnClickListener(this);
+            ll_item2 = (LinearLayout) popView.findViewById(R.id.ll_item2);
+            ll_item2.setOnClickListener(this);
+            ll_item3 = (LinearLayout) popView.findViewById(R.id.ll_item3);
+            ll_item3.setOnClickListener(this);
         } else {
             mPopupWindow.showAtLocation(mToolbar, Gravity.RIGHT | Gravity.TOP, 20, yOffset);
         }
@@ -227,14 +237,36 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.ll_item1:
-                Toast.makeText(mActivity, "点击了全部", Toast.LENGTH_SHORT).show();
+                ll_item1.setVisibility(View.GONE);
+                ll_item2.setVisibility(View.VISIBLE);
+                ll_item3.setVisibility(View.VISIBLE);
                 mPopupWindow.dismiss();
+                menuClickCallBack.changerCategory(Constants.ALL);
                 break;
             case R.id.ll_item2:
-                Toast.makeText(mActivity, "点击了显示论文", Toast.LENGTH_SHORT).show();
+                ll_item1.setVisibility(View.VISIBLE);
+                ll_item2.setVisibility(View.GONE);
+                ll_item3.setVisibility(View.VISIBLE);
                 mPopupWindow.dismiss();
+                menuClickCallBack.changerCategory(Constants.PAGE);
                 break;
+            case R.id.ll_item3:
+                ll_item1.setVisibility(View.VISIBLE);
+                ll_item2.setVisibility(View.VISIBLE);
+                ll_item3.setVisibility(View.GONE);
+                mPopupWindow.dismiss();
+                menuClickCallBack.changerCategory(Constants.DESIGN);
+                break;
+
         }
 
+    }
+
+    public interface MenuClickCallBack{
+        void changerCategory(String category);
+    }
+
+    public void setMenuClickCallBack(MenuClickCallBack menuClickCallBack) {
+        this.menuClickCallBack = menuClickCallBack;
     }
 }
