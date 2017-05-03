@@ -21,11 +21,12 @@ public class SPUtil {
 	 * @param username
 	 * @param password
 	 */
-	public static void saveLoginToSP(Context ct,String username,String password) {
+	public static void saveLoginToSP(Context ct,String username,String password,long tutorId) {
 		SharedPreferences setting =ct.getSharedPreferences("myInfo", ct.MODE_PRIVATE);
 		Editor editor = setting.edit();
 		editor.putString(Constants.USERNAME,username);
 		editor.putString(Constants.PASSWORD,password);
+		editor.putLong(Constants.TUTORID,tutorId);
 		editor.apply();
 	}
 
@@ -43,6 +44,16 @@ public class SPUtil {
 		}
 	}
 
+
+
+	/**
+	 * 获取tutor的id
+	 */
+	public static long getTutorIdfromSP(Context ct) {
+		SharedPreferences setting = ct.getSharedPreferences("myInfo", ct.MODE_PRIVATE);
+		return setting.getLong(Constants.TUTORID, 0);
+
+	}
 
 	/**
 	 * 删除指定的数据

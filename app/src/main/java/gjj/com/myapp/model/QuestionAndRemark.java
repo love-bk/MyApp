@@ -11,7 +11,7 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 @Entity
 public class QuestionAndRemark {
-    @Id
+    @Id(autoincrement = false)
     private Integer id;
     //该学生的课提
     private Integer graduateProjectId;

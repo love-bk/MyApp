@@ -11,7 +11,7 @@ import org.greenrobot.greendao.annotation.Generated;
 @Entity
 public class Addressee {
     //该id是使用sqlite数据库所必须有的属性
-    @Id
+    @Id(autoincrement = false)
     private Long id;
     //该联系人所对应发送通知的id
     private Integer noticeId;

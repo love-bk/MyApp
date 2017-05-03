@@ -12,7 +12,7 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 @Entity
 public class Notice {
-    @Id
+    @Id(autoincrement = false)
     private Long id;
     private String title;                          //通知的题目
     private String content;                   //通知的内容

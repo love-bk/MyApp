@@ -1,16 +1,9 @@
 package gjj.com.myapp.baseframework.retrofit;
 
-import gjj.com.myapp.model.MainModel;
-import gjj.com.myapp.model.Tutor;
 import gjj.com.myapp.model.User;
-import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 import rx.Observable;
 
 /**
@@ -29,7 +22,11 @@ public interface ApiStores {
     Observable<String> loadLoginData(@Body User user);
 
     @POST("getProjectAndReplyByTutor.json")
-    Observable<String> loadProjectAndReply(@Header("tutorId") String tutorId);
+    Observable<String> loadProjectAndReply(@Body String tutorId);
+
+    @POST("getGraduateProjectByTutorId.json")
+    Observable<String> loadProject(@Body String tutorId);
+
 
 
 }

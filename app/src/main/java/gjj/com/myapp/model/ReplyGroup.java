@@ -11,7 +11,7 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 @Entity
 public class ReplyGroup {
-    @Id
+    @Id(autoincrement = false)
     private Long id;
     private String description;                                    //答辩小组名称
     private String location;                                       //答辩的地点

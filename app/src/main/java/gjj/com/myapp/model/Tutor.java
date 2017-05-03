@@ -14,7 +14,7 @@ import java.util.List;
  */
 @Entity
 public class Tutor {
-    @Id
+    @Id(autoincrement = false)
     private Long id;
     private String name;             //姓名
     private String no;               //职工号

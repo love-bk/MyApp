@@ -13,4 +13,6 @@ public class Constants {
     public static final String TUTOR = "tutor";
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
+    public static final String TUTORID = "tutorid";
+    public static  long tutorId = 1;
 }

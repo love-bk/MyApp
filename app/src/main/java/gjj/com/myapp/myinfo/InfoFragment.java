@@ -1,4 +1,4 @@
-package gjj.com.myapp.myinfo.views;
+package gjj.com.myapp.myinfo;
 
 
 import android.content.Intent;
@@ -16,12 +16,13 @@ import butterknife.OnClick;
 import gjj.com.myapp.R;
 import gjj.com.myapp.baseframework.mvp.MvpFragment;
 import gjj.com.myapp.model.Tutor;
-import gjj.com.myapp.myinfo.presenter.MyInfoPresenter;
+import gjj.com.myapp.presenter.MyInfoPresenter;
+import gjj.com.myapp.views.MyInfoView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InfoFragment extends MvpFragment<MyInfoPresenter> implements MyInfoView{
+public class InfoFragment extends MvpFragment<MyInfoPresenter> implements MyInfoView {
 
 
     @BindView(R.id.nameTv)
@@ -70,9 +71,11 @@ public class InfoFragment extends MvpFragment<MyInfoPresenter> implements MyInfo
 
     @Override
     public void showMyInfo(Tutor tutor) {
-        mNameTv.setText(tutor.getName());
-        mSexTv.setText(tutor.getSex());
-        mWorkerNumTv.setText(tutor.getNo());
-        mDepartmentTv.setText(tutor.getDescription());
+        if (tutor != null){
+            mNameTv.setText(tutor.getName());
+            mSexTv.setText(tutor.getSex());
+            mWorkerNumTv.setText(tutor.getNo());
+            mDepartmentTv.setText(tutor.getDescription());
+        }
     }
 }

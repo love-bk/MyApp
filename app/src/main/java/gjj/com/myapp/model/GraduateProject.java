@@ -11,7 +11,7 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 @Entity
 public class GraduateProject {
-    @Id
+    @Id(autoincrement = false)
     private Long id;
     private String year;
     private String title;                 //题目名称
@@ -24,7 +24,7 @@ public class GraduateProject {
     private String content;               //工作内容
     private String basicRequirement;      //基本要求
     private String basicSkill;            //基本技能
-    private  String reference;            //参考文献
+    private String reference;            //参考文献
     private String major;                 //专业
     private Integer version;              //版本号
     private Integer completenessScoreByGroup;      //完成任务规定的要求与水平评分
@@ -34,7 +34,7 @@ public class GraduateProject {
     private String remark;                         //指导老师的评语
     private Integer student_id;                     //选该题目学生的id
     private String student_name;                     //选该题目学生的姓名
-    private  Integer tutor_id;                      //申报该题目老师的id
+    private Integer tutor_id;                      //申报该题目老师的id
     private boolean isAllow;                     //是否允许答辩 在commentByTutor中可以找到
     private boolean isSubmit;                    //是否提交 在commentByTutor中可以找到
     private boolean isSave;                      //是否保存 暂定
@@ -42,18 +42,17 @@ public class GraduateProject {
     private String replyStation;
 
 
-
     @Generated(hash = 2060373895)
     public GraduateProject(Long id, String year, String title, String subTitle,
-            String category, String projectType, String projectFidelity,
-            String projectFrom, Integer replyGroup_id, String content,
-            String basicRequirement, String basicSkill, String reference,
-            String major, Integer version, Integer completenessScoreByGroup,
-            Integer correctnessScoreByGroup, Integer qualityScoreBtGroup,
-            Integer replyScoreByGroup, String remark, Integer student_id,
-            String student_name, Integer tutor_id, boolean isAllow,
-            boolean isSubmit, boolean isSave, boolean isAuditByDirector,
-            String replyStation) {
+                           String category, String projectType, String projectFidelity,
+                           String projectFrom, Integer replyGroup_id, String content,
+                           String basicRequirement, String basicSkill, String reference,
+                           String major, Integer version, Integer completenessScoreByGroup,
+                           Integer correctnessScoreByGroup, Integer qualityScoreBtGroup,
+                           Integer replyScoreByGroup, String remark, Integer student_id,
+                           String student_name, Integer tutor_id, boolean isAllow,
+                           boolean isSubmit, boolean isSave, boolean isAuditByDirector,
+                           String replyStation) {
         this.id = id;
         this.year = year;
         this.title = title;
@@ -87,7 +86,6 @@ public class GraduateProject {
     @Generated(hash = 1800086101)
     public GraduateProject() {
     }
-
 
 
     public void setStudent_id(Integer student_id) {
@@ -133,7 +131,6 @@ public class GraduateProject {
     public void setStudent_name(String student_name) {
         this.student_name = student_name;
     }
-
 
 
     public String getBasicRequirement() {
@@ -183,7 +180,6 @@ public class GraduateProject {
     public void setCorrectnessScoreByGroup(Integer correctnessScoreByGroup) {
         this.correctnessScoreByGroup = correctnessScoreByGroup;
     }
-
 
 
     public boolean isAllow() {
@@ -330,7 +326,6 @@ public class GraduateProject {
     public void setYear(String year) {
         this.year = year;
     }
-
 
 
     public Long getId() {

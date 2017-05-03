@@ -80,43 +80,8 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
             mvpPresenter.loadLoginData(new User(name, pwd));
         }
 
-//        testApi();
-
-
     }
 
-    /**
-     * 用于测试服务器接口的
-     */
-    private void testApi() {
-        retrofit = new Retrofit.Builder()
-                .baseUrl(ApiStores.API_SERVER_URL)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        User user = new User("020081", "020081");
-        //生成对象的Service
-        ApiStores loginService = retrofit.create(ApiStores.class);
-        //调用方法得到Call
-//        Call<String> loginCall = loginService.loadLoginData(user);
-//
-//        //异步执行
-//        loginCall.enqueue(new Callback<String>() {
-//            @Override
-//            public void onResponse(Call<String> call, Response<String> response) {
-//
-//                Log.d("vivi",response.message()+" "+response.body());
-//            }
-//
-//            @Override
-//            public void onFailure(Call<String> call, Throwable t) {
-//
-//                Log.d("vivie",t.getMessage());
-//                Log.d("vivie",t.toString());
-//            }
-//        });
-
-    }
 
     /**
      * 隐藏软键盘
@@ -136,8 +101,6 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements LoginV
 
     @Override
     public void loginSuccess(Tutor tutor) {
-        //将账号保存到SP中
-        SPUtil.saveLoginToSP(this,name, pwd);
         jumpToHomePage();
     }
 

@@ -1,4 +1,4 @@
-package gjj.com.myapp.myproject.views;
+package gjj.com.myapp.myproject;
 
 
 import android.content.Intent;
@@ -20,14 +20,17 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import gjj.com.myapp.R;
-import gjj.com.myapp.myproject.ProjectDetailActivity;
+import gjj.com.myapp.baseframework.mvp.MvpFragment;
+import gjj.com.myapp.model.GraduateProject;
 import gjj.com.myapp.myproject.adapter.ProjectRecyclerViewAdapter;
+import gjj.com.myapp.presenter.ProjectPresenter;
 import gjj.com.myapp.utils.Constants;
+import gjj.com.myapp.views.ProjectView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProjectFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+public class ProjectFragment extends MvpFragment<ProjectPresenter> implements SwipeRefreshLayout.OnRefreshListener,ProjectView{
 
 
     @BindView(R.id.recyclerView)
@@ -101,19 +104,44 @@ public class ProjectFragment extends Fragment implements SwipeRefreshLayout.OnRe
     }
 
     @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected ProjectPresenter createPresenter() {
+        return new ProjectPresenter(this);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
 
     @Override
     public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //结束后停止刷新
-                mSwipeRefresh.setRefreshing(false);
-            }
-        }, 3000);
+        mvpPresenter.loadLoginData("1");
     }
 
+    @Override
+    public void loadSucceed(List<GraduateProject> projects) {
+        if (projects != null) {
+            Toast.makeText(mActivity, "数据加载成功"+projects.size(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void loadFail(String msg) {
+        Toast.makeText(mActivity, "数据加载失败", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void showLoading() {
+//        mSwipeRefresh.setRefreshing(true);
+    }
+
+    @Override
+    public void hideLoading() {
+        mSwipeRefresh.setRefreshing(false);
+    }
 }

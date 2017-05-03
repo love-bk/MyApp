@@ -11,7 +11,7 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 @Entity
 public class Scores {
-    @Id
+    @Id(autoincrement = false)
     private Long id;
     //学生的id
     private Integer studentId;

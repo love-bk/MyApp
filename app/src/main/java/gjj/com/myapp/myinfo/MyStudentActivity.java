@@ -1,4 +1,4 @@
-package gjj.com.myapp.myinfo.views;
+package gjj.com.myapp.myinfo;
 
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -15,12 +15,12 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import gjj.com.myapp.R;
-import gjj.com.myapp.baseframework.base.BaseActivity;
 import gjj.com.myapp.baseframework.mvp.MvpActivity;
 import gjj.com.myapp.model.Student;
 import gjj.com.myapp.model.Tutor;
 import gjj.com.myapp.myinfo.adapter.MyStudentListAdapter;
-import gjj.com.myapp.myinfo.presenter.MyInfoPresenter;
+import gjj.com.myapp.presenter.MyInfoPresenter;
+import gjj.com.myapp.views.MyInfoView;
 
 public class MyStudentActivity extends MvpActivity<MyInfoPresenter> implements MyInfoView {
 
