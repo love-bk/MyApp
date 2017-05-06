@@ -16,8 +16,8 @@ public class HomePresenter  extends BasePresenter<HomeView>{
 
 
     public void loadProjectAndReply(String tutorId){
-        mvpView.showLoading();
-        addSubscription(mApiStores.loadProjectAndReply(tutorId),
+        mvpView.showLoading();//loadProjectAndReply
+        addSubscription(mApiStores.loadReply(tutorId),
                 new ApiCallback<String>() {
                     @Override
                     public void onSuccess(String model) {

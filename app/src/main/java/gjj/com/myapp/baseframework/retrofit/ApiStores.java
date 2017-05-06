@@ -26,7 +26,17 @@ public interface ApiStores {
 
     @POST("getGraduateProjectByTutorId.json")
     Observable<String> loadProject(@Body String tutorId);
+    @POST("getReplyGroupByTutor.json")
+    Observable<String> loadReply(@Body String tutorId);
 
+
+//      /login.json"
+//      "/sendMail.json";
+//      "/getGraduateProjectByTutorId.json";
+//      /getReplyGroupByTutor.json";
+//      /mail.json";
+//      /myStudent.json";
+//            /setScoreWithProjectByGroupMembers.json";
 
 
 }
