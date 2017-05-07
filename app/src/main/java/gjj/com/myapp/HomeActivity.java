@@ -144,24 +144,24 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
     }
 
     private void initTitle(int currentItem) {
-        if (0 == currentItem) {
+        if (0 == currentItem || 3 == currentItem) {
             settingIv.setVisibility(View.VISIBLE);
-            mTitleTv.setText("我的课题");
-
         } else {
             settingIv.setVisibility(View.GONE);
-            switch (currentItem) {
-                case 1:
-                    mTitleTv.setText("我所在小组");
-                    break;
-                case 2:
-                    mTitleTv.setText("我的通知");
-                    break;
-                case 3:
-                    mTitleTv.setText("我的信息");
-                    break;
-
-            }
+        }
+        switch (currentItem){
+            case 0:
+                mTitleTv.setText("我的课题");
+                break;
+            case 1:
+                mTitleTv.setText("我所在小组");
+                break;
+            case 2:
+                mTitleTv.setText("我的通知");
+                break;
+            case 3:
+                mTitleTv.setText("我的信息");
+                break;
         }
     }
 
