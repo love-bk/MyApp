@@ -11,44 +11,26 @@ import org.greenrobot.greendao.annotation.Transient;
  */
 @Entity
 public class Student {
-    @Id
+    @Id(autoincrement = false)
     private Long id;
     private Integer version;                      //版本号
     private String no;                          //学生的学号
     private String contact;                          //学生的手机号
     private String name;                         //学生的姓名
-//    private String major;                          //学生所在的专业
+    @Transient
+    private Major major;                          //学生所在的专业
     private String classDescription;
     @Transient
     private StudentClass studentClass;                 //学生所在的班级
     private Long tutorId;                     //指导老师的id
     private Long replyGroup_id;               //学生所在的答辩小组的id
-    private Long serverId;                    //学生服务器端的id
     private Long replyGraduateProject_id;     //学生所答辩课题的服务器端id
     /*@Column(column = "isAddressee")
     private boolean isAddressee;//学生是否是收件方*/
 
 
 
-    @Generated(hash = 696116032)
-    public Student(Long id, Integer version, String no, String contact, String name,
-            String classDescription, Long tutorId, Long replyGroup_id,
-            Long serverId, Long replyGraduateProject_id) {
-        this.id = id;
-        this.version = version;
-        this.no = no;
-        this.contact = contact;
-        this.name = name;
-        this.classDescription = classDescription;
-        this.tutorId = tutorId;
-        this.replyGroup_id = replyGroup_id;
-        this.serverId = serverId;
-        this.replyGraduateProject_id = replyGraduateProject_id;
-    }
 
-    @Generated(hash = 1556870573)
-    public Student() {
-    }
 
 
 
@@ -66,14 +48,6 @@ public class Student {
 
     public void setReplyGroup_id(Long replyGroup_id) {
         this.replyGroup_id = replyGroup_id;
-    }
-
-    public Long getServerId() {
-        return serverId;
-    }
-
-    public void setServerId(Long serverId) {
-        this.serverId = serverId;
     }
 
     public Long getReplyGraduateProject_id() {
@@ -146,6 +120,7 @@ public class Student {
     }
 
     private class StudentClass {
+        private long id;
         private String description;
 
         public String getDescription() {
@@ -156,11 +131,40 @@ public class Student {
             this.description = description;
         }
 
+        public long getId() {
+            return id;
+        }
+
+        public void setId(long id) {
+            this.id = id;
+        }
+
         @Override
         public String toString() {
             return "StudentClass{" +
                     "description='" + description + '\'' +
                     '}';
+        }
+    }
+
+    private class Major{
+        private long id;
+        private String description;
+
+        public long getId() {
+            return id;
+        }
+
+        public void setId(long id) {
+            this.id = id;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
         }
     }
 }

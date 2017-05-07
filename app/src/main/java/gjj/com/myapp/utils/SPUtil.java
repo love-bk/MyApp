@@ -60,10 +60,12 @@ public class SPUtil {
 	 * @param key
 	 * @return
 	 */
-	public static boolean removeConfig(String key){
-		SharedPreferences setting = MyApplication.getInstances().getSharedPreferences("myInfo", MyApplication.getInstances().MODE_PRIVATE);
+	public static boolean removeConfig(Context context,String... key){
+		SharedPreferences setting = context.getSharedPreferences("myInfo", MyApplication.getInstances().MODE_PRIVATE);
 		Editor editor = setting.edit();
-		editor.remove(key);
+		for (String s : key) {
+			editor.remove(s);
+		}
 		return editor.commit();
 	}
 }

@@ -90,7 +90,7 @@
             </RelativeLayout>
             <RelativeLayout
                 style="@style/ProjectDetailRL_style"
-                android:background="@drawable/border"
+                android:background="@drawable/border_norightbottom"
                 android:padding="10dp">
                 <TextView
                     android:layout_width="wrap_content"
@@ -102,7 +102,7 @@
             </RelativeLayout>
             <RelativeLayout
                 style="@style/ProjectDetailRL_style"
-                android:background="@drawable/border"
+                android:background="@drawable/border_norightbottom"
                 android:padding="10dp">
                 <TextView
                     android:id="@+id/score01"
@@ -122,7 +122,7 @@
             </RelativeLayout>
             <RelativeLayout
                 style="@style/ProjectDetailRL_style"
-                android:background="@drawable/border"
+                android:background="@drawable/border_norightbottom"
                 android:padding="10dp">
                 <TextView
                     android:id="@+id/score02"
@@ -142,7 +142,7 @@
             </RelativeLayout>
             <RelativeLayout
                 style="@style/ProjectDetailRL_style"
-                android:background="@drawable/border"
+                android:background="@drawable/border_norightbottom"
                 android:padding="10dp">
                 <TextView
                     android:id="@+id/score03"
@@ -162,7 +162,7 @@
             </RelativeLayout>
             <RelativeLayout
                 style="@style/ProjectDetailRL_style"
-                android:background="@drawable/border"
+                android:background="@drawable/border_norightbottom"
                 android:padding="10dp">
                 <TextView
                     android:id="@+id/score04"
@@ -182,7 +182,7 @@
             </RelativeLayout>
             <RelativeLayout
                 style="@style/ProjectDetailRL_style"
-                android:background="@drawable/border"
+                android:background="@drawable/border_norightbottom"
                 android:padding="10dp">
                 <TextView
                     android:id="@+id/total"

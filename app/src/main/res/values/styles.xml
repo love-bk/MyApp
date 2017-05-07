@@ -101,14 +101,14 @@
     <style name="ProjectDetailTv_style" parent="@style/ItemTitleTv_style">
         <item name="android:layout_width">120dp</item>
         <item name="android:textSize">18sp</item>
-        <item name="android:background">@drawable/border</item>
+        <item name="android:background">@drawable/border_norightbottom</item>
         <item name="android:layout_marginLeft">0dp</item>
         <item name="android:padding">10dp</item>
         <item name="android:gravity">center</item>
     </style>
     <style name="ProjectDetailValueTv_style" parent="@style/ItemTitleValueTv_style">
         <item name="android:textSize">18sp</item>
-        <item name="android:background">@drawable/border</item>
+        <item name="android:background">@drawable/border_nobottom</item>
         <item name="android:layout_marginLeft">0dp</item>
         <item name="android:padding">10dp</item>
         <item name="android:gravity">right</item>

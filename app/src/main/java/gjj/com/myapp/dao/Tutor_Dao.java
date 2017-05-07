@@ -52,4 +52,12 @@ public class Tutor_Dao {
         }
         return null;
     }
+
+
+    /**
+     * 删除数据库中的数据
+     */
+    public void deleteAll(){
+        tutorDao.deleteAll();
+    }
 }

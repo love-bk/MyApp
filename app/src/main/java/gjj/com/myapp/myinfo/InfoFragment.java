@@ -1,21 +1,25 @@
 package gjj.com.myapp.myinfo;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import gjj.com.myapp.R;
 import gjj.com.myapp.baseframework.mvp.MvpFragment;
+import gjj.com.myapp.model.Student;
 import gjj.com.myapp.model.Tutor;
+import gjj.com.myapp.myinfo.adapter.MyStudentListAdapter;
 import gjj.com.myapp.presenter.MyInfoPresenter;
 import gjj.com.myapp.views.MyInfoView;
 
@@ -33,8 +37,11 @@ public class InfoFragment extends MvpFragment<MyInfoPresenter> implements MyInfo
     TextView mWorkerNumTv;
     @BindView(R.id.departmentTv)
     TextView mDepartmentTv;
-    @BindView(R.id.mystudent_btn)
-    Button mMystudentBtn;
+    @BindView(R.id.replyStudentRecyclerView)
+    RecyclerView mReplyStudentRecyclerView;
+    @BindView(R.id.student_tv)
+    TextView mStudentTv;
+    private MyStudentListAdapter adapter;
 
     public InfoFragment() {
         // Required empty public constructor
@@ -47,7 +54,15 @@ public class InfoFragment extends MvpFragment<MyInfoPresenter> implements MyInfo
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_info, container, false);
         ButterKnife.bind(this, view);
+        initView();
         return view;
+    }
+
+    private void initView() {
+        mReplyStudentRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        mReplyStudentRecyclerView.setItemAnimator(new DefaultItemAnimator());
+        adapter = new MyStudentListAdapter(getActivity());
+        mReplyStudentRecyclerView.setAdapter(adapter);
     }
 
 
@@ -62,20 +77,31 @@ public class InfoFragment extends MvpFragment<MyInfoPresenter> implements MyInfo
     }
 
 
-
-    @OnClick(R.id.mystudent_btn)
-    public void onViewClicked() {
-        startActivity(new Intent(getActivity(), MyStudentActivity.class));
-    }
+//    @OnClick(R.id.mystudent_btn)
+//    public void onViewClicked() {
+//        startActivity(new Intent(getActivity(), MyStudentActivity.class));
+//    }
 
 
     @Override
     public void showMyInfo(Tutor tutor) {
-        if (tutor != null){
+        if (tutor != null) {
             mNameTv.setText(tutor.getName());
             mSexTv.setText(tutor.getSex());
             mWorkerNumTv.setText(tutor.getNo());
             mDepartmentTv.setText(tutor.getDescription());
+            List<Student> students = tutor.getStudent();
+            if (students != null && students.size() != 0) {
+                adapter.addList(students);
+            } else {
+                mStudentTv.setText("暂无分配学生");
+            }
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
     }
 }

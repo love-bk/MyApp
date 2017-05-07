@@ -12,6 +12,7 @@
         android:visibility="gone">
 
         <TextView
+            android:id="@+id/setting_text1"
             style="@style/Popwindow_Style"
             android:text="显示全部"/>
 
@@ -25,6 +26,7 @@
         style="@style/Ll_Style">
 
         <TextView
+            android:id="@+id/setting_text2"
             style="@style/Popwindow_Style"
             android:text="显示设计"/>
 
@@ -38,6 +40,7 @@
         style="@style/Ll_Style">
 
         <TextView
+            android:id="@+id/setting_text3"
             style="@style/Popwindow_Style"
             android:text="显示论文"/>
 

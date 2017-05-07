@@ -20,25 +20,8 @@ public class Notice {
     private  Integer version;                     //版本号
     private Integer addressor_id;                     //发送通知的id
     private String addressor_name;                     //发送通知的姓名
-    private Integer serverId;                     //服务器端的id
 
-    @Generated(hash = 1335927359)
-    public Notice(Long id, String title, String content, String noticeDate,
-            Integer version, Integer addressor_id, String addressor_name,
-            Integer serverId) {
-        this.id = id;
-        this.title = title;
-        this.content = content;
-        this.noticeDate = noticeDate;
-        this.version = version;
-        this.addressor_id = addressor_id;
-        this.addressor_name = addressor_name;
-        this.serverId = serverId;
-    }
 
-    @Generated(hash = 1880392847)
-    public Notice() {
-    }
 
 //    private List<Integer> addressee_id;   //该属性用于发送通知，一个通知可以对应多个收件人
 
@@ -84,14 +67,6 @@ public class Notice {
 
 
 
-    public Integer getServerId() {
-        return serverId;
-    }
-
-    public void setServerId(Integer serverId) {
-        this.serverId = serverId;
-    }
-
     public String getTitle() {
         return title;
     }
@@ -108,18 +83,7 @@ public class Notice {
         this.version = version;
     }
 
-    @Override
-    public String toString() {
-        return "Notice{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", content='" + content + '\'' +
-                ", noticeDate='" + noticeDate + '\'' +
-                ", version=" + version +
-                ", addressor_id=" + addressor_id +
-                ", serverId=" + serverId +
-                '}';
-    }
+
 
     public Long getId() {
         return this.id;

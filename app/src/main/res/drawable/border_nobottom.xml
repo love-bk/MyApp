@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <!-- 连框颜色值 -->
+    <!-- 连框颜色值 theme_color-->
     <item>
         <shape>
-            <solid android:color="@color/theme_color" />
+            <solid android:color="@color/line_Color" />
         </shape>
     </item>
     <!-- 主体背景颜色值 -->
     <item
-        android:bottom="2dp"
-        android:left="2dp"
-        android:right="2dp"
-        android:top="0dp">
+        android:bottom="0dp"
+        android:left="1dp"
+        android:right="1dp"
+        android:top="1dp">
 
         <!-- 边框里面背景颜色 白色 -->
         <shape>

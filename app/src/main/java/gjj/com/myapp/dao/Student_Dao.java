@@ -42,4 +42,11 @@ public class Student_Dao {
         return studentDao.queryBuilder().where(StudentDao.Properties.TutorId.eq(tutorId)).list();
 
     }
+
+    /**
+     * 删除数据库中的数据
+     */
+    public void deleteAll(){
+        studentDao.deleteAll();
+    }
 }

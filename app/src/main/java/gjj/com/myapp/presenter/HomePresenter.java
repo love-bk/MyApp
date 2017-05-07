@@ -1,5 +1,7 @@
 package gjj.com.myapp.presenter;
 
+import android.content.Context;
+
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -8,6 +10,8 @@ import com.google.gson.JsonParser;
 import gjj.com.myapp.baseframework.mvp.BasePresenter;
 import gjj.com.myapp.baseframework.retrofit.ApiCallback;
 import gjj.com.myapp.model.ProjectAndReply;
+import gjj.com.myapp.utils.Constants;
+import gjj.com.myapp.utils.SPUtil;
 import gjj.com.myapp.views.HomeView;
 
 /**
@@ -45,4 +49,13 @@ public class HomePresenter  extends BasePresenter<HomeView>{
                 });
     }
 
+    /**
+     * 切换账号时删除指定数据
+     * @param context
+     */
+    public void deleteData(Context context){
+        //删除数据库中的数据
+        //删除SP中的数据
+        SPUtil.removeConfig(context,Constants.USERNAME,Constants.PASSWORD,Constants.TUTORID);
+    }
 }

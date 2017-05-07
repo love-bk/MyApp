@@ -52,6 +52,12 @@ public class Addressee_Dao {
             addresseeDao.insertInTx(addressees);
         }
     }
+    /**
+     * 删除数据库中的数据
+     */
+    public void deleteAll(){
+        addresseeDao.deleteAll();
+    }
 
     public Addressee queryAddresseeById(long id){
         List<Addressee> addressees = addresseeDao.queryBuilder().where(AddresseeDao.Properties.Id.eq(id)).list();

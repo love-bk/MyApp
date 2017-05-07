@@ -1,5 +1,6 @@
 package gjj.com.myapp;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -24,6 +25,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import gjj.com.myapp.baseframework.mvp.MvpActivity;
+import gjj.com.myapp.login.LoginActivity;
 import gjj.com.myapp.myinfo.InfoFragment;
 import gjj.com.myapp.mynotice.views.NoticeFragment;
 import gjj.com.myapp.myproject.adapter.MainFragmentPageAdapter;
@@ -52,6 +54,12 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
     private LinearLayout ll_item1;
     private LinearLayout ll_item2;
     private LinearLayout ll_item3;
+    private TextView setting_text1;
+    private TextView setting_text2;
+    private TextView setting_text3;
+    private int ll_item1IsVisible = View.GONE;
+    private int ll_item2IsVisible = View.VISIBLE;
+    private int ll_item3IsVisible = View.VISIBLE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -193,6 +201,7 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
             case R.id.setting_iv:
                 //弹出自定义overflow
                 popUpMyOverFlow();
+                showMyInfoMenu();
                 break;
 
         }
@@ -223,11 +232,14 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
             mPopupWindow.showAtLocation(mToolbar, Gravity.RIGHT | Gravity.TOP, 20, yOffset);
             //设置item的点击监听
             ll_item1 = (LinearLayout) popView.findViewById(R.id.ll_item1);
-            ll_item1.setOnClickListener(this);
             ll_item2 = (LinearLayout) popView.findViewById(R.id.ll_item2);
-            ll_item2.setOnClickListener(this);
             ll_item3 = (LinearLayout) popView.findViewById(R.id.ll_item3);
+            ll_item1.setOnClickListener(this);
+            ll_item2.setOnClickListener(this);
             ll_item3.setOnClickListener(this);
+            setting_text1 = ((TextView) popView.findViewById(R.id.setting_text1));
+            setting_text2 = ((TextView) popView.findViewById(R.id.setting_text2));
+            setting_text3 = ((TextView) popView.findViewById(R.id.setting_text3));
         } else {
             mPopupWindow.showAtLocation(mToolbar, Gravity.RIGHT | Gravity.TOP, 20, yOffset);
         }
@@ -237,23 +249,29 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.ll_item1:
-                ll_item1.setVisibility(View.GONE);
-                ll_item2.setVisibility(View.VISIBLE);
-                ll_item3.setVisibility(View.VISIBLE);
+                if (mViewPager.getCurrentItem() == 0){
+                    ll_item1IsVisible = View.GONE;
+                    ll_item2IsVisible = View.VISIBLE;
+                    ll_item3IsVisible = View.VISIBLE;
+                    menuClickCallBack.changerCategory(Constants.ALL);
+                }else{
+                    switchAccount();
+                    Toast.makeText(mActivity, "切换账号", Toast.LENGTH_SHORT).show();
+                }
                 mPopupWindow.dismiss();
-                menuClickCallBack.changerCategory(Constants.ALL);
+
                 break;
             case R.id.ll_item2:
-                ll_item1.setVisibility(View.VISIBLE);
-                ll_item2.setVisibility(View.GONE);
-                ll_item3.setVisibility(View.VISIBLE);
+                ll_item1IsVisible = View.VISIBLE;
+                ll_item2IsVisible = View.GONE;
+                ll_item3IsVisible = View.VISIBLE;
                 mPopupWindow.dismiss();
                 menuClickCallBack.changerCategory(Constants.PAGE);
                 break;
             case R.id.ll_item3:
-                ll_item1.setVisibility(View.VISIBLE);
-                ll_item2.setVisibility(View.VISIBLE);
-                ll_item3.setVisibility(View.GONE);
+                ll_item1IsVisible = View.VISIBLE;
+                ll_item2IsVisible = View.VISIBLE;
+                ll_item3IsVisible = View.VISIBLE;
                 mPopupWindow.dismiss();
                 menuClickCallBack.changerCategory(Constants.DESIGN);
                 break;
@@ -262,11 +280,35 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
 
     }
 
+    private void switchAccount() {
+        //删除账号
+        mvpPresenter.deleteData(this);
+        startActivity(new Intent(this, LoginActivity.class));
+        finish();
+    }
+
     public interface MenuClickCallBack{
         void changerCategory(String category);
     }
 
     public void setMenuClickCallBack(MenuClickCallBack menuClickCallBack) {
         this.menuClickCallBack = menuClickCallBack;
+    }
+
+
+    private void showMyInfoMenu(){
+        if (mViewPager.getCurrentItem() == 3){
+            ll_item1.setVisibility(View.VISIBLE);
+            ll_item2.setVisibility(View.GONE);
+            ll_item3.setVisibility(View.GONE);
+            setting_text1.setText("切换账号");
+        }else {
+            ll_item1.setVisibility(ll_item1IsVisible);
+            ll_item2.setVisibility(ll_item2IsVisible);
+            ll_item3.setVisibility(ll_item3IsVisible);
+            setting_text1.setText("显示全部");
+            setting_text2.setText("显示论文");
+            setting_text3.setText("显示设计");
+        }
     }
 }

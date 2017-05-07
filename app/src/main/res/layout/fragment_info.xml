@@ -9,8 +9,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="10dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="0dp"
         >
 
     <RelativeLayout
@@ -19,7 +21,6 @@
         <TextView
             android:id="@+id/name_tv"
             style="@style/ProjectDetailTv_style"
-            android:background="@drawable/border_all"
             android:text="姓名"
             />
 
@@ -27,7 +28,6 @@
             android:id="@+id/nameTv"
             style="@style/ProjectDetailValueTv_style"
             android:layout_toRightOf="@id/name_tv"
-            android:background="@drawable/border_all"
             />
     </RelativeLayout>
 
@@ -79,20 +79,28 @@
             android:layout_toRightOf="@id/department_tv"
             />
     </RelativeLayout>
-        <RelativeLayout
+        <LinearLayout
             style="@style/ProjectDetailRL_style"
-            android:background="@drawable/border"
-            android:padding="10dp">
-            <Button
-                android:id="@+id/mystudent_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/login_btn_selector"
-                android:layout_centerHorizontal="true"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:text="我的学生"/>
-        </RelativeLayout>
+            android:orientation="vertical"
+            android:background="@drawable/border_nobottom">
+
+            <TextView
+                android:id="@+id/student_tv"
+                style="@style/ProjectDetailTv_style"
+                android:layout_width="match_parent"
+                android:text="我的学生"
+                android:textColor="#f00"
+                android:background="@drawable/border_nobottom"
+                />
+            <include layout="@layout/line"/>
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/replyStudentRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </android.support.v7.widget.RecyclerView>
+        </LinearLayout>
+
 
     </LinearLayout>
 </RelativeLayout>
