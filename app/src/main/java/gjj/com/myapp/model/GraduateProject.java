@@ -16,16 +16,16 @@ public class GraduateProject {
     private String year;
     private String title;                 //题目名称
     private String subTitle;              //副标题
-    private String category;              //题目类别
+    private String category;              //题目类别   不需要
     private String projectType;           //题目类型
     private String projectFidelity;       //题目性质
     private String projectFrom;           //题目来源
-    private Integer replyGroup_id;           //该课题所在的答辩小组
+    private Integer replyGroup_id;        //该课题所在的答辩小组
     private String content;               //工作内容
     private String basicRequirement;      //基本要求
     private String basicSkill;            //基本技能
     private String reference;            //参考文献
-    private String major;                 //专业
+    private String major;                 //所在专业
     private Integer version;              //版本号
     private Integer completenessScoreByGroup;      //完成任务规定的要求与水平评分
     private Integer correctnessScoreByGroup;       //回答问题的正确性评分
