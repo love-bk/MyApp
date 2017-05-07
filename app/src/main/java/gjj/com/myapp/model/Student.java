@@ -15,9 +15,9 @@ public class Student {
     private Long id;
     private Integer version;                      //版本号
     private String no;                          //学生的学号
-    private String phoneNumber;                          //学生的手机号
+    private String contact;                          //学生的手机号
     private String name;                         //学生的姓名
-    private String major;                          //学生所在的专业
+//    private String major;                          //学生所在的专业
     private String classDescription;
     @Transient
     private StudentClass studentClass;                 //学生所在的班级
@@ -29,16 +29,16 @@ public class Student {
     private boolean isAddressee;//学生是否是收件方*/
 
 
-    @Generated(hash = 343840845)
-    public Student(Long id, Integer version, String no, String phoneNumber,
-            String name, String major, String classDescription, Long tutorId,
-            Long replyGroup_id, Long serverId, Long replyGraduateProject_id) {
+
+    @Generated(hash = 696116032)
+    public Student(Long id, Integer version, String no, String contact, String name,
+            String classDescription, Long tutorId, Long replyGroup_id,
+            Long serverId, Long replyGraduateProject_id) {
         this.id = id;
         this.version = version;
         this.no = no;
-        this.phoneNumber = phoneNumber;
+        this.contact = contact;
         this.name = name;
-        this.major = major;
         this.classDescription = classDescription;
         this.tutorId = tutorId;
         this.replyGroup_id = replyGroup_id;
@@ -49,6 +49,7 @@ public class Student {
     @Generated(hash = 1556870573)
     public Student() {
     }
+
 
 
     public Long getTutorId() {
@@ -118,32 +119,7 @@ public class Student {
     }
 
 
-    public String getMajor() {
-        return major;
-    }
 
-    public void setMajor(String major) {
-        this.major = major;
-    }
-
-
-    @Override
-    public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", version=" + version +
-                ", no='" + no + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", name='" + name + '\'' +
-                ", major='" + major + '\'' +
-                ", classDescription='" + classDescription + '\'' +
-                ", studentClass=" + studentClass +
-                ", tutorId=" + tutorId +
-                ", replyGroup_id=" + replyGroup_id +
-                ", serverId=" + serverId +
-                ", replyGraduateProject_id=" + replyGraduateProject_id +
-                '}';
-    }
 
     public String getClassDescription() {
         return classDescription;
@@ -161,12 +137,12 @@ public class Student {
         this.id = id;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getContact() {
+        return contact;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 
     private class StudentClass {

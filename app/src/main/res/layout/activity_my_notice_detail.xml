@@ -6,11 +6,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/theme_bg_color"
+
+    android:fitsSystemWindows="true"
+    android:background="@color/title_bg_color"
     tools:context="gjj.com.myapp.mynotice.views.MyNoticeDetailActivity">
 
     <include layout="@layout/toolbar"/>
     <ScrollView
+        android:background="@color/theme_bg_color"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"

@@ -27,6 +27,26 @@ public class ReplyGroup {
 
 
 
+    @Generated(hash = 915338937)
+    public ReplyGroup(Long id, String description, String location,
+            Integer leader_id, String leader_name, long beginTime, long endTime) {
+        this.id = id;
+        this.description = description;
+        this.location = location;
+        this.leader_id = leader_id;
+        this.leader_name = leader_name;
+        this.beginTime = beginTime;
+        this.endTime = endTime;
+    }
+
+    @Generated(hash = 21646655)
+    public ReplyGroup() {
+    }
+
+
+
+
+
     public String getLeader_name() {
         return leader_name;
     }

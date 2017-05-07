@@ -29,9 +29,8 @@ public class MyStudentListAdapter extends RecyclerView.Adapter<MyStudentListAdap
     private ProjectRecyclerViewAdapter.OnItemClickListener mOnItemClickListener;
 
 
-    public MyStudentListAdapter(Context context, List<Student> list) {
+    public MyStudentListAdapter(Context context) {
         this.mContext = context;
-        this.mData = list;
         mInflater = LayoutInflater.from(mContext);
     }
 
@@ -96,7 +95,7 @@ public class MyStudentListAdapter extends RecyclerView.Adapter<MyStudentListAdap
 //            mPhonenumberTv.setText(position+"0000000000");
 //            mSerialNumberTv.setText(String.valueOf(position+1));
             mNameTv.setText(student.getName());
-            mPhonenumberTv.setText(student.getPhoneNumber());
+            mPhonenumberTv.setText(student.getContact());
             mSerialNumberTv.setText(String.valueOf(position+1));
         }
     }

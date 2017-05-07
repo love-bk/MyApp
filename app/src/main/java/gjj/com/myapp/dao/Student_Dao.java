@@ -37,4 +37,9 @@ public class Student_Dao {
             studentDao.insertInTx(students);
         }
     }
+
+    public List<Student> queryDatasByTutorId(long tutorId){
+        return studentDao.queryBuilder().where(StudentDao.Properties.TutorId.eq(tutorId)).list();
+
+    }
 }

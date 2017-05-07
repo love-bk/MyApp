@@ -30,7 +30,6 @@ public class MyStudentActivity extends MvpActivity<MyInfoPresenter> implements M
     RecyclerView mMystudentRecyclerview;
     @BindView(R.id.back_iv)
     ImageView mBackIv;
-    private List<Student> mData = new ArrayList<>();
     private MyStudentListAdapter adapter;
 
     @Override
@@ -40,14 +39,12 @@ public class MyStudentActivity extends MvpActivity<MyInfoPresenter> implements M
         ButterKnife.bind(this);
 
         initView();
-        //测试数据
-        initData();
         mMystudentRecyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mMystudentRecyclerview.setItemAnimator(new DefaultItemAnimator());
-        adapter = new MyStudentListAdapter(this, mData);
+        adapter = new MyStudentListAdapter(this);
         mMystudentRecyclerview.setAdapter(adapter);
         mBackIv.setVisibility(View.VISIBLE);
-
+        initData();
     }
 
     private void initData() {
