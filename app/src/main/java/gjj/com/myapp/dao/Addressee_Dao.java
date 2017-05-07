@@ -46,7 +46,7 @@ public class Addressee_Dao {
      * 插入多条条数据
      * @param addressees
      */
-    public void insertAddressees(List<Addressee> addressees){
+    public void insertAddressees(List<Addressee>  addressees){
         if (addressees != null){
             addresseeDao.deleteAll();
             addresseeDao.insertInTx(addressees);
