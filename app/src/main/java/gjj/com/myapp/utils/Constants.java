@@ -17,6 +17,7 @@ public class Constants {
     public static final String DESIGN = "设计";
     public static final String PAGE = "论文";
     public static final String ALL = "all";
+    public static final String PROJECT_ID = "projectId";
     public static  long tutorId = 1;
 
 }

@@ -31,15 +31,31 @@ public class Student_Dao {
     }
 
 
-    public void insert(List<Student> students){
+    public void insertStudentList(List<Student> students){
         if (students != null && students.size() !=0){
             studentDao.deleteAll();
             studentDao.insertInTx(students);
         }
     }
 
+    public void insertStudent(Student student){
+        List<Student> students = studentDao.queryBuilder().where(StudentDao.Properties.Id.eq(student.getId())).list();
+        if (students!=null && students.size()!=0){
+            studentDao.delete(students.get(0));
+        }
+        studentDao.insert(student);
+    }
     public List<Student> queryDatasByTutorId(long tutorId){
         return studentDao.queryBuilder().where(StudentDao.Properties.TutorId.eq(tutorId)).list();
+
+    }
+     public Student queryDatasByProjectId(long projectId){
+
+         List<Student> students = studentDao.queryBuilder().where(StudentDao.Properties.ReplyGraduateProject_id.eq(projectId)).list();
+         if (students!=null && students.size()!=0){
+             return students.get(0);
+         }
+         return null;
 
     }
 

@@ -36,7 +36,7 @@ public class ProjectRecyclerViewAdapter extends RecyclerView.Adapter<ProjectRecy
     }
 
     public interface OnItemClickListener{
-        void onItemClick(View view,int position);
+        void onItemClick(View view,int position,GraduateProject project);
     }
     public void setOnItemClickListener(OnItemClickListener mOnItemClickListener){
         this.mOnItemClickListener = mOnItemClickListener;
@@ -59,7 +59,7 @@ public class ProjectRecyclerViewAdapter extends RecyclerView.Adapter<ProjectRecy
                 @Override
                 public void onClick(View v) {
                     int position = holder.getLayoutPosition(); // 1
-                    mOnItemClickListener.onItemClick(holder.itemView,position); // 2
+                    mOnItemClickListener.onItemClick(holder.itemView,position,mData.get(position)); // 2
                 }
             });
         }
@@ -93,10 +93,10 @@ public class ProjectRecyclerViewAdapter extends RecyclerView.Adapter<ProjectRecy
 
         public void setData(GraduateProject project, int position) {
             mTvInfo.setText(project.getTitle());
-            if (Constants.DESIGN.equals(project.getCategory())){
-                mSerialNumberTv.setText(Constants.DESIGN);
+            if ("设计题目".equals(project.getCategory())){
+                mSerialNumberTv.setBackgroundResource(R.mipmap.design_logo);
             }else{
-                mSerialNumberTv.setText(Constants.PAGE);
+                mSerialNumberTv.setBackgroundResource(R.mipmap.paper_logo);
             }
             mSubTitle.setText(project.getSubTitle());
         }

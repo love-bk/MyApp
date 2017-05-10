@@ -6,6 +6,8 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Transient;
 
+import java.util.List;
+
 /**
  * Created by Administrator on 2016/1/21.
  * 答辩小组，与老师是多对一的关系。
@@ -22,14 +24,14 @@ public class ReplyGroup {
     private ReplyTime replyTime;
     private long beginTime;                                     //答辩的开始时间
     private long endTime;                                       //答辩的结束时间
+    @Transient
+    private List<GraduateProject> graduateProjects;
+    private long tutorId;
 
-
-
-
-
-    @Generated(hash = 915338937)
+    @Generated(hash = 1827433202)
     public ReplyGroup(Long id, String description, String location,
-            Integer leader_id, String leader_name, long beginTime, long endTime) {
+            Integer leader_id, String leader_name, long beginTime, long endTime,
+            long tutorId) {
         this.id = id;
         this.description = description;
         this.location = location;
@@ -37,15 +39,28 @@ public class ReplyGroup {
         this.leader_name = leader_name;
         this.beginTime = beginTime;
         this.endTime = endTime;
+        this.tutorId = tutorId;
     }
 
     @Generated(hash = 21646655)
     public ReplyGroup() {
     }
 
+    public long getTutorId() {
+        return tutorId;
+    }
 
+    public void setTutorId(long tutorId) {
+        this.tutorId = tutorId;
+    }
 
+    public List<GraduateProject> getGraduateProjects() {
+        return graduateProjects;
+    }
 
+    public void setGraduateProjects(List<GraduateProject> graduateProjects) {
+        this.graduateProjects = graduateProjects;
+    }
 
     public String getLeader_name() {
         return leader_name;
@@ -113,7 +128,7 @@ public class ReplyGroup {
         this.id = id;
     }
 
-    private class ReplyTime {
+    public class ReplyTime {
         private long beginTime;                                     //答辩的开始时间
         private long endTime;                                       //答辩的结束时间
 

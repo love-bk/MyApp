@@ -75,6 +75,7 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
         mFragmentList.add(noticeFragment);
         mFragmentList.add(infoFragment);
         mViewPager.setAdapter(new MainFragmentPageAdapter(getSupportFragmentManager(), mFragmentList));
+        mViewPager.setOffscreenPageLimit(3);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -185,12 +186,15 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
 
     @Override
     public void loadSucceed(String projectAndReply) {
-        Toast.makeText(mActivity, "加载成功", Toast.LENGTH_SHORT).show();
+        if (mViewPager.getCurrentItem()==0){
+            menuClickCallBack.changerCategory(Constants.ALL);
+        }
+        Toast.makeText(mActivity, "数据加载成功", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void loadFail(String msg) {
-        Toast.makeText(mActivity, "加载失败", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mActivity, "数据加载失败", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -271,7 +275,7 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
             case R.id.ll_item3:
                 ll_item1IsVisible = View.VISIBLE;
                 ll_item2IsVisible = View.VISIBLE;
-                ll_item3IsVisible = View.VISIBLE;
+                ll_item3IsVisible = View.GONE;
                 mPopupWindow.dismiss();
                 menuClickCallBack.changerCategory(Constants.DESIGN);
                 break;
@@ -289,7 +293,9 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
 
     public interface MenuClickCallBack{
         void changerCategory(String category);
+
     }
+
 
     public void setMenuClickCallBack(MenuClickCallBack menuClickCallBack) {
         this.menuClickCallBack = menuClickCallBack;

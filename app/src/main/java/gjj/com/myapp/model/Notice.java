@@ -23,6 +23,24 @@ public class Notice {
 
 
 
+    @Generated(hash = 1106525684)
+    public Notice(Long id, String title, String content, String noticeDate,
+            Integer version, Integer addressor_id, String addressor_name) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.noticeDate = noticeDate;
+        this.version = version;
+        this.addressor_id = addressor_id;
+        this.addressor_name = addressor_name;
+    }
+
+    @Generated(hash = 1880392847)
+    public Notice() {
+    }
+
+
+
 //    private List<Integer> addressee_id;   //该属性用于发送通知，一个通知可以对应多个收件人
 
 //    public List<Integer> getAddressee_id() {

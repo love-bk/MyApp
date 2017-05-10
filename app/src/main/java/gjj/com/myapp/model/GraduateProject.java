@@ -4,6 +4,9 @@ package gjj.com.myapp.model;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Transient;
+
+import java.io.Serializable;
 
 /**
  * Created by Administrator on 2016/1/21.
@@ -20,39 +23,53 @@ public class GraduateProject {
     private String projectType;           //题目类型
     private String projectFidelity;       //题目性质
     private String projectFrom;           //题目来源
-    private Integer replyGroup_id;        //该课题所在的答辩小组
+    private Long replyGroup_id;        //该课题所在的答辩小组
     private String content;               //工作内容
     private String basicRequirement;      //基本要求
     private String basicSkill;            //基本技能
     private String reference;            //参考文献
     private String major;                 //所在专业
-    private Integer version;              //版本号
-    private Integer completenessScoreByGroup;      //完成任务规定的要求与水平评分
-    private Integer correctnessScoreByGroup;       //回答问题的正确性评分
-    private Integer qualityScoreBtGroup;           //论文与实务的质量评分
-    private Integer replyScoreByGroup;             //论文内容的答辩陈述评分
+    private Double completenessScoreByGroup;      //完成任务规定的要求与水平评分
+    private Double correctnessScoreByGroup;       //回答问题的正确性评分
+    private Double qualityScoreBtGroup;           //论文与实务的质量评分
+    private Double replyScoreByGroup;             //论文内容的答辩陈述评分
     private String remark;                         //指导老师的评语
-    private Integer student_id;                     //选该题目学生的id
-    private String student_name;                     //选该题目学生的姓名
-    private Integer tutor_id;                      //申报该题目老师的id
+    private Long student_id;                     //选该题目学生的id
+    @Transient
+    private Student student_name;                     //选该题目学生的姓名
+    private Long tutor_id;                      //申报该题目老师的id
     private boolean isAllow;                     //是否允许答辩 在commentByTutor中可以找到
     private boolean isSubmit;                    //是否提交 在commentByTutor中可以找到
     private boolean isSave;                      //是否保存 暂定
-    private boolean isAuditByDirector;           //审核状态
+    private boolean auditByDirector;           //审核状态
     private String replyStation;
 
 
-    @Generated(hash = 2060373895)
+
+
+
+    @Generated(hash = 1800086101)
+    public GraduateProject() {
+    }
+
+
+
+
+
+
+
+
+
+    @Generated(hash = 518391813)
     public GraduateProject(Long id, String year, String title, String subTitle,
-                           String category, String projectType, String projectFidelity,
-                           String projectFrom, Integer replyGroup_id, String content,
-                           String basicRequirement, String basicSkill, String reference,
-                           String major, Integer version, Integer completenessScoreByGroup,
-                           Integer correctnessScoreByGroup, Integer qualityScoreBtGroup,
-                           Integer replyScoreByGroup, String remark, Integer student_id,
-                           String student_name, Integer tutor_id, boolean isAllow,
-                           boolean isSubmit, boolean isSave, boolean isAuditByDirector,
-                           String replyStation) {
+            String category, String projectType, String projectFidelity,
+            String projectFrom, Long replyGroup_id, String content,
+            String basicRequirement, String basicSkill, String reference,
+            String major, Double completenessScoreByGroup,
+            Double correctnessScoreByGroup, Double qualityScoreBtGroup,
+            Double replyScoreByGroup, String remark, Long student_id, Long tutor_id,
+            boolean isAllow, boolean isSubmit, boolean isSave,
+            boolean auditByDirector, String replyStation) {
         this.id = id;
         this.year = year;
         this.title = title;
@@ -67,30 +84,27 @@ public class GraduateProject {
         this.basicSkill = basicSkill;
         this.reference = reference;
         this.major = major;
-        this.version = version;
         this.completenessScoreByGroup = completenessScoreByGroup;
         this.correctnessScoreByGroup = correctnessScoreByGroup;
         this.qualityScoreBtGroup = qualityScoreBtGroup;
         this.replyScoreByGroup = replyScoreByGroup;
         this.remark = remark;
         this.student_id = student_id;
-        this.student_name = student_name;
         this.tutor_id = tutor_id;
         this.isAllow = isAllow;
         this.isSubmit = isSubmit;
         this.isSave = isSave;
-        this.isAuditByDirector = isAuditByDirector;
+        this.auditByDirector = auditByDirector;
         this.replyStation = replyStation;
     }
 
-    @Generated(hash = 1800086101)
-    public GraduateProject() {
-    }
 
 
-    public void setStudent_id(Integer student_id) {
-        this.student_id = student_id;
-    }
+
+
+
+
+
 
     public void setAllow(boolean allow) {
         isAllow = allow;
@@ -104,9 +118,6 @@ public class GraduateProject {
         isSave = save;
     }
 
-    public void setAuditByDirector(boolean auditByDirector) {
-        isAuditByDirector = auditByDirector;
-    }
 
     public String getReplyStation() {
         return replyStation;
@@ -114,22 +125,6 @@ public class GraduateProject {
 
     public void setReplyStation(String replyStation) {
         this.replyStation = replyStation;
-    }
-
-    public Integer getReplyGroup_id() {
-        return replyGroup_id;
-    }
-
-    public void setReplyGroup_id(Integer replyGroup_id) {
-        this.replyGroup_id = replyGroup_id;
-    }
-
-    public String getStudent_name() {
-        return student_name;
-    }
-
-    public void setStudent_name(String student_name) {
-        this.student_name = student_name;
     }
 
 
@@ -157,13 +152,7 @@ public class GraduateProject {
         this.category = category;
     }
 
-    public Integer getCompletenessScoreByGroup() {
-        return completenessScoreByGroup;
-    }
 
-    public void setCompletenessScoreByGroup(Integer completenessScoreByGroup) {
-        this.completenessScoreByGroup = completenessScoreByGroup;
-    }
 
     public String getContent() {
         return content;
@@ -173,13 +162,7 @@ public class GraduateProject {
         this.content = content;
     }
 
-    public Integer getCorrectnessScoreByGroup() {
-        return correctnessScoreByGroup;
-    }
 
-    public void setCorrectnessScoreByGroup(Integer correctnessScoreByGroup) {
-        this.correctnessScoreByGroup = correctnessScoreByGroup;
-    }
 
 
     public boolean isAllow() {
@@ -190,13 +173,7 @@ public class GraduateProject {
         this.isAllow = isAllow;
     }
 
-    public boolean isAuditByDirector() {
-        return isAuditByDirector;
-    }
 
-    public void setIsAuditByDirector(boolean isAuditByDirector) {
-        this.isAuditByDirector = isAuditByDirector;
-    }
 
     public boolean isSave() {
         return isSave;
@@ -246,13 +223,6 @@ public class GraduateProject {
         this.projectType = projectType;
     }
 
-    public Integer getQualityScoreBtGroup() {
-        return qualityScoreBtGroup;
-    }
-
-    public void setQualityScoreBtGroup(Integer qualityScoreBtGroup) {
-        this.qualityScoreBtGroup = qualityScoreBtGroup;
-    }
 
     public String getReference() {
         return reference;
@@ -270,21 +240,7 @@ public class GraduateProject {
         this.remark = remark;
     }
 
-    public Integer getReplyScoreByGroup() {
-        return replyScoreByGroup;
-    }
 
-    public void setReplyScoreByGroup(Integer replyScoreByGroup) {
-        this.replyScoreByGroup = replyScoreByGroup;
-    }
-
-    public int getStudent_id() {
-        return student_id;
-    }
-
-    public void setStudent_id(int student_id) {
-        this.student_id = student_id;
-    }
 
     public String getSubTitle() {
         return subTitle;
@@ -302,22 +258,29 @@ public class GraduateProject {
         this.title = title;
     }
 
-    public Integer getTutor_id() {
+    public Long getReplyGroup_id() {
+        return replyGroup_id;
+    }
+
+    public void setReplyGroup_id(Long replyGroup_id) {
+        this.replyGroup_id = replyGroup_id;
+    }
+
+    public Long getStudent_id() {
+        return student_id;
+    }
+
+    public void setStudent_id(Long student_id) {
+        this.student_id = student_id;
+    }
+
+    public Long getTutor_id() {
         return tutor_id;
     }
 
-    public void setTutor_id(Integer tutor_id) {
+    public void setTutor_id(Long tutor_id) {
         this.tutor_id = tutor_id;
     }
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
 
     public String getYear() {
         return year;
@@ -348,7 +311,55 @@ public class GraduateProject {
         return this.isSave;
     }
 
-    public boolean getIsAuditByDirector() {
-        return this.isAuditByDirector;
+    public Student getStudent_name() {
+        return student_name;
+    }
+
+    public void setStudent_name(Student student_name) {
+        this.student_name = student_name;
+    }
+
+    public boolean isAuditByDirector() {
+        return auditByDirector;
+    }
+
+    public void setAuditByDirector(boolean auditByDirector) {
+        this.auditByDirector = auditByDirector;
+    }
+
+    public boolean getAuditByDirector() {
+        return this.auditByDirector;
+    }
+
+    public Double getCompletenessScoreByGroup() {
+        return completenessScoreByGroup;
+    }
+
+    public void setCompletenessScoreByGroup(Double completenessScoreByGroup) {
+        this.completenessScoreByGroup = completenessScoreByGroup;
+    }
+
+    public Double getCorrectnessScoreByGroup() {
+        return correctnessScoreByGroup;
+    }
+
+    public void setCorrectnessScoreByGroup(Double correctnessScoreByGroup) {
+        this.correctnessScoreByGroup = correctnessScoreByGroup;
+    }
+
+    public Double getQualityScoreBtGroup() {
+        return qualityScoreBtGroup;
+    }
+
+    public void setQualityScoreBtGroup(Double qualityScoreBtGroup) {
+        this.qualityScoreBtGroup = qualityScoreBtGroup;
+    }
+
+    public Double getReplyScoreByGroup() {
+        return replyScoreByGroup;
+    }
+
+    public void setReplyScoreByGroup(Double replyScoreByGroup) {
+        this.replyScoreByGroup = replyScoreByGroup;
     }
 }

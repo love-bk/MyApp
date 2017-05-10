@@ -65,11 +65,17 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         }
         //将获取到的数据添加到数据库中
         Tutor_Dao.getInstance((LoginActivity) mvpView).insert(tutor);
-        if (tutor.getStudent() != null && tutor.getStudent().size() !=0){
-            for (Student student : tutor.getStudent()) {
+        if (tutor.getStudentList() != null && tutor.getStudentList().size() !=0){
+            for (Student student : tutor.getStudentList()) {
                 student.setTutorId(tutor.getId());
+                if (student.getStudentClass()!=null){
+                    student.setClassDescription(student.getStudentClass().getDescription());
+                }
+                if (student.getMajor()!=null){
+                    student.setMajorDecription(student.getMajor().getDescription());
+                }
             }
-            Student_Dao.getInstance((LoginActivity) mvpView).insert(tutor.getStudent());
+            Student_Dao.getInstance((LoginActivity) mvpView).insertStudentList(tutor.getStudentList());
         }
         //将账号保存到SP中
         SPUtil.saveLoginToSP(((LoginActivity) mvpView),user.getUsername(), user.getUsername(),tutor.getId());

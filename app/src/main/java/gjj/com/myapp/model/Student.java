@@ -17,6 +17,7 @@ public class Student {
     private String no;                          //学生的学号
     private String contact;                          //学生的手机号
     private String name;                         //学生的姓名
+    private String majorDecription;
     @Transient
     private Major major;                          //学生所在的专业
     private String classDescription;
@@ -27,6 +28,32 @@ public class Student {
     private Long replyGraduateProject_id;     //学生所答辩课题的服务器端id
     /*@Column(column = "isAddressee")
     private boolean isAddressee;//学生是否是收件方*/
+
+
+
+
+
+
+
+    @Generated(hash = 574184336)
+    public Student(Long id, Integer version, String no, String contact, String name,
+            String majorDecription, String classDescription, Long tutorId,
+            Long replyGroup_id, Long replyGraduateProject_id) {
+        this.id = id;
+        this.version = version;
+        this.no = no;
+        this.contact = contact;
+        this.name = name;
+        this.majorDecription = majorDecription;
+        this.classDescription = classDescription;
+        this.tutorId = tutorId;
+        this.replyGroup_id = replyGroup_id;
+        this.replyGraduateProject_id = replyGraduateProject_id;
+    }
+
+    @Generated(hash = 1556870573)
+    public Student() {
+    }
 
 
 
@@ -119,7 +146,7 @@ public class Student {
         this.contact = contact;
     }
 
-    private class StudentClass {
+    public class StudentClass {
         private long id;
         private String description;
 
@@ -142,12 +169,15 @@ public class Student {
         @Override
         public String toString() {
             return "StudentClass{" +
-                    "description='" + description + '\'' +
+                    "id=" + id +
+                    ", description='" + description + '\'' +
                     '}';
         }
     }
 
-    private class Major{
+
+
+    public class Major{
         private long id;
         private String description;
 
@@ -166,5 +196,21 @@ public class Student {
         public void setDescription(String description) {
             this.description = description;
         }
+    }
+
+    public Major getMajor() {
+        return major;
+    }
+
+    public void setMajor(Major major) {
+        this.major = major;
+    }
+
+    public String getMajorDecription() {
+        return majorDecription;
+    }
+
+    public void setMajorDecription(String majorDecription) {
+        this.majorDecription = majorDecription;
     }
 }

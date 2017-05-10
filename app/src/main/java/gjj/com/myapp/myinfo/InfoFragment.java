@@ -90,7 +90,7 @@ public class InfoFragment extends MvpFragment<MyInfoPresenter> implements MyInfo
             mSexTv.setText(tutor.getSex());
             mWorkerNumTv.setText(tutor.getNo());
             mDepartmentTv.setText(tutor.getDescription());
-            List<Student> students = tutor.getStudent();
+            List<Student> students = tutor.getStudentList();
             if (students != null && students.size() != 0) {
                 adapter.addList(students);
             } else {

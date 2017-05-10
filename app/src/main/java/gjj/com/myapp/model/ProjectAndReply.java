@@ -7,15 +7,15 @@ import java.util.List;
  */
 
 public class ProjectAndReply {
-    private List<GraduateProject> proposerGraduateProject;
+    private List<GraduateProject> graduateProjectList;
     private List<ReplyGroup> replyGroups;
 
-    public List<GraduateProject> getProposerGraduateProject() {
-        return proposerGraduateProject;
+    public List<GraduateProject> getGraduateProjectList() {
+        return graduateProjectList;
     }
 
-    public void setProposerGraduateProject(List<GraduateProject> proposerGraduateProject) {
-        this.proposerGraduateProject = proposerGraduateProject;
+    public void setGraduateProjectList(List<GraduateProject> graduateProjectList) {
+        this.graduateProjectList = graduateProjectList;
     }
 
     public List<ReplyGroup> getReplyGroups() {
@@ -29,7 +29,7 @@ public class ProjectAndReply {
     @Override
     public String toString() {
         return "ProjectAndReply{" +
-                "proposerGraduateProject=" + proposerGraduateProject +
+                "graduateProjectList=" + graduateProjectList +
                 ", replyGroups=" + replyGroups +
                 '}';
     }

@@ -31,7 +31,7 @@ public class MyInfoPresenter extends BasePresenter<MyInfoView> {
         //从数据库中读取数据
         Tutor tutor = Tutor_Dao.getInstance(context).queryByTutorId(SPUtil.getTutorIdfromSP(context));
         List<Student> students = Student_Dao.getInstance(context).queryDatasByTutorId(SPUtil.getTutorIdfromSP(context));
-        tutor.setStudent(students);
+        tutor.setStudentList(students);
         mvpView.showMyInfo(tutor);
     }
 

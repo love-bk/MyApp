@@ -31,7 +31,6 @@
                 <TextView
                     android:id="@+id/titleName_tv"
                     style="@style/ProjectDetailTv_style"
-                    android:background="@drawable/border_all"
                     android:text="@string/title"
                     />
 
@@ -39,7 +38,6 @@
                     android:id="@+id/title_Tv"
                     style="@style/ProjectDetailValueTv_style"
                     android:layout_toRightOf="@id/titleName_tv"
-                    android:background="@drawable/border_all"
                     />
             </RelativeLayout>
 

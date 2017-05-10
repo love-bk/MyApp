@@ -40,9 +40,8 @@ public class ProjectFragment extends MvpFragment<ProjectPresenter> implements Sw
     RecyclerView mRecyclerView;
     @BindView(R.id.swipe_refresh)
     SwipeRefreshLayout mSwipeRefresh;
-    private List<String> mData = new ArrayList<>();
     private ProjectRecyclerViewAdapter mAdapter;
-
+    private String category = Constants.ALL;
 
     public ProjectFragment() {
     }
@@ -71,9 +70,11 @@ public class ProjectFragment extends MvpFragment<ProjectPresenter> implements Sw
         mAdapter = new ProjectRecyclerViewAdapter(getActivity());
         mAdapter.setOnItemClickListener(new ProjectRecyclerViewAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                startActivity(new Intent(getActivity(), ProjectDetailActivity.class));
-                Toast.makeText(getActivity(), "点击了第" + position + "条", Toast.LENGTH_SHORT).show();
+            public void onItemClick(View view, int position,GraduateProject project) {
+
+                Intent intent = new Intent(getActivity(), ProjectDetailActivity.class);
+                intent.putExtra(Constants.PROJECT_ID,project.getId());
+                startActivity(intent);
             }
         });
         mRecyclerView.setAdapter(mAdapter);
@@ -96,9 +97,10 @@ public class ProjectFragment extends MvpFragment<ProjectPresenter> implements Sw
         }
     }
 
+
     @Override
     protected void initData() {
-        mvpPresenter.loadProjectFromDB();
+
     }
 
     @Override
@@ -122,7 +124,6 @@ public class ProjectFragment extends MvpFragment<ProjectPresenter> implements Sw
     @Override
     public void loadSucceed(List<GraduateProject> projects) {
         if (projects != null) {
-            Toast.makeText(mActivity, "数据加载成功"+projects.size(), Toast.LENGTH_SHORT).show();
             mAdapter.addList(projects);
         }
     }
@@ -151,14 +152,18 @@ public class ProjectFragment extends MvpFragment<ProjectPresenter> implements Sw
 
     @Override
     public void changerCategory(String category) {
+        this.category = category;
         switch (category){
             case Constants.ALL:
+                mvpPresenter.loadProjectFromDB(category);
                 Toast.makeText(mActivity, "点击了全部", Toast.LENGTH_SHORT).show();
                 break;
             case Constants.DESIGN:
+                mvpPresenter.loadProjectFromDB(category);
                 Toast.makeText(mActivity, "点击了设计", Toast.LENGTH_SHORT).show();
                 break;
             case Constants.PAGE:
+                mvpPresenter.loadProjectFromDB(category);
                 Toast.makeText(mActivity, "点击了论文", Toast.LENGTH_SHORT).show();
                 break;
         }

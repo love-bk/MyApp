@@ -2,6 +2,8 @@ package gjj.com.myapp.dao;
 
 import android.content.Context;
 
+import org.greenrobot.greendao.query.QueryBuilder;
+
 import java.util.List;
 
 import gjj.com.myapp.greendao.gen.GraduateProjectDao;
@@ -34,7 +36,7 @@ public class GraduateProject_Dao {
          * 插入多条条数据
          * @param projects
          */
-        public void insertProjects(List<GraduateProject> projects){
+        public void insertProjectList(List<GraduateProject> projects){
             if (projects != null){
                 graduateProjectDao.deleteAll();
                 graduateProjectDao.insertInTx(projects);
@@ -47,7 +49,10 @@ public class GraduateProject_Dao {
      */
     public void insertProject(GraduateProject project){
         if (project != null){
-            graduateProjectDao.deleteAll();
+            List<GraduateProject> projects = graduateProjectDao.queryBuilder().where(GraduateProjectDao.Properties.Id.eq(project.getId())).list();
+            if (projects!=null&&projects.size()!=0){
+                graduateProjectDao.delete(projects.get(0));
+            }
             graduateProjectDao.insert(project);
         }
     }
@@ -66,5 +71,16 @@ public class GraduateProject_Dao {
      */
     public void deleteAll(){
         graduateProjectDao.deleteAll();
+    }
+
+    public List<GraduateProject> queryProjectListByTutorId(Long tutorId) {
+         return graduateProjectDao.queryBuilder().where(GraduateProjectDao.Properties.Tutor_id.eq(tutorId)).list();
+
+    }
+    public List<GraduateProject> queryProjectListByCategory(String category,long tutorId) {
+        return  graduateProjectDao.queryBuilder().where(
+                GraduateProjectDao.Properties.Tutor_id.eq(tutorId),
+                GraduateProjectDao.Properties.Category.eq(category)).list();
+
     }
 }

@@ -23,7 +23,7 @@ public class Tutor {
     @Transient
     private Department department;       //部门
     @Transient
-    private List<Student> student;       //学生
+    private List<Student> studentList;       //学生
 
 
     @Generated(hash = 286835940)
@@ -128,16 +128,16 @@ public class Tutor {
                 ", sex='" + sex + '\'' +
                 ", description='" + description + '\'' +
                 ", department=" + department +
-                ", student=" + student +
+                ", studentList=" + studentList +
                 '}';
     }
 
-    public List<Student> getStudent() {
-        return student;
+    public List<Student> getStudentList() {
+        return studentList;
     }
 
-    public void setStudent(List<Student> student) {
-        this.student = student;
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
     }
 }
 

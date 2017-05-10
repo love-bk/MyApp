@@ -26,7 +26,7 @@ public class MyStudentListAdapter extends RecyclerView.Adapter<MyStudentListAdap
     private Context mContext;
     private List<Student> mData = new ArrayList<>();
     private LayoutInflater mInflater;
-    private ProjectRecyclerViewAdapter.OnItemClickListener mOnItemClickListener;
+    private OnItemClickListener mOnItemClickListener;
 
 
     public MyStudentListAdapter(Context context) {
@@ -38,7 +38,7 @@ public class MyStudentListAdapter extends RecyclerView.Adapter<MyStudentListAdap
         void onItemClick(View view, int position);
     }
 
-    public void setOnItemClickListener(ProjectRecyclerViewAdapter.OnItemClickListener mOnItemClickListener) {
+    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
         this.mOnItemClickListener = mOnItemClickListener;
     }
 

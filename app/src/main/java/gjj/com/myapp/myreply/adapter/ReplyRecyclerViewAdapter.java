@@ -14,6 +14,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import gjj.com.myapp.R;
+import gjj.com.myapp.model.ReplyGroup;
 
 /**
  * Created by 高娟娟 on 2017/4/4.
@@ -21,14 +22,13 @@ import gjj.com.myapp.R;
 
 public class ReplyRecyclerViewAdapter extends RecyclerView.Adapter<ReplyRecyclerViewAdapter.MyViewHolder> {
     private Context mContext;
-    private List<String> mData = new ArrayList<>();
+    private List<ReplyGroup> mData = new ArrayList<>();
     private LayoutInflater mInflater;
     private OnItemClickListener mOnItemClickListener;
 
 
-    public ReplyRecyclerViewAdapter(Context context, List<String> list) {
+    public ReplyRecyclerViewAdapter(Context context) {
         this.mContext = context;
-        this.mData = list;
         mInflater = LayoutInflater.from(mContext);
     }
 
@@ -67,7 +67,7 @@ public class ReplyRecyclerViewAdapter extends RecyclerView.Adapter<ReplyRecycler
         return mData.size();
     }
 
-    public void addList(List<String> list) {
+    public void addList(List<ReplyGroup> list) {
         mData.clear();
         mData.addAll(list);
         notifyDataSetChanged();
@@ -87,10 +87,10 @@ public class ReplyRecyclerViewAdapter extends RecyclerView.Adapter<ReplyRecycler
             ButterKnife.bind(this, itemView);
         }
 
-        public void setData(String s, int position) {
-            mTeamNameTv.setText(mData.get(position));
+        public void setData(ReplyGroup replyGroup, int position) {
+            mTeamNameTv.setText(replyGroup.getDescription());
             mSerialNumberTv.setText(String.valueOf(position + 1));
-            mReplyLeaderTv.setText("组长"+String.valueOf(position + 1));
+            mReplyLeaderTv.setText(replyGroup.getLeader_name());
 
         }
     }

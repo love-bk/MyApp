@@ -16,7 +16,7 @@ import gjj.com.myapp.R;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 public class BaseFragment extends Fragment {
-    public Activity mActivity;
+    public static Activity mActivity;
     public ProgressDialog progressDialog;
 
 

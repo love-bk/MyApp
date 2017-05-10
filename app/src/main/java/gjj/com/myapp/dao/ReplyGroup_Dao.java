@@ -33,7 +33,7 @@ public class ReplyGroup_Dao {
      * 插入多条条数据
      * @param replyGroups
      */
-    public void insert(List<ReplyGroup> replyGroups){
+    public void insertReplyGroupList(List<ReplyGroup> replyGroups){
         if (replyGroups != null){
             replyGroupDao.deleteAll();
             replyGroupDao.insertInTx(replyGroups);
@@ -47,6 +47,10 @@ public class ReplyGroup_Dao {
             return replyGroups.get(0);
         }
         return null;
+    }
+    public List<ReplyGroup> queryReplyGroupListByTutorId(long tutorId){
+        return replyGroupDao.queryBuilder().where(ReplyGroupDao.Properties.TutorId.eq(tutorId)).list();
+
     }
 
     /**
