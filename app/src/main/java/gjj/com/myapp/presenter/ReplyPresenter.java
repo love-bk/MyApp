@@ -97,9 +97,15 @@ public class ReplyPresenter extends BasePresenter<ReplyView> {
         mvpView.loadSucceed(replyGroups);
     }
 
-//    public void loadReplyGroupFromDb(long projectId){
-//        List<GraduateProject> projects = new ArrayList<>();
-//        projects.add(GraduateProject_Dao.getInstance(context).queryProjectById(projectId));
-//        mvpView.loadSucceed(projects);
-//    }
+    public void loadReplyGroupFromDb(long replyGroupId){
+        List<ReplyGroup> replyGroups = new ArrayList<>();
+        ReplyGroup replyGroup = ReplyGroup_Dao.getInstance(context).queryReplyGroupById(replyGroupId);
+        List<GraduateProject> projects = GraduateProject_Dao.getInstance(context).queryProjectByReplyGroupId(replyGroupId);
+        for (GraduateProject project : projects) {
+            project.setStudent_name(Student_Dao.getInstance(context).queryDatasByProjectId(project.getId()));
+        }
+        replyGroup.setGraduateProjects(projects);
+        replyGroups.add(replyGroup);
+        mvpView.loadSucceed(replyGroups);
+    }
 }

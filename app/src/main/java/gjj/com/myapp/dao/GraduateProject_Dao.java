@@ -83,4 +83,8 @@ public class GraduateProject_Dao {
                 GraduateProjectDao.Properties.Category.eq(category)).list();
 
     }
+
+    public List<GraduateProject> queryProjectByReplyGroupId(long replyGroupId) {
+        return graduateProjectDao.queryBuilder().where(GraduateProjectDao.Properties.ReplyGroup_id.eq(replyGroupId)).list();
+    }
 }

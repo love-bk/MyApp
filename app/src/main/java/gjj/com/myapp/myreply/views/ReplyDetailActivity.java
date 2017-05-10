@@ -11,15 +11,23 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import gjj.com.myapp.R;
 import gjj.com.myapp.baseframework.base.BaseActivity;
+import gjj.com.myapp.baseframework.mvp.MvpActivity;
+import gjj.com.myapp.model.GraduateProject;
+import gjj.com.myapp.model.ReplyGroup;
 import gjj.com.myapp.myreply.adapter.ReplyStudentRecyclerViewAdapter;
+import gjj.com.myapp.presenter.ReplyPresenter;
+import gjj.com.myapp.utils.Constants;
+import gjj.com.myapp.utils.TimeUtils;
+import gjj.com.myapp.views.ReplyView;
 
-public class ReplyDetailActivity extends BaseActivity {
+public class ReplyDetailActivity extends MvpActivity<ReplyPresenter> implements ReplyView {
 
     @BindView(R.id.back_iv)
     ImageView mBackIv;
@@ -44,6 +52,7 @@ public class ReplyDetailActivity extends BaseActivity {
     @BindView(R.id.replyScrollView)
     ScrollView mReplyScrollView;
     private ArrayList<String> mData;
+    private ReplyStudentRecyclerViewAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +60,13 @@ public class ReplyDetailActivity extends BaseActivity {
         setContentView(R.layout.activity_reply_detail);
         ButterKnife.bind(this);
         initTitle();
-        initData();
         initView();
+        initData();
+    }
+
+    @Override
+    protected ReplyPresenter createPresenter() {
+        return new ReplyPresenter(this);
     }
 
     private void initView() {
@@ -60,7 +74,7 @@ public class ReplyDetailActivity extends BaseActivity {
         mReplyStudentRecyclerView.setLayoutManager(new AutoLinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mReplyStudentRecyclerView.setNestedScrollingEnabled(false);
         mReplyStudentRecyclerView.setItemAnimator(new DefaultItemAnimator());
-        ReplyStudentRecyclerViewAdapter mAdapter = new ReplyStudentRecyclerViewAdapter(this, mData);
+        mAdapter = new ReplyStudentRecyclerViewAdapter(this);
         mAdapter.setOnItemClickListener(new ReplyStudentRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
@@ -81,9 +95,36 @@ public class ReplyDetailActivity extends BaseActivity {
     }
 
     private void initData() {
-        mData = new ArrayList<>();
-        for (int i = 1; i < 11; i++) {
-            mData.add(" 第" + i + "个item");
+        long replygroupId = getIntent().getLongExtra(Constants.REPLYGROUPID, 0);
+        mvpPresenter.loadReplyGroupFromDb(replygroupId);
+    }
+
+    @Override
+    public void loadSucceed(List<ReplyGroup> replyGroups) {
+        ReplyGroup replyGroup = replyGroups.get(0);
+        mReplyTeamNameTv.setText(replyGroup.getDescription());
+        mReplyLeaderTv.setText(replyGroup.getLeader_name());
+        mReplyPlaceTv.setText(replyGroup.getLocation());
+        mReplyMajorTv.setText(replyGroup.getMajor());
+        List<GraduateProject> projects = replyGroup.getGraduateProjects();
+        if (projects != null&&projects.size()!=0){
+            String members = "";
+            for (GraduateProject project : projects) {
+                if (project.getStudent_name()!=null){
+                    members = members+project.getStudent_name().getName()+"、";
+                }
+            }
+            if (members.contains("、")){
+                mReplyMemberTv.setText(members.substring(0,members.lastIndexOf("、")));
+            }
+            mAdapter.addList(projects);
         }
+        mStartTimeTv.setText(TimeUtils.formatTimeInMillis(replyGroup.getBeginTime()));
+        mEndTimeTv.setText(TimeUtils.formatTimeInMillis(replyGroup.getEndTime()));
+    }
+
+    @Override
+    public void loadFail(String msg) {
+
     }
 }

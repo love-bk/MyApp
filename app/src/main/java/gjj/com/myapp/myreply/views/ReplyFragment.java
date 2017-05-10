@@ -25,6 +25,7 @@ import gjj.com.myapp.baseframework.mvp.MvpFragment;
 import gjj.com.myapp.model.ReplyGroup;
 import gjj.com.myapp.myreply.adapter.ReplyRecyclerViewAdapter;
 import gjj.com.myapp.presenter.ReplyPresenter;
+import gjj.com.myapp.utils.Constants;
 import gjj.com.myapp.utils.SPUtil;
 import gjj.com.myapp.views.ReplyView;
 
@@ -62,8 +63,11 @@ public class ReplyFragment extends MvpFragment<ReplyPresenter> implements SwipeR
         mAdapter = new ReplyRecyclerViewAdapter(getActivity());
         mAdapter.setOnItemClickListener(new ReplyRecyclerViewAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                startActivity(new Intent(getActivity(), ReplyDetailActivity.class));
+            public void onItemClick(View view, int position,ReplyGroup replyGroup) {
+
+                Intent intent = new Intent(getActivity(), ReplyDetailActivity.class);
+                intent.putExtra(Constants.REPLYGROUPID,replyGroup.getId());
+                startActivity(intent);
             }
         });
         mReplyRecyclerView.setAdapter(mAdapter);

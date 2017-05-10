@@ -14,6 +14,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import gjj.com.myapp.R;
+import gjj.com.myapp.model.GraduateProject;
+import gjj.com.myapp.model.ReplyGroup;
+import gjj.com.myapp.model.Student;
 
 /**
  * Created by 高娟娟 on 2017/4/4.
@@ -21,14 +24,13 @@ import gjj.com.myapp.R;
 
 public class ReplyStudentRecyclerViewAdapter extends RecyclerView.Adapter<ReplyStudentRecyclerViewAdapter.MyViewHolder> {
     private Context mContext;
-    private List<String> mData = new ArrayList<>();
+    private List<GraduateProject> mData = new ArrayList<>();
     private LayoutInflater mInflater;
     private OnItemClickListener mOnItemClickListener;
 
 
-    public ReplyStudentRecyclerViewAdapter(Context context, List<String> list) {
+    public ReplyStudentRecyclerViewAdapter(Context context) {
         this.mContext = context;
-        this.mData = list;
         mInflater = LayoutInflater.from(mContext);
     }
 
@@ -67,7 +69,7 @@ public class ReplyStudentRecyclerViewAdapter extends RecyclerView.Adapter<ReplyS
         return mData.size();
     }
 
-    public void addList(List<String> list) {
+    public void addList(List<GraduateProject> list) {
         mData.clear();
         mData.addAll(list);
         notifyDataSetChanged();
@@ -90,10 +92,10 @@ public class ReplyStudentRecyclerViewAdapter extends RecyclerView.Adapter<ReplyS
             ButterKnife.bind(this, itemView);
         }
 
-        public void setData(String s, int position) {
-            mReplyProjectTv.setText(mData.get(position));
+        public void setData(GraduateProject graduateProject, int position) {
+            mReplyProjectTv.setText(graduateProject.getTitle());
             mSerialNumberTv.setText(String.valueOf(position + 1));
-            mReplyStudentTv.setText("组长"+String.valueOf(position + 1));
+            mReplyStudentTv.setText(graduateProject.getStudent_name().getName());
             mReamStateTv.setText("已打分");
 
         }

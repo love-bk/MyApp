@@ -10,16 +10,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import gjj.com.myapp.R;
 import gjj.com.myapp.baseframework.base.BaseActivity;
+import gjj.com.myapp.baseframework.mvp.MvpActivity;
+import gjj.com.myapp.model.Notice;
 import gjj.com.myapp.mynotice.adapter.MyNoticeListAdapter;
+import gjj.com.myapp.presenter.NoticePresenter;
 import gjj.com.myapp.utils.Constants;
+import gjj.com.myapp.utils.SPUtil;
+import gjj.com.myapp.views.NoticeView;
 
-public class MyNoticeListActivity extends BaseActivity implements MyNoticeListAdapter.OnItemClickListener {
+public class MyNoticeListActivity extends MvpActivity<NoticePresenter> implements MyNoticeListAdapter.OnItemClickListener,NoticeView {
 
     @BindView(R.id.title_tv)
     TextView mTitleTv;
@@ -27,8 +33,8 @@ public class MyNoticeListActivity extends BaseActivity implements MyNoticeListAd
     RecyclerView mMynoticeRecyclerview;
     @BindView(R.id.back_iv)
     ImageView mBackIv;
-    private ArrayList<String> mData;
     private String flag;
+    private MyNoticeListAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +45,16 @@ public class MyNoticeListActivity extends BaseActivity implements MyNoticeListAd
         initData();
         mMynoticeRecyclerview.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         mMynoticeRecyclerview.setItemAnimator(new DefaultItemAnimator());
-        MyNoticeListAdapter adapter = new MyNoticeListAdapter(this, mData, flag);
-        adapter.setOnItemClickListener(this);
-        mMynoticeRecyclerview.setAdapter(adapter);
+        mAdapter = new MyNoticeListAdapter(this,flag);
+        mAdapter.setOnItemClickListener(this);
+        mMynoticeRecyclerview.setAdapter(mAdapter);
         mBackIv.setVisibility(View.VISIBLE);
 
+    }
+
+    @Override
+    protected NoticePresenter createPresenter() {
+        return new NoticePresenter(this);
     }
 
 
@@ -60,10 +71,7 @@ public class MyNoticeListActivity extends BaseActivity implements MyNoticeListAd
             default:
                 break;
         }
-        mData = new ArrayList<>();
-        for (int i = 1; i < 11; i++) {
-            mData.add(" 第" + i + "个item");
-        }
+        mvpPresenter.loadProjectData(String.valueOf(SPUtil.getTutorIdfromSP(this)));
     }
 
     /**
@@ -82,5 +90,15 @@ public class MyNoticeListActivity extends BaseActivity implements MyNoticeListAd
     @OnClick(R.id.back_iv)
     public void onViewClicked() {
         onBackPressed();
+    }
+
+    @Override
+    public void loadSucceed(List<Notice> notices) {
+        mAdapter.addList(notices);
+    }
+
+    @Override
+    public void loadFail(String msg) {
+
     }
 }

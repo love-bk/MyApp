@@ -41,7 +41,7 @@ public class ReplyGroup_Dao {
     }
 
 
-    public ReplyGroup queryProjectById(long id){
+    public ReplyGroup queryReplyGroupById(long id){
         List<ReplyGroup> replyGroups = replyGroupDao.queryBuilder().where(ReplyGroupDao.Properties.Id.eq(id)).list();
         if (replyGroups != null&&replyGroups.size()>0) {
             return replyGroups.get(0);

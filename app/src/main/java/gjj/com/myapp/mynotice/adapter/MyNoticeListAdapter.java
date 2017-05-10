@@ -14,6 +14,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import gjj.com.myapp.R;
+import gjj.com.myapp.model.Notice;
 import gjj.com.myapp.utils.Constants;
 
 /**
@@ -23,15 +24,14 @@ import gjj.com.myapp.utils.Constants;
 public class MyNoticeListAdapter extends RecyclerView.Adapter<MyNoticeListAdapter.MyViewHolder> {
 
     private Context mContext;
-    private List<String> mData = new ArrayList<>();
+    private List<Notice> mData = new ArrayList<>();
     private LayoutInflater mInflater;
     private String flag;
     private MyNoticeListAdapter.OnItemClickListener mOnItemClickListener;
 
 
-    public MyNoticeListAdapter(Context context, List<String> list,String flag) {
+    public MyNoticeListAdapter(Context context,String flag) {
         this.mContext = context;
-        this.mData = list;
         this.flag = flag;
         mInflater = LayoutInflater.from(mContext);
     }
@@ -72,7 +72,7 @@ public class MyNoticeListAdapter extends RecyclerView.Adapter<MyNoticeListAdapte
         return mData.size();
     }
 
-    public void addList(List<String> list) {
+    public void addList(List<Notice> list) {
         mData.clear();
         mData.addAll(list);
         notifyDataSetChanged();
@@ -90,8 +90,8 @@ public class MyNoticeListAdapter extends RecyclerView.Adapter<MyNoticeListAdapte
             ButterKnife.bind(this, itemView);
         }
 
-        public void setData(String s, int position) {
-            mNameTv.setText(s+position);
+        public void setData(Notice notice, int position) {
+            mNameTv.setText(notice.getTitle());
             switch (flag){
                 case Constants.FORWARD_MESSAGE:
                     mSerialNumberTv.setText("发");

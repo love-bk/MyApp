@@ -33,7 +33,7 @@ public class ReplyRecyclerViewAdapter extends RecyclerView.Adapter<ReplyRecycler
     }
 
     public interface OnItemClickListener{
-        void onItemClick(View view, int position);
+        void onItemClick(View view, int position,ReplyGroup replyGroup);
     }
     public void setOnItemClickListener(OnItemClickListener mOnItemClickListener){
         this.mOnItemClickListener = mOnItemClickListener;
@@ -56,7 +56,7 @@ public class ReplyRecyclerViewAdapter extends RecyclerView.Adapter<ReplyRecycler
                 @Override
                 public void onClick(View v) {
                     int position = holder.getLayoutPosition(); // 1
-                    mOnItemClickListener.onItemClick(holder.itemView,position); // 2
+                    mOnItemClickListener.onItemClick(holder.itemView,position,mData.get(position)); // 2
                 }
             });
         }
