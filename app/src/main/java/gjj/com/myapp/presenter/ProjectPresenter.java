@@ -68,7 +68,6 @@ public class ProjectPresenter extends BasePresenter<ProjectView> {
             //将数据保存到数据库中
             long tutorId = SPUtil.getTutorIdfromSP(context);
             for (GraduateProject project : projects) {
-                project.setTutor_id(tutorId);
                 Student student = project.getStudent_name();
                 if (student != null){
                     if (student.getStudentClass()!=null){

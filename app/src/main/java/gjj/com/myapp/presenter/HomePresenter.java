@@ -16,10 +16,12 @@ import gjj.com.myapp.baseframework.retrofit.ApiCallback;
 import gjj.com.myapp.dao.GraduateProject_Dao;
 import gjj.com.myapp.dao.ReplyGroup_Dao;
 import gjj.com.myapp.dao.Student_Dao;
+import gjj.com.myapp.dao.Tutor_Dao;
 import gjj.com.myapp.model.GraduateProject;
 import gjj.com.myapp.model.ProjectAndReply;
 import gjj.com.myapp.model.ReplyGroup;
 import gjj.com.myapp.model.Student;
+import gjj.com.myapp.model.Tutor;
 import gjj.com.myapp.utils.Constants;
 import gjj.com.myapp.utils.SPUtil;
 import gjj.com.myapp.views.HomeView;
@@ -66,14 +68,12 @@ public class HomePresenter  extends BasePresenter<HomeView>{
      */
     private void handleData(ProjectAndReply projectAndReply) {
         if (projectAndReply != null){
-
             List<GraduateProject> projects = projectAndReply.getGraduateProjectList();
             List<ReplyGroup> groups = projectAndReply.getReplyGroups();
             long tutorId = SPUtil.getTutorIdfromSP(context);
             if (projects!=null&&projects.size()!=0){
                 //将数据保存到数据库中
                 for (GraduateProject project : projects) {
-                    project.setTutor_id(tutorId);
                     Student student = project.getStudent_name();
                     if (student != null){
                         if (student.getStudentClass()!=null){
@@ -88,19 +88,31 @@ public class HomePresenter  extends BasePresenter<HomeView>{
                     }
                 }
                 GraduateProject_Dao.getInstance(context).insertProjectList(projects);
+            }else {
+                //从数据库中读取数据
+
             }
             if (groups != null && groups.size() != 0){
                 //将数据保存到数据库中
+                String replyMembers = "";
                 for (ReplyGroup group : groups) {
                     if (group.getReplyTime()!=null){
                         group.setBeginTime(group.getReplyTime().getBeginTime());
                         group.setEndTime(group.getReplyTime().getEndTime());
                     }
-                    group.setTutorId(tutorId);
+                    group.setTutor_Id(tutorId);
                     List<GraduateProject> graduateProjects = group.getGraduateProjects();
+                    List<Tutor> tutors = group.getTutorId();
+                    //操作答辩小组里的答辩成员
+                    if (tutors != null && tutors.size() != 0){
+                        for (Tutor tutor : tutors) {
+                            tutor.setReplyId(group.getId());
+                            Tutor_Dao.getInstance(context).insert(tutor);
+                        }
+                    }
+                    //操作答辩小组里的课题
                     if (graduateProjects !=null&& graduateProjects.size()!=0){
                         for (GraduateProject project : graduateProjects) {
-                            project.setTutor_id(tutorId);
                             project.setReplyGroup_id(group.getId());
                             Student student = project.getStudent_name();
                             if (student != null){
@@ -120,6 +132,9 @@ public class HomePresenter  extends BasePresenter<HomeView>{
                     }
                 }
                 ReplyGroup_Dao.getInstance(context).insertReplyGroupList(groups);
+            }else{
+                //从数据库中读取数据
+
             }
         }
     }

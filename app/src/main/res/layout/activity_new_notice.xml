@@ -37,7 +37,6 @@
                 <TextView
                     android:id="@+id/titleName_tv"
                     style="@style/ProjectDetailTv_style"
-                    android:background="@drawable/border_all"
                     android:text="通知标题"
                     />
 
@@ -45,7 +44,6 @@
                     android:id="@+id/noticeTitle_et"
                     style="@style/ProjectDetailValueTv_style"
                     android:layout_toRightOf="@id/titleName_tv"
-                    android:background="@drawable/border_all"
                     android:hint="请输入标题"
                     android:textCursorDrawable="@drawable/cursor"
                     />
@@ -68,6 +66,7 @@
                     android:text="选择收件人"
                     android:textColor="@color/select_addressee"
                     android:drawableRight="@mipmap/enter"
+                    android:drawablePadding="5dp"
                     />
             </RelativeLayout>
 

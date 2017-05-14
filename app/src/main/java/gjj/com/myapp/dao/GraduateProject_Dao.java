@@ -74,12 +74,12 @@ public class GraduateProject_Dao {
     }
 
     public List<GraduateProject> queryProjectListByTutorId(Long tutorId) {
-         return graduateProjectDao.queryBuilder().where(GraduateProjectDao.Properties.Tutor_id.eq(tutorId)).list();
+         return graduateProjectDao.queryBuilder().where(GraduateProjectDao.Properties.TutorId.eq(tutorId)).list();
 
     }
     public List<GraduateProject> queryProjectListByCategory(String category,long tutorId) {
         return  graduateProjectDao.queryBuilder().where(
-                GraduateProjectDao.Properties.Tutor_id.eq(tutorId),
+                GraduateProjectDao.Properties.TutorId.eq(tutorId),
                 GraduateProjectDao.Properties.Category.eq(category)).list();
 
     }

@@ -37,7 +37,7 @@ public class GraduateProject {
     private Long student_id;                     //选该题目学生的id
     @Transient
     private Student student_name;                     //选该题目学生的姓名
-    private Long tutor_id;                      //申报该题目老师的id
+    private Long tutorId;                      //申报该题目老师的id
     private boolean isAllow;                     //是否允许答辩 在commentByTutor中可以找到
     private boolean isSubmit;                    //是否提交 在commentByTutor中可以找到
     private boolean isSave;                      //是否保存 暂定
@@ -46,28 +46,14 @@ public class GraduateProject {
 
 
 
-
-
-    @Generated(hash = 1800086101)
-    public GraduateProject() {
-    }
-
-
-
-
-
-
-
-
-
-    @Generated(hash = 518391813)
+    @Generated(hash = 1749095835)
     public GraduateProject(Long id, String year, String title, String subTitle,
             String category, String projectType, String projectFidelity,
             String projectFrom, Long replyGroup_id, String content,
             String basicRequirement, String basicSkill, String reference,
             String major, Double completenessScoreByGroup,
             Double correctnessScoreByGroup, Double qualityScoreBtGroup,
-            Double replyScoreByGroup, String remark, Long student_id, Long tutor_id,
+            Double replyScoreByGroup, String remark, Long student_id, Long tutorId,
             boolean isAllow, boolean isSubmit, boolean isSave,
             boolean auditByDirector, String replyStation) {
         this.id = id;
@@ -90,7 +76,7 @@ public class GraduateProject {
         this.replyScoreByGroup = replyScoreByGroup;
         this.remark = remark;
         this.student_id = student_id;
-        this.tutor_id = tutor_id;
+        this.tutorId = tutorId;
         this.isAllow = isAllow;
         this.isSubmit = isSubmit;
         this.isSave = isSave;
@@ -98,11 +84,9 @@ public class GraduateProject {
         this.replyStation = replyStation;
     }
 
-
-
-
-
-
+    @Generated(hash = 1800086101)
+    public GraduateProject() {
+    }
 
 
 
@@ -274,12 +258,12 @@ public class GraduateProject {
         this.student_id = student_id;
     }
 
-    public Long getTutor_id() {
-        return tutor_id;
+    public Long getTutorId() {
+        return tutorId;
     }
 
-    public void setTutor_id(Long tutor_id) {
-        this.tutor_id = tutor_id;
+    public void setTutorId(Long tutorId) {
+        this.tutorId = tutorId;
     }
 
     public String getYear() {

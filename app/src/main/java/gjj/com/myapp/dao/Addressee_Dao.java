@@ -53,6 +53,12 @@ public class Addressee_Dao {
         }
     }
     /**
+     * 获取通知数据
+     */
+    public List<Addressee> getAllAddressees(){
+        return addresseeDao.queryBuilder().list();
+    }
+    /**
      * 删除数据库中的数据
      */
     public void deleteAll(){

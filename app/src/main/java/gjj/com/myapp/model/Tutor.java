@@ -24,21 +24,30 @@ public class Tutor {
     private Department department;       //部门
     @Transient
     private List<Student> studentList;       //学生
+    private long replyId;
 
-
-    @Generated(hash = 286835940)
-    public Tutor(Long id, String name, String no, String sex, String description) {
+    @Generated(hash = 1768449379)
+    public Tutor(Long id, String name, String no, String sex, String description,
+            long replyId) {
         this.id = id;
         this.name = name;
         this.no = no;
         this.sex = sex;
         this.description = description;
+        this.replyId = replyId;
     }
 
     @Generated(hash = 380252782)
     public Tutor() {
     }
 
+    public long getReplyId() {
+        return replyId;
+    }
+
+    public void setReplyId(long replyId) {
+        this.replyId = replyId;
+    }
 
     public String getDescription() {
         return description;

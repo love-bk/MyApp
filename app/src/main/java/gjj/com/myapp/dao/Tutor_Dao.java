@@ -39,10 +39,14 @@ public class Tutor_Dao {
      */
     public void insert(Tutor tutor){
         if (tutor != null){
-            tutorDao.deleteAll();
+            List<Tutor> tutors = tutorDao.queryBuilder().where(TutorDao.Properties.Id.eq(tutor.getId())).list();
+            if (tutors!=null &&tutors.size()!=0){
+                tutorDao.delete(tutors.get(0));
+            }
             tutorDao.insert(tutor);
         }
     }
+
 
 
     public Tutor queryByTutorId(long tutorId){

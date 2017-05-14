@@ -177,4 +177,12 @@
 
     </style>
 
+    <style name="Custom_Dialog_Style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginLeft">20dp</item>
+        <item name="android:textColor">@android:color/black</item>
+    </style>
 </resources>

@@ -26,18 +26,16 @@ public class ReplyGroup {
     private long endTime;                                       //答辩的结束时间
     @Transient
     private List<GraduateProject> graduateProjects;
-    private long tutorId;   //登陆用户的id
+    private long tutor_Id;   //登陆用户的id
     private String major; //答辩专业
     @Transient
-    private List<Tutor> tutors;
+    private List<Tutor> tutorId;
+    private String replyMembers;
 
-
-
-
-    @Generated(hash = 1350997047)
+    @Generated(hash = 2084684966)
     public ReplyGroup(Long id, String description, String location,
             Integer leader_id, String leader_name, long beginTime, long endTime,
-            long tutorId, String major) {
+            long tutor_Id, String major, String replyMembers) {
         this.id = id;
         this.description = description;
         this.location = location;
@@ -45,23 +43,21 @@ public class ReplyGroup {
         this.leader_name = leader_name;
         this.beginTime = beginTime;
         this.endTime = endTime;
-        this.tutorId = tutorId;
+        this.tutor_Id = tutor_Id;
         this.major = major;
+        this.replyMembers = replyMembers;
     }
 
     @Generated(hash = 21646655)
     public ReplyGroup() {
     }
 
-
-
-
-    public long getTutorId() {
-        return tutorId;
+    public String getReplyMembers() {
+        return replyMembers;
     }
 
-    public void setTutorId(long tutorId) {
-        this.tutorId = tutorId;
+    public void setReplyMembers(String replyMembers) {
+        this.replyMembers = replyMembers;
     }
 
     public List<GraduateProject> getGraduateProjects() {
@@ -168,11 +164,19 @@ public class ReplyGroup {
         this.major = major;
     }
 
-    public List<Tutor> getTutors() {
-        return tutors;
+    public long getTutor_Id() {
+        return tutor_Id;
     }
 
-    public void setTutors(List<Tutor> tutors) {
-        this.tutors = tutors;
+    public void setTutor_Id(long tutor_Id) {
+        this.tutor_Id = tutor_Id;
+    }
+
+    public List<Tutor> getTutorId() {
+        return tutorId;
+    }
+
+    public void setTutorId(List<Tutor> tutorId) {
+        this.tutorId = tutorId;
     }
 }

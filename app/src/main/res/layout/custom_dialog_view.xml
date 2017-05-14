@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <TextView
+       style="@style/Custom_Dialog_Style"
+        android:text="学生"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/student_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginBottom="5dp">
+
+    </android.support.v7.widget.RecyclerView>
+    <include layout="@layout/line"/>
+    <TextView
+        style="@style/Custom_Dialog_Style"
+        android:text="老师"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/tutor_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="15dp">
+
+    </android.support.v7.widget.RecyclerView>
+</LinearLayout>

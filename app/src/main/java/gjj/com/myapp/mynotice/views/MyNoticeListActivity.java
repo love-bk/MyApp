@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,14 +65,15 @@ public class MyNoticeListActivity extends MvpActivity<NoticePresenter> implement
         switch (flag) {
             case Constants.FORWARD_MESSAGE:
                 mTitleTv.setText("我发送的通知");
+                mvpPresenter.loadMyReleasedNotices(String.valueOf(SPUtil.getTutorIdfromSP(this)));
                 break;
             case Constants.GET_MESSAGE:
                 mTitleTv.setText("我收到的通知");
+                mvpPresenter.loadMyReceivedNotices(String.valueOf(SPUtil.getTutorIdfromSP(this)));
                 break;
             default:
                 break;
         }
-        mvpPresenter.loadProjectData(String.valueOf(SPUtil.getTutorIdfromSP(this)));
     }
 
     /**
@@ -99,6 +101,6 @@ public class MyNoticeListActivity extends MvpActivity<NoticePresenter> implement
 
     @Override
     public void loadFail(String msg) {
-
+        Toast.makeText(mActivity, "请求失败："+msg, Toast.LENGTH_SHORT).show();
     }
 }

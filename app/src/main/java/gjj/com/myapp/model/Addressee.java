@@ -16,38 +16,26 @@ public class Addressee {
     //该联系人所对应发送通知的id
     private Long noticeId;
     //收件人的姓名
-    private String addressee_name;
-    //收件人有两类，分别是学生和老师。主要用于显示收件人列表的功能。
-    private String addresseeType;
+    private String name;
     //用于判断该收件人是否被选择
     private boolean isSelected;
 
+    private String addresseeType;
 
 
-
-
-
-
-
-    @Generated(hash = 1590162628)
-    public Addressee(Long id, Long noticeId, String addressee_name,
-            String addresseeType, boolean isSelected) {
+    @Generated(hash = 1152501023)
+    public Addressee(Long id, Long noticeId, String name, boolean isSelected,
+            String addresseeType) {
         this.id = id;
         this.noticeId = noticeId;
-        this.addressee_name = addressee_name;
-        this.addresseeType = addresseeType;
+        this.name = name;
         this.isSelected = isSelected;
+        this.addresseeType = addresseeType;
     }
 
     @Generated(hash = 1999156007)
     public Addressee() {
     }
-
-
-
-
-
-
 
 
     public String getAddresseeType() {
@@ -64,14 +52,6 @@ public class Addressee {
 
     public void setNoticeId(Long noticeId) {
         this.noticeId = noticeId;
-    }
-
-    public String getAddressee_name() {
-        return addressee_name;
-    }
-
-    public void setAddressee_name(String addressee_name) {
-        this.addressee_name = addressee_name;
     }
 
     public boolean isSelected() {
@@ -98,5 +78,13 @@ public class Addressee {
 
     public void setIsSelected(boolean isSelected) {
         this.isSelected = isSelected;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

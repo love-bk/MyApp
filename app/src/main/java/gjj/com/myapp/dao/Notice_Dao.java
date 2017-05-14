@@ -46,7 +46,7 @@ public class Notice_Dao {
      * 插入多条条数据
      * @param notices
      */
-    public void insertAddressees(List<Notice> notices){
+    public void insertNotices(List<Notice> notices){
         if (notices != null){
             noticeDao.deleteAll();
             noticeDao.insertInTx(notices);
@@ -59,7 +59,7 @@ public class Notice_Dao {
         noticeDao.deleteAll();
     }
 
-    public Notice queryAddresseeById(long id){
+    public Notice queryNoticeById(long id){
         List<Notice> notices = noticeDao.queryBuilder().where(NoticeDao.Properties.Id.eq(id)).list();
         if (notices != null&&notices.size()>0) {
             return notices.get(0);
