@@ -17,6 +17,7 @@ import gjj.com.myapp.dao.Tutor_Dao;
 import gjj.com.myapp.model.GraduateProject;
 import gjj.com.myapp.model.ReplyGroup;
 import gjj.com.myapp.model.Student;
+import gjj.com.myapp.model.Tutor;
 import gjj.com.myapp.myproject.ProjectDetailActivity;
 import gjj.com.myapp.myproject.ProjectFragment;
 import gjj.com.myapp.myreply.views.ReplyDetailActivity;
@@ -32,19 +33,20 @@ import gjj.com.myapp.views.ReplyView;
 
 public class ReplyPresenter extends BasePresenter<ReplyView> {
     private Context context;
+
     public ReplyPresenter(ReplyView replyView) {
         attachView(replyView);
-        if (replyView instanceof ReplyFragment){
+        if (replyView instanceof ReplyFragment) {
             this.context = ReplyFragment.mActivity;
-        }else {
+        } else {
             this.context = ((ReplyDetailActivity) replyView);
         }
     }
 
 
-    public void loadProjectData(String tutorId) {
+    public void loadReplyGroupData(String tutorId) {
         mvpView.showLoading();
-        addSubscription(mApiStores.loadProject(tutorId), new ApiCallback<String>() {
+        addSubscription(mApiStores.loadReply(tutorId), new ApiCallback<String>() {
             @Override
             public void onSuccess(String model) {
                 mvpView.loadSucceed(handleData(model));
@@ -65,40 +67,61 @@ public class ReplyPresenter extends BasePresenter<ReplyView> {
     private List<ReplyGroup> handleData(String model) {
         //解析数据
         Gson gson = new Gson();
-        List<ReplyGroup> replyGroups = gson.fromJson(model, new TypeToken<List<GraduateProject>>() {
+        List<ReplyGroup> groups = gson.fromJson(model, new TypeToken<List<ReplyGroup>>() {
         }.getType());
+        long tutorId = SPUtil.getTutorIdfromSP(context);
         //将数据保存到数据库中
-        if (replyGroups!=null&&replyGroups.size()!=0){
+        if (groups != null && groups.size() != 0) {
             //将数据保存到数据库中
-//            for (ReplyGroup project : replyGroups) {
-//                project.setTutor_id(SPUtil.getTutorIdfromSP(context));
-//            }
-//            GraduateProject_Dao.getInstance(context).insertProjectList(projects);
-//            for (GraduateProject project : projects) {
-//                Student student = project.getStudent_name();
-//                if (student != null){
-//                    if (student.getStudentClass()!=null){
-//                        student.setClassDescription(student.getStudentClass().getDescription());
-//                    }
-//                    if (student.getMajor()!=null){
-//                        student.setMajorDecription(student.getMajor().getDescription());
-//                    }
-//                    student.setTutorId(SPUtil.getTutorIdfromSP(context));
-//                    student.setReplyGraduateProject_id(project.getId());
-//                    Student_Dao.getInstance(context).insertStudent(student);
-//                }
-//            }
+            for (ReplyGroup group : groups) {
+                if (group.getReplyTime() != null) {
+                    group.setBeginTime(group.getReplyTime().getBeginTime());
+                    group.setEndTime(group.getReplyTime().getEndTime());
+                }
+                group.setTutor_Id(tutorId);
+                List<GraduateProject> graduateProjects = group.getGraduateProjects();
+                List<Tutor> tutors = group.getTutorId();
+                //操作答辩小组里的答辩成员
+                if (tutors != null && tutors.size() != 0) {
+                    for (Tutor tutor : tutors) {
+                        tutor.setReplyId(group.getId());
+                        Tutor_Dao.getInstance(context).insert(tutor);
+                    }
+                }
+                //操作答辩小组里的课题
+                if (graduateProjects != null && graduateProjects.size() != 0) {
+                    for (GraduateProject project : graduateProjects) {
+                        project.setReplyGroup_id(group.getId());
+                        Student student = project.getStudent_name();
+                        if (student != null) {
+                            if (student.getStudentClass() != null) {
+                                student.setClassDescription(student.getStudentClass().getDescription());
+                            }
+                            if (student.getMajor() != null) {
+                                student.setMajorDecription(student.getMajor().getDescription());
+                            }
+                            student.setReplyGraduateProject_id(project.getId());
+                            student.setReplyGroup_id(group.getId());
+                            Student_Dao.getInstance(context).insertStudent(student);
+                        }
+                        GraduateProject_Dao.getInstance(context).insertProject(project);
+                    }
+                }
+            }
+            ReplyGroup_Dao.getInstance(context).insertReplyGroupList(groups);
         }
-        return replyGroups;
+
+        return groups;
     }
 
     public void loadReplyGroupFromDB() {
         //从数据库中获取数据
         List<ReplyGroup> replyGroups = ReplyGroup_Dao.getInstance(context).queryReplyGroupListByTutorId(SPUtil.getTutorIdfromSP(context));
+
         mvpView.loadSucceed(replyGroups);
     }
 
-    public void loadReplyGroupFromDb(long replyGroupId){
+    public void loadReplyGroupFromDb(long replyGroupId) {
         List<ReplyGroup> replyGroups = new ArrayList<>();
         ReplyGroup replyGroup = ReplyGroup_Dao.getInstance(context).queryReplyGroupById(replyGroupId);
         List<GraduateProject> projects = GraduateProject_Dao.getInstance(context).queryProjectByReplyGroupId(replyGroupId);

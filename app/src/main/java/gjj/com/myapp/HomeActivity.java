@@ -194,7 +194,7 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
 
     @Override
     public void loadFail(String msg) {
-        Toast.makeText(mActivity, "数据加载失败", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mActivity, "数据加载失败:"+msg, Toast.LENGTH_SHORT).show();
 
     }
 

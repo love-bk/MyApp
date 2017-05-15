@@ -17,15 +17,15 @@ public class Notice {
     private Long id;
     private String title;                       //通知的题目
     private String content;                     //通知的内容
-    private long addressTime;                   //通知的时间
-    private Integer addressor_id;               //发送者的id
+    private Long addressTime;                   //通知的时间
+    private Long addressor_id;               //发送者的id
     private String addressor_name;              //发送者的姓名
-    @Transient
-    private List<Addressee> addressees;         //收件人,只有发送者是登陆用户时收件人才被赋值，如果发送者是不是登陆用户，那么收件人肯定是登陆用户
+//    @Transient
+//    private List<Addressee> addressees;         //收件人,只有发送者是登陆用户时收件人才被赋值，如果发送者是不是登陆用户，那么收件人肯定是登陆用户
 
 
-    @Generated(hash = 199123806)
-    public Notice(Long id, String title, String content, long addressTime, Integer addressor_id,
+    @Generated(hash = 1906794361)
+    public Notice(Long id, String title, String content, Long addressTime, Long addressor_id,
             String addressor_name) {
         this.id = id;
         this.title = title;
@@ -48,11 +48,12 @@ public class Notice {
         this.addressor_name = addressor_name;
     }
 
-    public Integer getAddressor_id() {
+
+    public Long getAddressor_id() {
         return addressor_id;
     }
 
-    public void setAddressor_id(Integer addressor_id) {
+    public void setAddressor_id(Long addressor_id) {
         this.addressor_id = addressor_id;
     }
 
@@ -64,21 +65,21 @@ public class Notice {
         this.content = content;
     }
 
-    public long getAddressTime() {
+    public Long getAddressTime() {
         return addressTime;
     }
 
-    public void setAddressTime(long addressTime) {
+    public void setAddressTime(Long addressTime) {
         this.addressTime = addressTime;
     }
 
-    public List<Addressee> getAddressees() {
-        return addressees;
-    }
+//    public List<Addressee> getAddressees() {
+//        return addressees;
+//    }
 
-    public void setAddressees(List<Addressee> addressees) {
-        this.addressees = addressees;
-    }
+//    public void setAddressees(List<Addressee> addressees) {
+//        this.addressees = addressees;
+//    }
 
     public String getTitle() {
         return title;

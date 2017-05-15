@@ -12,6 +12,6 @@ import gjj.com.myapp.model.Notice;
 
 public interface AddresseeView extends BaseView{
     void loadSucceed(List<Addressee> addressees);
-    void sendSucceed();
+    void sendSucceed(String model);
     void loadFail(String msg);
 }

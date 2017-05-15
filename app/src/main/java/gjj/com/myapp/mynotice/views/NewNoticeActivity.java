@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,6 +59,8 @@ public class NewNoticeActivity extends MvpActivity<AddresseePresenter> implement
     private AddresseeAdapter mStudentAdapter;
     private AddresseeAdapter mTutorAdapter;
     private AlertDialog dlg;
+    private List<Addressee> mAddressees = new ArrayList<>();
+    private long noticeTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +75,8 @@ public class NewNoticeActivity extends MvpActivity<AddresseePresenter> implement
         mBackIv.setVisibility(View.VISIBLE);
         mTitleTv.setText("发送通知");
         mAddressorTv.setText(SPUtil.getValueBykey(this,Constants.ACOUNTNAME));
-        mTimeTv.setText(TimeUtils.formatTimeInMillis(System.currentTimeMillis()));
+        noticeTime = System.currentTimeMillis();
+        mTimeTv.setText(TimeUtils.formatTimeInMillis(noticeTime));
     }
 
     @Override
@@ -95,13 +99,36 @@ public class NewNoticeActivity extends MvpActivity<AddresseePresenter> implement
                 break;
             case R.id.send:
                 hideSoftKeyboard(view);
-                Notice notice = new Notice();
-                mvpPresenter.sendNotice(notice);
+                initNotice();
                 break;
             case R.id.back_iv:
                 onBackPressed();
                 break;
 
+        }
+    }
+
+    private void initNotice() {
+        Notice notice = new Notice();
+        String noticeTitle = mNoticeTitleEt.getText().toString();
+        String content = mContentEt.getText().toString();
+        String addressees = mDdresseeaTv.getText().toString();
+        String addressor = mAddressorTv.getText().toString();
+//        String time = mTimeTv.getText().toString();
+        notice.setAddressor_name(addressor);
+        notice.setAddressor_id(SPUtil.getTutorIdfromSP(this));
+        notice.setAddressTime(noticeTime);
+        if (TextUtils.isEmpty(noticeTitle)){
+            Toast.makeText(mActivity, "通知标题不能为空", Toast.LENGTH_SHORT).show();
+        }else if (TextUtils.isEmpty(addressees)){
+            Toast.makeText(mActivity, "请选择收件人", Toast.LENGTH_SHORT).show();
+        }else if (TextUtils.isEmpty(content)){
+            Toast.makeText(mActivity, "通知内容不能为空", Toast.LENGTH_SHORT).show();
+        }else {
+            notice.setTitle(noticeTitle);
+//            notice.setAddressees(mAddressees);
+            notice.setContent(content);
+            mvpPresenter.sendNotice(notice);
         }
     }
 
@@ -131,11 +158,13 @@ public class NewNoticeActivity extends MvpActivity<AddresseePresenter> implement
                     if (studentCache != null && studentCache.size()!=0){
                         for (Addressee addressee : studentCache) {
                             addressees = addressees+addressee.getName()+"、";
+                            mAddressees.add(addressee);
                         }
                     }
                     if (tutorCache != null && tutorCache.size() != 0){
                         for (Addressee addressee : tutorCache) {
                             addressees = addressees+addressee.getName()+"、";
+                            mAddressees.add(addressee);
                         }
                     }
                     if (addressees.contains("、")){
@@ -180,8 +209,8 @@ public class NewNoticeActivity extends MvpActivity<AddresseePresenter> implement
     }
 
     @Override
-    public void sendSucceed() {
-        Toast.makeText(mActivity, "通知发送成功", Toast.LENGTH_SHORT).show();
+    public void sendSucceed(String model) {
+        Toast.makeText(mActivity, "通知发送成功:"+model, Toast.LENGTH_SHORT).show();
     }
 
     @Override

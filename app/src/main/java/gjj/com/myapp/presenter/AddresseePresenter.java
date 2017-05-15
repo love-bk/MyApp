@@ -107,7 +107,7 @@ public class AddresseePresenter extends BasePresenter<AddresseeView> {
         addSubscription(mApiStores.sendNotice(notice), new ApiCallback<String>() {
             @Override
             public void onSuccess(String model) {
-                mvpView.sendSucceed();
+                mvpView.sendSucceed(model);
             }
 
             @Override

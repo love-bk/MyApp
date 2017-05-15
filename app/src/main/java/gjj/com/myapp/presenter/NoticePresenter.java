@@ -101,13 +101,13 @@ public class NoticePresenter extends BasePresenter<NoticeView> {
         //保存到数据库中
         Notice_Dao.getInstance(context).insertNotices(notices);
         for (Notice notice : notices) {
-            List<Addressee> addressees = notice.getAddressees();
-            if (addressees !=null&& addressees.size()!=0){
-                for (Addressee addressee : addressees) {
-                    //将收件人发送到数据库中
-                    Addressee_Dao.getInstance(context).insert(addressee);
-                }
-            }
+//            List<Addressee> addressees = notice.getAddressees();
+//            if (addressees !=null&& addressees.size()!=0){
+//                for (Addressee addressee : addressees) {
+//                    //将收件人发送到数据库中
+//                    Addressee_Dao.getInstance(context).insert(addressee);
+//                }
+//            }
         }
         return notices;
     }
@@ -115,7 +115,7 @@ public class NoticePresenter extends BasePresenter<NoticeView> {
     public void loadNoticeFromDB(long noticeId){
         List<Notice> notices = new ArrayList<>();
         Notice notice = Notice_Dao.getInstance(context).queryNoticeById(noticeId);
-        notice.setAddressees(Addressee_Dao.getInstance(context).queryAddresseeByNoticeId(noticeId));
+//        notice.setAddressees(Addressee_Dao.getInstance(context).queryAddresseeByNoticeId(noticeId));
         notices.add(notice);
         mvpView.loadSucceed(notices);
     }

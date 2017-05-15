@@ -93,14 +93,18 @@ public class ReplyFragment extends MvpFragment<ReplyPresenter> implements SwipeR
     }
 
     @Override
+    public void hideLoading() {
+        mReplySwipeRefresh.setRefreshing(false);
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
     public void onRefresh() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                //结束后停止刷新
-                mReplySwipeRefresh.setRefreshing(false);
-            }
-        }, 3000);
+        mvpPresenter.loadReplyGroupData(String.valueOf(SPUtil.getTutorIdfromSP(mActivity)));
     }
 
     @Override

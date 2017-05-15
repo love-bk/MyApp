@@ -17,7 +17,7 @@ public class Student {
     private String no;                          //学生的学号
     private String contact;                          //学生的手机号
     private String name;                         //学生的姓名
-    private String majorDecription;
+    private String majorDecription;             //学生所在的专业
     @Transient
     private Major major;                          //学生所在的专业
     private String classDescription;

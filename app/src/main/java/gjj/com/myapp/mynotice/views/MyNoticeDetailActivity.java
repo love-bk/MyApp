@@ -82,16 +82,16 @@ public class MyNoticeDetailActivity extends MvpActivity<NoticePresenter> impleme
     public void loadSucceed(List<Notice> notices) {
         Notice notice = notices.get(0);
         mNoticeTitleTv.setText(notice.getTitle());
-        List<Addressee> addressees = notice.getAddressees();
+//        List<Addressee> addressees = notice.getAddressees();
         String addresseeStr = "";
-        if (addressees !=null && addressees.size()!=0){
-            for (Addressee addressee : addressees) {
-                addresseeStr = addresseeStr + addressee.getName()+"、";
-            }
-            if (addresseeStr.contains("、")){
-                addresseeStr = addresseeStr.substring(0,addresseeStr.lastIndexOf("、"));
-            }
-        }
+//        if (addressees !=null && addressees.size()!=0){
+//            for (Addressee addressee : addressees) {
+//                addresseeStr = addresseeStr + addressee.getName()+"、";
+//            }
+//            if (addresseeStr.contains("、")){
+//                addresseeStr = addresseeStr.substring(0,addresseeStr.lastIndexOf("、"));
+//            }
+//        }
         mDdresseeaTv.setText(addresseeStr);
         mAddressorTv.setText(notice.getAddressor_name());
         mTimeTv.setText(TimeUtils.formatTimeInMillis(notice.getAddressTime()));

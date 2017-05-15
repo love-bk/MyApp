@@ -85,11 +85,8 @@ public class HomePresenter  extends BasePresenter<HomeView>{
                         student.setReplyGraduateProject_id(project.getId());
                         Student_Dao.getInstance(context).insertStudent(student);
                     }
+                    GraduateProject_Dao.getInstance(context).insertProject(project);
                 }
-                GraduateProject_Dao.getInstance(context).insertProjectList(projects);
-            }else {
-                //从数据库中读取数据
-
             }
             if (groups != null && groups.size() != 0){
                 //将数据保存到数据库中
@@ -129,9 +126,6 @@ public class HomePresenter  extends BasePresenter<HomeView>{
                     }
                 }
                 ReplyGroup_Dao.getInstance(context).insertReplyGroupList(groups);
-            }else{
-                //从数据库中读取数据
-
             }
         }
     }
@@ -143,6 +137,6 @@ public class HomePresenter  extends BasePresenter<HomeView>{
     public void deleteData(Context context){
         //删除数据库中的数据
         //删除SP中的数据
-        SPUtil.removeConfig(context,Constants.USERNAME,Constants.PASSWORD,Constants.TUTORID);
+        SPUtil.removeConfig(context,Constants.USERNAME,Constants.PASSWORD,Constants.TUTORID,Constants.ACOUNTNAME);
     }
 }

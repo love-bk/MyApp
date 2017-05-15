@@ -51,6 +51,10 @@ public class GraduateProject_Dao {
         if (project != null){
             List<GraduateProject> projects = graduateProjectDao.queryBuilder().where(GraduateProjectDao.Properties.Id.eq(project.getId())).list();
             if (projects!=null&&projects.size()!=0){
+                Long replyGroup_id = projects.get(0).getReplyGroup_id();
+                if (replyGroup_id != null){
+                    project.setReplyGroup_id(replyGroup_id);
+                }
                 graduateProjectDao.delete(projects.get(0));
             }
             graduateProjectDao.insert(project);

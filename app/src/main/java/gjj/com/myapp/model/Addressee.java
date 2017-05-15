@@ -19,14 +19,17 @@ public class Addressee {
     //收件人的姓名
     private String name;
     //用于判断该收件人是否被选择
-    private boolean isSelected;
+    private Boolean isSelected = false;
 
     private String addresseeType;
 
 
-    @Generated(hash = 1994325079)
+
+
+
+    @Generated(hash = 77792968)
     public Addressee(Long addresseeId, Long id, Long noticeId, String name,
-            boolean isSelected, String addresseeType) {
+            Boolean isSelected, String addresseeType) {
         this.addresseeId = addresseeId;
         this.id = id;
         this.noticeId = noticeId;
@@ -38,6 +41,9 @@ public class Addressee {
     @Generated(hash = 1999156007)
     public Addressee() {
     }
+
+
+
 
 
     public String getAddresseeType() {
@@ -56,15 +62,13 @@ public class Addressee {
         this.noticeId = noticeId;
     }
 
-    public boolean isSelected() {
+    public Boolean getSelected() {
         return isSelected;
     }
 
-    public void setSelected(boolean selected) {
+    public void setSelected(Boolean selected) {
         isSelected = selected;
     }
-
-
 
     public Long getId() {
         return this.id;
@@ -96,5 +100,9 @@ public class Addressee {
 
     public void setAddresseeId(Long addresseeId) {
         this.addresseeId = addresseeId;
+    }
+
+    public void setIsSelected(Boolean isSelected) {
+        this.isSelected = isSelected;
     }
 }
