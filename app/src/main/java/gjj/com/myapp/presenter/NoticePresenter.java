@@ -15,6 +15,7 @@ import gjj.com.myapp.dao.Notice_Dao;
 import gjj.com.myapp.model.Addressee;
 import gjj.com.myapp.model.Notice;
 import gjj.com.myapp.model.ServiceAddressee;
+import gjj.com.myapp.mynotice.views.MyNoticeDetailActivity;
 import gjj.com.myapp.mynotice.views.MyNoticeListActivity;
 import gjj.com.myapp.mynotice.views.NewNoticeActivity;
 import gjj.com.myapp.utils.Constants;
@@ -32,11 +33,11 @@ public class NoticePresenter extends BasePresenter<NoticeView> {
         attachView(noticeView);
         if (noticeView instanceof MyNoticeListActivity){
             this.context = (MyNoticeListActivity)noticeView;
+        }else if (noticeView instanceof MyNoticeDetailActivity){
+            this.context = (MyNoticeDetailActivity)noticeView;
         }else {
 
         }
-
-
 
     }
 
@@ -88,17 +89,34 @@ public class NoticePresenter extends BasePresenter<NoticeView> {
         });
     }
 
-
-
-
-
+    /**
+     * 将报题数据保存到数据库中
+     * @param model
+     * @return
+     */
     private List<Notice> handleData(String model) {
         Gson gson = new Gson();
         List<Notice> notices = gson.fromJson(model, new TypeToken<List<Notice>>() {
         }.getType());
         //保存到数据库中
         Notice_Dao.getInstance(context).insertNotices(notices);
+        for (Notice notice : notices) {
+            List<Addressee> addressees = notice.getAddressees();
+            if (addressees !=null&& addressees.size()!=0){
+                for (Addressee addressee : addressees) {
+                    //将收件人发送到数据库中
+                    Addressee_Dao.getInstance(context).insert(addressee);
+                }
+            }
+        }
         return notices;
     }
 
+    public void loadNoticeFromDB(long noticeId){
+        List<Notice> notices = new ArrayList<>();
+        Notice notice = Notice_Dao.getInstance(context).queryNoticeById(noticeId);
+        notice.setAddressees(Addressee_Dao.getInstance(context).queryAddresseeByNoticeId(noticeId));
+        notices.add(notice);
+        mvpView.loadSucceed(notices);
+    }
 }

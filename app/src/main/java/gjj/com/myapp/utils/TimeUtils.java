@@ -18,7 +18,7 @@ public class TimeUtils {
         cal.setTimeInMillis(timeInMillis);
         Date date = cal.getTime();
         SimpleDateFormat dateFormat = new SimpleDateFormat(
-                "yyyy年MM月dd日 HH时mm分");
+                "yyyy/MM/dd HH:mm");
         String fmt = dateFormat.format(date);
 
         return fmt;

@@ -21,11 +21,12 @@ public class SPUtil {
 	 * @param username
 	 * @param password
 	 */
-	public static void saveLoginToSP(Context ct,String username,String password,long tutorId) {
+	public static void saveLoginToSP(Context ct,String username,String password,long tutorId,String accountname) {
 		SharedPreferences setting =ct.getSharedPreferences("myInfo", ct.MODE_PRIVATE);
 		Editor editor = setting.edit();
 		editor.putString(Constants.USERNAME,username);
 		editor.putString(Constants.PASSWORD,password);
+		editor.putString(Constants.ACOUNTNAME,accountname);
 		editor.putLong(Constants.TUTORID,tutorId);
 		editor.apply();
 	}
@@ -52,6 +53,14 @@ public class SPUtil {
 	public static long getTutorIdfromSP(Context ct) {
 		SharedPreferences setting = ct.getSharedPreferences("myInfo", ct.MODE_PRIVATE);
 		return setting.getLong(Constants.TUTORID, 0);
+
+	}
+	/**
+	 * 根据key获取value
+	 */
+	public static String getValueBykey(Context ct,String key) {
+		SharedPreferences setting = ct.getSharedPreferences("myInfo", ct.MODE_PRIVATE);
+		return setting.getString(key, "");
 
 	}
 

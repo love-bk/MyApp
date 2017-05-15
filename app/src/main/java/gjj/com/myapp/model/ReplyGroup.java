@@ -22,8 +22,8 @@ public class ReplyGroup {
     private String leader_name;                                     //答辩小组组长的id
     @Transient
     private ReplyTime replyTime;
-    private long beginTime;                                     //答辩的开始时间
-    private long endTime;                                       //答辩的结束时间
+    private long beginTime = -1;                                     //答辩的开始时间
+    private long endTime = -1;                                       //答辩的结束时间
     @Transient
     private List<GraduateProject> graduateProjects;
     private long tutor_Id;   //登陆用户的id
@@ -178,5 +178,13 @@ public class ReplyGroup {
 
     public void setTutorId(List<Tutor> tutorId) {
         this.tutorId = tutorId;
+    }
+
+    public void setBeginTime(Long beginTime) {
+        this.beginTime = beginTime;
+    }
+
+    public void setEndTime(Long endTime) {
+        this.endTime = endTime;
     }
 }

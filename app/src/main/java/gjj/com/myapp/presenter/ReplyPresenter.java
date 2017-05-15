@@ -13,6 +13,7 @@ import gjj.com.myapp.baseframework.retrofit.ApiCallback;
 import gjj.com.myapp.dao.GraduateProject_Dao;
 import gjj.com.myapp.dao.ReplyGroup_Dao;
 import gjj.com.myapp.dao.Student_Dao;
+import gjj.com.myapp.dao.Tutor_Dao;
 import gjj.com.myapp.model.GraduateProject;
 import gjj.com.myapp.model.ReplyGroup;
 import gjj.com.myapp.model.Student;
@@ -104,6 +105,7 @@ public class ReplyPresenter extends BasePresenter<ReplyView> {
         for (GraduateProject project : projects) {
             project.setStudent_name(Student_Dao.getInstance(context).queryDatasByProjectId(project.getId()));
         }
+        replyGroup.setTutorId(Tutor_Dao.getInstance(context).queryTutorsByReplyId(replyGroupId));
         replyGroup.setGraduateProjects(projects);
         replyGroups.add(replyGroup);
         mvpView.loadSucceed(replyGroups);

@@ -19,6 +19,8 @@ public class Constants {
     public static final String ALL = "all";
     public static final String PROJECT_ID = "projectId";
     public static final String REPLYGROUPID = "replygroup_id";
+    public static final String NOTICE_ID = "notice_id";
+    public static final String ACOUNTNAME = "accountname";
     public static  long tutorId = 1;
     public static  final String TUTOR_TYPE = "老师";
     public static  final String STUDENT_TYPE = "学生";

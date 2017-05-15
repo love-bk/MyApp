@@ -64,7 +64,7 @@ public class MyNoticeListActivity extends MvpActivity<NoticePresenter> implement
         flag = getIntent().getStringExtra(Constants.NOTICE_FLAG);
         switch (flag) {
             case Constants.FORWARD_MESSAGE:
-                mTitleTv.setText("我发送的通知");
+                mTitleTv.setText("我发布的通知");
                 mvpPresenter.loadMyReleasedNotices(String.valueOf(SPUtil.getTutorIdfromSP(this)));
                 break;
             case Constants.GET_MESSAGE:
@@ -83,9 +83,10 @@ public class MyNoticeListActivity extends MvpActivity<NoticePresenter> implement
      * @param position
      */
     @Override
-    public void onItemClick(View view, int position, String flag) {
+    public void onItemClick(View view, int position, String flag,long id) {
         Intent intent = new Intent(MyNoticeListActivity.this, MyNoticeDetailActivity.class);
         intent.putExtra(Constants.NOTICE_FLAG, flag);
+        intent.putExtra(Constants.NOTICE_ID,id);
         startActivity(intent);
     }
 

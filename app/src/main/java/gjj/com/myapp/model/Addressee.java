@@ -10,8 +10,9 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 @Entity
 public class Addressee {
-    //该id是使用sqlite数据库所必须有的属性
-    @Id(autoincrement = false)
+
+    @Id
+    private Long addresseeId;
     private Long id;
     //该联系人所对应发送通知的id
     private Long noticeId;
@@ -23,9 +24,10 @@ public class Addressee {
     private String addresseeType;
 
 
-    @Generated(hash = 1152501023)
-    public Addressee(Long id, Long noticeId, String name, boolean isSelected,
-            String addresseeType) {
+    @Generated(hash = 1994325079)
+    public Addressee(Long addresseeId, Long id, Long noticeId, String name,
+            boolean isSelected, String addresseeType) {
+        this.addresseeId = addresseeId;
         this.id = id;
         this.noticeId = noticeId;
         this.name = name;
@@ -86,5 +88,13 @@ public class Addressee {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getAddresseeId() {
+        return addresseeId;
+    }
+
+    public void setAddresseeId(Long addresseeId) {
+        this.addresseeId = addresseeId;
     }
 }

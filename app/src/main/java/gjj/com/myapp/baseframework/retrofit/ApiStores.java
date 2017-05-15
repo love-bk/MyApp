@@ -1,5 +1,6 @@
 package gjj.com.myapp.baseframework.retrofit;
 
+import gjj.com.myapp.model.Notice;
 import gjj.com.myapp.model.User;
 import retrofit2.http.Body;
 import retrofit2.http.Header;
@@ -35,14 +36,9 @@ public interface ApiStores {
 
     @POST("getAllSchoolAndMyStudent.json")
     Observable<String> loadAddressees(@Body String tutorId);
+    @POST("sendMail.json")
+    Observable<String> sendNotice(@Body Notice notice);
 
-//      /login.json"
-//      "/sendMail.json";
-//      "/getGraduateProjectByTutorId.json";
-//      /getReplyGroupByTutor.json";
-//      /mail.json";
-//      /myStudent.json";
 //            /setScoreWithProjectByGroupMembers.json";
-
 
 }

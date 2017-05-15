@@ -82,7 +82,6 @@ public class HomePresenter  extends BasePresenter<HomeView>{
                         if (student.getMajor()!=null){
                             student.setMajorDecription(student.getMajor().getDescription());
                         }
-                        student.setTutorId(tutorId);
                         student.setReplyGraduateProject_id(project.getId());
                         Student_Dao.getInstance(context).insertStudent(student);
                     }
@@ -94,7 +93,6 @@ public class HomePresenter  extends BasePresenter<HomeView>{
             }
             if (groups != null && groups.size() != 0){
                 //将数据保存到数据库中
-                String replyMembers = "";
                 for (ReplyGroup group : groups) {
                     if (group.getReplyTime()!=null){
                         group.setBeginTime(group.getReplyTime().getBeginTime());
@@ -122,7 +120,6 @@ public class HomePresenter  extends BasePresenter<HomeView>{
                                 if (student.getMajor()!=null){
                                     student.setMajorDecription(student.getMajor().getDescription());
                                 }
-                                student.setTutorId(tutorId);
                                 student.setReplyGraduateProject_id(project.getId());
                                 student.setReplyGroup_id(group.getId());
                                 Student_Dao.getInstance(context).insertStudent(student);

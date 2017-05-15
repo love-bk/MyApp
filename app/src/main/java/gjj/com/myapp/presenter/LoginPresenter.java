@@ -78,7 +78,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
             Student_Dao.getInstance((LoginActivity) mvpView).insertStudentList(tutor.getStudentList());
         }
         //将账号保存到SP中
-        SPUtil.saveLoginToSP(((LoginActivity) mvpView),user.getUsername(), user.getUsername(),tutor.getId());
+        SPUtil.saveLoginToSP(((LoginActivity) mvpView),user.getUsername(), user.getUsername(),tutor.getId(),tutor.getName());
         Constants.tutorId = tutor.getId();
         return tutor;
     }

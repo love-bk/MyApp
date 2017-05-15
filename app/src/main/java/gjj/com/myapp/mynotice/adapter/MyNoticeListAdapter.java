@@ -37,7 +37,7 @@ public class MyNoticeListAdapter extends RecyclerView.Adapter<MyNoticeListAdapte
     }
 
     public interface OnItemClickListener {
-        void onItemClick(View view, int position,String flag);
+        void onItemClick(View view, int position,String flag,long id);
     }
 
     public void setOnItemClickListener(MyNoticeListAdapter.OnItemClickListener mOnItemClickListener) {
@@ -61,7 +61,7 @@ public class MyNoticeListAdapter extends RecyclerView.Adapter<MyNoticeListAdapte
                 @Override
                 public void onClick(View v) {
                     int position = holder.getLayoutPosition(); // 1
-                    mOnItemClickListener.onItemClick(holder.itemView, position,flag); // 2
+                    mOnItemClickListener.onItemClick(holder.itemView, position,flag,mData.get(position).getId()); // 2
                 }
             });
         }

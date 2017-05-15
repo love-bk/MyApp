@@ -57,14 +57,16 @@
                     android:id="@+id/subtitle_tv"
                     style="@style/ProjectDetailTv_style"
                     android:text="收件人"
+                    android:layout_height="match_parent"
                     />
 
                 <TextView
                     android:id="@+id/ddresseeaTv"
                     style="@style/ProjectDetailValueTv_style"
                     android:layout_toRightOf="@id/subtitle_tv"
-                    android:text="选择收件人"
-                    android:textColor="@color/select_addressee"
+                    android:hint="选择收件人"
+                    android:textColorHint="@color/select_addressee"
+                    android:textColor="@android:color/black"
                     android:drawableRight="@mipmap/enter"
                     android:drawablePadding="5dp"
                     />
@@ -93,6 +95,7 @@
                     android:id="@+id/projectFidelity_tv"
                     style="@style/ProjectDetailTv_style"
                     android:layout_alignParentTop="true"
+                    android:layout_height="match_parent"
                     android:text="时间"/>
 
                 <TextView

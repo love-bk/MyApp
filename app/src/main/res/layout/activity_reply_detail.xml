@@ -17,13 +17,12 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@color/theme_bg_color"
-        android:fillViewport="true"
         android:scrollbars="none"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:orientation="vertical"
             >
@@ -62,11 +61,13 @@
             </RelativeLayout>
 
             <RelativeLayout
-                style="@style/ProjectDetailRL_style">
+                style="@style/ProjectDetailRL_style"
+                >
 
                 <TextView
                     android:id="@+id/projectType_tv"
                     style="@style/ProjectDetailTv_style"
+                    android:layout_height="match_parent"
                     android:text="答辩成员"
                     />
 
@@ -94,20 +95,20 @@
                     />
             </RelativeLayout>
 
-            <RelativeLayout
-                style="@style/ProjectDetailRL_style">
+            <!--<RelativeLayout-->
+                <!--style="@style/ProjectDetailRL_style">-->
 
-                <TextView
-                    android:id="@+id/major_tv"
-                    style="@style/ProjectDetailTv_style"
-                    android:text="答辩专业"/>
+                <!--<TextView-->
+                    <!--android:id="@+id/major_tv"-->
+                    <!--style="@style/ProjectDetailTv_style"-->
+                    <!--android:text="答辩专业"/>-->
 
-                <TextView
-                    android:id="@+id/replyMajorTv"
-                    style="@style/ProjectDetailValueTv_style"
-                    android:layout_toRightOf="@id/major_tv"
-                    />
-            </RelativeLayout>
+                <!--<TextView-->
+                    <!--android:id="@+id/replyMajorTv"-->
+                    <!--style="@style/ProjectDetailValueTv_style"-->
+                    <!--android:layout_toRightOf="@id/major_tv"-->
+                    <!--/>-->
+            <!--</RelativeLayout>-->
 
             <RelativeLayout
                 style="@style/ProjectDetailRL_style">
@@ -150,13 +151,17 @@
                     android:text="答辩学生"
                     android:textColor="#f00"
                     android:textStyle="bold"
+                    android:background="@drawable/border_nobottom"
                     />
             </RelativeLayout>
 
             <RelativeLayout
                 style="@style/ProjectDetailRL_style"
-                android:background="@drawable/border_norightbottom"
-                android:padding="10dp">
+                android:background="@drawable/border_nobottom"
+                android:paddingLeft="1dp"
+                android:paddingRight="1dp"
+                android:paddingTop="1dp"
+                >
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/replyStudentRecyclerView"

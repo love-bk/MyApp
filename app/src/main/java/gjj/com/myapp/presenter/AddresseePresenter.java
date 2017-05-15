@@ -11,6 +11,7 @@ import gjj.com.myapp.baseframework.mvp.BasePresenter;
 import gjj.com.myapp.baseframework.retrofit.ApiCallback;
 import gjj.com.myapp.dao.Addressee_Dao;
 import gjj.com.myapp.model.Addressee;
+import gjj.com.myapp.model.Notice;
 import gjj.com.myapp.model.ServiceAddressee;
 import gjj.com.myapp.mynotice.views.NewNoticeActivity;
 import gjj.com.myapp.utils.Constants;
@@ -33,7 +34,7 @@ public class AddresseePresenter extends BasePresenter<AddresseeView> {
 
 
     /**
-     * 获取我的通知
+     * 获取收件人列表
      * @param tutorId
      */
     public void loadAddressees(String tutorId) {
@@ -56,6 +57,11 @@ public class AddresseePresenter extends BasePresenter<AddresseeView> {
         });
     }
 
+    /**
+     * 处理收件人列表数据
+     * @param model
+     * @return
+     */
     private List<Addressee> handleAddressees(String model) {
         Gson gson = new Gson();
         ServiceAddressee serviceAddressee = gson.fromJson(model, ServiceAddressee.class);
@@ -76,17 +82,43 @@ public class AddresseePresenter extends BasePresenter<AddresseeView> {
                 }
             }
             if (addressees.size() != 0){
-                Addressee_Dao.getInstance(context).insertAddressees(addressees);
+                for (Addressee addressee : addressees) {
+                    Addressee_Dao.getInstance(context).insert(addressee);
+                }
                 return addressees;
             }
         }
         return null;
     }
     /*
-获取本地的通知数据
- */
+    获取本地收件人列表
+     */
     public void loadAddresseesFromDB(){
         List<Addressee> allAddressees = Addressee_Dao.getInstance(context).getAllAddressees();
         mvpView.loadSucceed(allAddressees);
+    }
+
+    /**
+     * 发送通知
+     * @param notice
+     */
+    public void sendNotice(Notice notice) {
+        mvpView.showLoading();
+        addSubscription(mApiStores.sendNotice(notice), new ApiCallback<String>() {
+            @Override
+            public void onSuccess(String model) {
+                mvpView.sendSucceed();
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mvpView.loadFail(msg);
+            }
+
+            @Override
+            public void onFinish() {
+                mvpView.hideLoading();
+            }
+        });
     }
 }

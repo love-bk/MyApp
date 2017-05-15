@@ -25,10 +25,12 @@ import butterknife.OnClick;
 import gjj.com.myapp.R;
 import gjj.com.myapp.baseframework.mvp.MvpActivity;
 import gjj.com.myapp.model.Addressee;
+import gjj.com.myapp.model.Notice;
 import gjj.com.myapp.mynotice.adapter.AddresseeAdapter;
 import gjj.com.myapp.presenter.AddresseePresenter;
 import gjj.com.myapp.utils.Constants;
 import gjj.com.myapp.utils.SPUtil;
+import gjj.com.myapp.utils.TimeUtils;
 import gjj.com.myapp.views.AddresseeView;
 
 public class NewNoticeActivity extends MvpActivity<AddresseePresenter> implements AddresseeView {
@@ -62,9 +64,15 @@ public class NewNoticeActivity extends MvpActivity<AddresseePresenter> implement
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_notice);
         ButterKnife.bind(this);
+        initWidget();
+        initData();
+    }
+
+    private void initWidget() {
         mBackIv.setVisibility(View.VISIBLE);
         mTitleTv.setText("发送通知");
-        initData();
+        mAddressorTv.setText(SPUtil.getValueBykey(this,Constants.ACOUNTNAME));
+        mTimeTv.setText(TimeUtils.formatTimeInMillis(System.currentTimeMillis()));
     }
 
     @Override
@@ -73,7 +81,7 @@ public class NewNoticeActivity extends MvpActivity<AddresseePresenter> implement
     }
 
     private void initData() {
-        mvpPresenter.loadAddressees(String.valueOf(SPUtil.getTutorIdfromSP(this)));
+        mvpPresenter.loadAddresseesFromDB();
     }
 
 
@@ -87,6 +95,8 @@ public class NewNoticeActivity extends MvpActivity<AddresseePresenter> implement
                 break;
             case R.id.send:
                 hideSoftKeyboard(view);
+                Notice notice = new Notice();
+                mvpPresenter.sendNotice(notice);
                 break;
             case R.id.back_iv:
                 onBackPressed();
@@ -163,26 +173,20 @@ public class NewNoticeActivity extends MvpActivity<AddresseePresenter> implement
                     tutorList.add(addressee);
                 }
             }
+            Toast.makeText(mActivity, "加载数据成功", Toast.LENGTH_SHORT).show();
+        }else {
+            mvpPresenter.loadAddressees(String.valueOf(SPUtil.getTutorIdfromSP(this)));
         }
-//        mvpPresenter.loadAddresseesFromDB();
-        Toast.makeText(mActivity, "加载数据成功", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void sendSucceed() {
+        Toast.makeText(mActivity, "通知发送成功", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void loadFail(String msg) {
-        Toast.makeText(mActivity, "加载数据失败", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mActivity, "加载数据失败"+msg, Toast.LENGTH_SHORT).show();
     }
-
-
-
-
-//    public void loadSucceed(List<Notice> notices) {
-//        Toast.makeText(mActivity, "加载数据成功", Toast.LENGTH_SHORT).show();
-//    }
-//
-//    @Override
-//    public void loadFail(String msg) {
-//        Toast.makeText(mActivity, "加载数据成功", Toast.LENGTH_SHORT).show();
-//    }    @Override
 
 }

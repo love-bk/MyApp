@@ -41,6 +41,7 @@ public class Tutor_Dao {
         if (tutor != null){
             List<Tutor> tutors = tutorDao.queryBuilder().where(TutorDao.Properties.Id.eq(tutor.getId())).list();
             if (tutors!=null &&tutors.size()!=0){
+                tutor.setDescription(tutors.get(0).getDescription());
                 tutorDao.delete(tutors.get(0));
             }
             tutorDao.insert(tutor);
@@ -63,5 +64,9 @@ public class Tutor_Dao {
      */
     public void deleteAll(){
         tutorDao.deleteAll();
+    }
+
+    public List<Tutor> queryTutorsByReplyId(long replyGroupId) {
+        return tutorDao.queryBuilder().where(TutorDao.Properties.ReplyId.eq(replyGroupId)).list();
     }
 }

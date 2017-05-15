@@ -1,14 +1,19 @@
 package gjj.com.myapp.myreply.views;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.text.TextUtilsCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +26,8 @@ import gjj.com.myapp.baseframework.base.BaseActivity;
 import gjj.com.myapp.baseframework.mvp.MvpActivity;
 import gjj.com.myapp.model.GraduateProject;
 import gjj.com.myapp.model.ReplyGroup;
+import gjj.com.myapp.model.Student;
+import gjj.com.myapp.model.Tutor;
 import gjj.com.myapp.myreply.adapter.ReplyStudentRecyclerViewAdapter;
 import gjj.com.myapp.presenter.ReplyPresenter;
 import gjj.com.myapp.utils.Constants;
@@ -41,8 +48,8 @@ public class ReplyDetailActivity extends MvpActivity<ReplyPresenter> implements 
     TextView mReplyMemberTv;
     @BindView(R.id.replyPlace_tv)
     TextView mReplyPlaceTv;
-    @BindView(R.id.replyMajorTv)
-    TextView mReplyMajorTv;
+//    @BindView(R.id.replyMajorTv)
+//    TextView mReplyMajorTv;
     @BindView(R.id.startTimeTv)
     TextView mStartTimeTv;
     @BindView(R.id.endTimeTv)
@@ -104,23 +111,41 @@ public class ReplyDetailActivity extends MvpActivity<ReplyPresenter> implements 
         ReplyGroup replyGroup = replyGroups.get(0);
         mReplyTeamNameTv.setText(replyGroup.getDescription());
         mReplyLeaderTv.setText(replyGroup.getLeader_name());
-        mReplyPlaceTv.setText(replyGroup.getLocation());
-        mReplyMajorTv.setText(replyGroup.getMajor());
+        if (TextUtils.isEmpty(replyGroup.getLocation())){
+            mReplyPlaceTv.setText("未设置");
+            mReplyPlaceTv.setTextColor(Color.RED);
+        }else {
+            mReplyPlaceTv.setText(replyGroup.getLocation());
+        }
+//        mReplyMajorTv.setText(replyGroup.getMajor());
         List<GraduateProject> projects = replyGroup.getGraduateProjects();
-        if (projects != null&&projects.size()!=0){
+        List<Tutor> tutors = replyGroup.getTutorId();
+        if (tutors != null&&tutors.size()!=0){
             String members = "";
-            for (GraduateProject project : projects) {
-                if (project.getStudent_name()!=null){
-                    members = members+project.getStudent_name().getName()+"、";
+            for (Tutor tutor : tutors) {
+                if (tutor.getName()!=null){
+                    members = members+tutor.getName()+"、";
                 }
             }
             if (members.contains("、")){
                 mReplyMemberTv.setText(members.substring(0,members.lastIndexOf("、")));
             }
+        }
+        if (projects!=null&&projects.size()!=0){
             mAdapter.addList(projects);
         }
-        mStartTimeTv.setText(TimeUtils.formatTimeInMillis(replyGroup.getBeginTime()));
-        mEndTimeTv.setText(TimeUtils.formatTimeInMillis(replyGroup.getEndTime()));
+        if (replyGroup.getBeginTime() == -1){
+            mStartTimeTv.setText("未设置");
+            mStartTimeTv.setTextColor(Color.RED);
+        }else{
+            mStartTimeTv.setText(TimeUtils.formatTimeInMillis(replyGroup.getBeginTime()));
+        }
+        if (replyGroup.getEndTime()==-1){
+            mEndTimeTv.setText("未设置");
+            mEndTimeTv.setTextColor(Color.RED);
+        }else{
+            mEndTimeTv.setText(TimeUtils.formatTimeInMillis(replyGroup.getEndTime()));
+        }
     }
 
     @Override
