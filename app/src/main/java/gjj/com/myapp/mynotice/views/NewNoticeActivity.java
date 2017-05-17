@@ -202,7 +202,6 @@ public class NewNoticeActivity extends MvpActivity<AddresseePresenter> implement
                     tutorList.add(addressee);
                 }
             }
-            Toast.makeText(mActivity, "加载数据成功", Toast.LENGTH_SHORT).show();
         }else {
             mvpPresenter.loadAddressees(String.valueOf(SPUtil.getTutorIdfromSP(this)));
         }

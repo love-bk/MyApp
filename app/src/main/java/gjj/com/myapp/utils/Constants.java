@@ -21,8 +21,13 @@ public class Constants {
     public static final String REPLYGROUPID = "replygroup_id";
     public static final String NOTICE_ID = "notice_id";
     public static final String ACOUNTNAME = "accountname";
+    public static final String SCORESTATE = "打分状态";
+    public static final String POSITION = "position";
     public static  long tutorId = 1;
     public static  final String TUTOR_TYPE = "老师";
     public static  final String STUDENT_TYPE = "学生";
+    public static  final int WDF = 0;//未打分
+    public static  final int YDF = 1;//已打分
+    public static  final int YTJ = 2;//已提交
 
 }

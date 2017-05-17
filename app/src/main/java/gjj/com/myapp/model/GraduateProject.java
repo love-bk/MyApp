@@ -29,64 +29,20 @@ public class GraduateProject {
     private String basicSkill;            //基本技能
     private String reference;            //参考文献
     private String major;                 //所在专业
-    private Double completenessScoreByGroup;      //完成任务规定的要求与水平评分
-    private Double correctnessScoreByGroup;       //回答问题的正确性评分
-    private Double qualityScoreBtGroup;           //论文与实务的质量评分
-    private Double replyScoreByGroup;             //论文内容的答辩陈述评分
+    private Integer completenessScoreByGroup;      //完成任务规定的要求与水平评分
+    private Integer correctnessScoreByGroup;       //回答问题的正确性评分
+    private Integer qualityScoreBtGroup;           //论文与实务的质量评分
+    private Integer replyScoreByGroup;             //论文内容的答辩陈述评分
     private String remark;                         //指导老师的评语
     private Long student_id;                     //选该题目学生的id
     @Transient
     private Student student_name;                     //选该题目学生的姓名
     private Long tutorId;                      //申报该题目老师的id
     private boolean isAllow;                     //是否允许答辩 在commentByTutor中可以找到
-    private boolean isSubmit;                    //是否提交 在commentByTutor中可以找到
-    private boolean isSave;                      //是否保存 暂定
     private boolean auditByDirector;           //审核状态
-    private String replyStation;
+    private int scoresState;                    //登陆用户对该学生的答辩打分
 
 
-
-    @Generated(hash = 1749095835)
-    public GraduateProject(Long id, String year, String title, String subTitle,
-            String category, String projectType, String projectFidelity,
-            String projectFrom, Long replyGroup_id, String content,
-            String basicRequirement, String basicSkill, String reference,
-            String major, Double completenessScoreByGroup,
-            Double correctnessScoreByGroup, Double qualityScoreBtGroup,
-            Double replyScoreByGroup, String remark, Long student_id, Long tutorId,
-            boolean isAllow, boolean isSubmit, boolean isSave,
-            boolean auditByDirector, String replyStation) {
-        this.id = id;
-        this.year = year;
-        this.title = title;
-        this.subTitle = subTitle;
-        this.category = category;
-        this.projectType = projectType;
-        this.projectFidelity = projectFidelity;
-        this.projectFrom = projectFrom;
-        this.replyGroup_id = replyGroup_id;
-        this.content = content;
-        this.basicRequirement = basicRequirement;
-        this.basicSkill = basicSkill;
-        this.reference = reference;
-        this.major = major;
-        this.completenessScoreByGroup = completenessScoreByGroup;
-        this.correctnessScoreByGroup = correctnessScoreByGroup;
-        this.qualityScoreBtGroup = qualityScoreBtGroup;
-        this.replyScoreByGroup = replyScoreByGroup;
-        this.remark = remark;
-        this.student_id = student_id;
-        this.tutorId = tutorId;
-        this.isAllow = isAllow;
-        this.isSubmit = isSubmit;
-        this.isSave = isSave;
-        this.auditByDirector = auditByDirector;
-        this.replyStation = replyStation;
-    }
-
-    @Generated(hash = 1800086101)
-    public GraduateProject() {
-    }
 
 
 
@@ -94,23 +50,14 @@ public class GraduateProject {
         isAllow = allow;
     }
 
-    public void setSubmit(boolean submit) {
-        isSubmit = submit;
+
+    public int getScoresState() {
+        return scoresState;
     }
 
-    public void setSave(boolean save) {
-        isSave = save;
+    public void setScoresState(int scoresState) {
+        this.scoresState = scoresState;
     }
-
-
-    public String getReplyStation() {
-        return replyStation;
-    }
-
-    public void setReplyStation(String replyStation) {
-        this.replyStation = replyStation;
-    }
-
 
     public String getBasicRequirement() {
         return basicRequirement;
@@ -137,7 +84,6 @@ public class GraduateProject {
     }
 
 
-
     public String getContent() {
         return content;
     }
@@ -145,8 +91,6 @@ public class GraduateProject {
     public void setContent(String content) {
         this.content = content;
     }
-
-
 
 
     public boolean isAllow() {
@@ -157,23 +101,6 @@ public class GraduateProject {
         this.isAllow = isAllow;
     }
 
-
-
-    public boolean isSave() {
-        return isSave;
-    }
-
-    public void setIsSave(boolean isSave) {
-        this.isSave = isSave;
-    }
-
-    public boolean isSubmit() {
-        return isSubmit;
-    }
-
-    public void setIsSubmit(boolean isSubmit) {
-        this.isSubmit = isSubmit;
-    }
 
     public String getMajor() {
         return major;
@@ -223,7 +150,6 @@ public class GraduateProject {
     public void setRemark(String remark) {
         this.remark = remark;
     }
-
 
 
     public String getSubTitle() {
@@ -287,13 +213,6 @@ public class GraduateProject {
         return this.isAllow;
     }
 
-    public boolean getIsSubmit() {
-        return this.isSubmit;
-    }
-
-    public boolean getIsSave() {
-        return this.isSave;
-    }
 
     public Student getStudent_name() {
         return student_name;
@@ -315,35 +234,35 @@ public class GraduateProject {
         return this.auditByDirector;
     }
 
-    public Double getCompletenessScoreByGroup() {
+    public Integer getCompletenessScoreByGroup() {
         return completenessScoreByGroup;
     }
 
-    public void setCompletenessScoreByGroup(Double completenessScoreByGroup) {
+    public void setCompletenessScoreByGroup(Integer completenessScoreByGroup) {
         this.completenessScoreByGroup = completenessScoreByGroup;
     }
 
-    public Double getCorrectnessScoreByGroup() {
+    public Integer getCorrectnessScoreByGroup() {
         return correctnessScoreByGroup;
     }
 
-    public void setCorrectnessScoreByGroup(Double correctnessScoreByGroup) {
+    public void setCorrectnessScoreByGroup(Integer correctnessScoreByGroup) {
         this.correctnessScoreByGroup = correctnessScoreByGroup;
     }
 
-    public Double getQualityScoreBtGroup() {
+    public Integer getQualityScoreBtGroup() {
         return qualityScoreBtGroup;
     }
 
-    public void setQualityScoreBtGroup(Double qualityScoreBtGroup) {
+    public void setQualityScoreBtGroup(Integer qualityScoreBtGroup) {
         this.qualityScoreBtGroup = qualityScoreBtGroup;
     }
 
-    public Double getReplyScoreByGroup() {
+    public Integer getReplyScoreByGroup() {
         return replyScoreByGroup;
     }
 
-    public void setReplyScoreByGroup(Double replyScoreByGroup) {
+    public void setReplyScoreByGroup(Integer replyScoreByGroup) {
         this.replyScoreByGroup = replyScoreByGroup;
     }
 }

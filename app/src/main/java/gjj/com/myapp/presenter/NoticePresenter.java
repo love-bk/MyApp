@@ -101,13 +101,15 @@ public class NoticePresenter extends BasePresenter<NoticeView> {
         //保存到数据库中
         Notice_Dao.getInstance(context).insertNotices(notices);
         for (Notice notice : notices) {
-//            List<Addressee> addressees = notice.getAddressees();
-//            if (addressees !=null&& addressees.size()!=0){
-//                for (Addressee addressee : addressees) {
-//                    //将收件人发送到数据库中
-//                    Addressee_Dao.getInstance(context).insert(addressee);
-//                }
-//            }
+            List<Long> addresseeIdList = notice.getAddresseeIdList();
+            List<String> addresseeNameList = notice.getAddresseeNameList();
+            if (addresseeIdList !=null&& addresseeIdList.size()!=0){
+                for (int i = 0; i < addresseeIdList.size(); i++) {
+                    Addressee addressee = new Addressee(addresseeIdList.get(i), addresseeNameList.get(i), notice.getId());
+                    //将收件人发送到数据库中
+                    Addressee_Dao.getInstance(context).insert(addressee);
+                }
+            }
         }
         return notices;
     }

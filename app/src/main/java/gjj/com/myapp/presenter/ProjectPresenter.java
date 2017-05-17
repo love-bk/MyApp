@@ -18,6 +18,7 @@ import gjj.com.myapp.model.GraduateProject;
 import gjj.com.myapp.model.Student;
 import gjj.com.myapp.myproject.ProjectDetailActivity;
 import gjj.com.myapp.myproject.ProjectFragment;
+import gjj.com.myapp.myreply.views.ReplyScoreDetailActivity;
 import gjj.com.myapp.utils.Constants;
 import gjj.com.myapp.utils.SPUtil;
 import gjj.com.myapp.views.ProjectView;
@@ -32,12 +33,20 @@ public class ProjectPresenter extends BasePresenter<ProjectView> {
         attachView(projectView);
         if (projectView instanceof ProjectFragment){
             this.context = ProjectFragment.mActivity;
-        }else {
+        }else if (projectView instanceof  ProjectDetailActivity){
             this.context = ((ProjectDetailActivity) projectView);
+        }else if (projectView instanceof ReplyScoreDetailActivity){
+            this.context = (ReplyScoreDetailActivity)projectView;
+        }else {
+
         }
     }
 
 
+    /**
+     * 从服务器获取数据
+     * @param tutorId
+     */
     public void loadProjectData(String tutorId) {
         mvpView.showLoading();
         addSubscription(mApiStores.loadProject(tutorId), new ApiCallback<String>() {
@@ -58,6 +67,11 @@ public class ProjectPresenter extends BasePresenter<ProjectView> {
         });
     }
 
+    /**
+     * 处理返回来的数据
+     * @param model
+     * @return
+     */
     private List<GraduateProject> handleData(String model) {
         //解析数据
         Gson gson = new Gson();
@@ -86,6 +100,10 @@ public class ProjectPresenter extends BasePresenter<ProjectView> {
         return projects;
     }
 
+    /**
+     * 根据课题的分类获取课题列表
+     * @param category
+     */
     public void loadProjectFromDB(String category) {
         //从数据库中获取数据
         List<GraduateProject> projects = new ArrayList<>();
@@ -108,9 +126,18 @@ public class ProjectPresenter extends BasePresenter<ProjectView> {
         mvpView.loadSucceed(projects);
     }
 
+    /**
+     * 根据课题id获取课题
+     * @param projectId
+     */
     public void loadProjectFromDb(long projectId){
         List<GraduateProject> projects = new ArrayList<>();
-        projects.add(GraduateProject_Dao.getInstance(context).queryProjectById(projectId));
+        GraduateProject project = GraduateProject_Dao.getInstance(context).queryProjectById(projectId);
+        project.setStudent_name(Student_Dao.getInstance(context).queryDatasByProjectId(projectId));
+        projects.add(project);
         mvpView.loadSucceed(projects);
     }
+
+
+
 }

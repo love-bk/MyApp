@@ -29,13 +29,21 @@ public class ReplyStudentRecyclerViewAdapter extends RecyclerView.Adapter<ReplyS
     private OnItemClickListener mOnItemClickListener;
 
 
+    public List<GraduateProject> getData() {
+        return mData;
+    }
+
+    public void setData(List<GraduateProject> data) {
+        mData = data;
+    }
+
     public ReplyStudentRecyclerViewAdapter(Context context) {
         this.mContext = context;
         mInflater = LayoutInflater.from(mContext);
     }
 
     public interface OnItemClickListener{
-        void onItemClick(View view, int position);
+        void onItemClick(View view, int position,Long projectId);
     }
     public void setOnItemClickListener(OnItemClickListener mOnItemClickListener){
         this.mOnItemClickListener = mOnItemClickListener;
@@ -58,7 +66,7 @@ public class ReplyStudentRecyclerViewAdapter extends RecyclerView.Adapter<ReplyS
                 @Override
                 public void onClick(View v) {
                     int position = holder.getLayoutPosition(); // 1
-                    mOnItemClickListener.onItemClick(holder.itemView,position); // 2
+                    mOnItemClickListener.onItemClick(holder.itemView,position,mData.get(position).getId()); // 2
                 }
             });
         }
@@ -97,7 +105,6 @@ public class ReplyStudentRecyclerViewAdapter extends RecyclerView.Adapter<ReplyS
             mSerialNumberTv.setText(String.valueOf(position + 1));
             mReplyStudentTv.setText(graduateProject.getStudent_name().getName());
             mReamStateTv.setText("已打分");
-
         }
     }
 

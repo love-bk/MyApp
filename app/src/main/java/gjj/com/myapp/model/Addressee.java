@@ -42,7 +42,11 @@ public class Addressee {
     public Addressee() {
     }
 
-
+    public Addressee(Long id,String name , Long noticeId) {
+        this.id = id;
+        this.noticeId = noticeId;
+        this.name = name;
+    }
 
 
 

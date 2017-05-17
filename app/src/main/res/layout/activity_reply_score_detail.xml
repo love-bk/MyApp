@@ -28,7 +28,6 @@
                 <TextView
                     android:id="@+id/name_tv"
                     style="@style/ProjectDetailTv_style"
-                    android:background="@drawable/border_all"
                     android:text="题目"
                     />
 
@@ -36,7 +35,6 @@
                     android:id="@+id/nameTv"
                     style="@style/ProjectDetailValueTv_style"
                     android:layout_toRightOf="@id/name_tv"
-                    android:background="@drawable/border_all"
                     />
             </RelativeLayout>
 
@@ -51,7 +49,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/sexTv"
+                    android:id="@+id/studentNameTv"
                     style="@style/ProjectDetailValueTv_style"
                     android:layout_toRightOf="@id/sex_tv"
                     />
@@ -67,7 +65,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/worker_numTv"
+                    android:id="@+id/classNameTv"
                     style="@style/ProjectDetailValueTv_style"
                     android:layout_toRightOf="@id/worker_num_tv"
                     />
@@ -83,7 +81,7 @@
                     android:text="学号"/>
 
                 <TextView
-                    android:id="@+id/departmentTv"
+                    android:id="@+id/noTv"
                     style="@style/ProjectDetailValueTv_style"
                     android:layout_toRightOf="@id/department_tv"
                     />
@@ -203,6 +201,26 @@
             </RelativeLayout>
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_marginTop="20dp">
+                <Button
+                    android:id="@+id/saveBtn"
+                    android:text="保存"
+                    android:layout_height="wrap_content"
+                    style="@style/CommonBtn_style"
+                    />
+                <Button
+                    android:id="@+id/submitBtn"
+                    android:layout_toRightOf="@id/saveBtn"
+                    android:layout_height="wrap_content"
+                    style="@style/CommonBtn_style"
+                    android:layout_marginLeft="10dp"
+                    android:text="提交"/>
+            </LinearLayout>
 
         </LinearLayout>
     </LinearLayout>

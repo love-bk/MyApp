@@ -20,8 +20,10 @@ public class Notice {
     private Long addressTime;                   //通知的时间
     private Long addressor_id;               //发送者的id
     private String addressor_name;              //发送者的姓名
-//    @Transient
-//    private List<Addressee> addressees;         //收件人,只有发送者是登陆用户时收件人才被赋值，如果发送者是不是登陆用户，那么收件人肯定是登陆用户
+    @Transient
+    private List<Long> addresseeIdList;         //收件人,只有发送者是登陆用户时收件人才被赋值，如果发送者是不是登陆用户，那么收件人肯定是登陆用户
+    @Transient
+    private List<String> addresseeNameList;
 
 
     @Generated(hash = 1906794361)
@@ -39,6 +41,22 @@ public class Notice {
     public Notice() {
     }
 
+
+    public List<Long> getAddresseeIdList() {
+        return addresseeIdList;
+    }
+
+    public void setAddresseeIdList(List<Long> addresseeIdList) {
+        this.addresseeIdList = addresseeIdList;
+    }
+
+    public List<String> getAddresseeNameList() {
+        return addresseeNameList;
+    }
+
+    public void setAddresseeNameList(List<String> addresseeNameList) {
+        this.addresseeNameList = addresseeNameList;
+    }
 
     public String getAddressor_name() {
         return addressor_name;

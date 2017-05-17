@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
@@ -60,6 +61,7 @@ public class ReplyDetailActivity extends MvpActivity<ReplyPresenter> implements 
     ScrollView mReplyScrollView;
     private ArrayList<String> mData;
     private ReplyStudentRecyclerViewAdapter mAdapter;
+    private int requestCode = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +86,11 @@ public class ReplyDetailActivity extends MvpActivity<ReplyPresenter> implements 
         mAdapter = new ReplyStudentRecyclerViewAdapter(this);
         mAdapter.setOnItemClickListener(new ReplyStudentRecyclerViewAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                startActivity(new Intent(ReplyDetailActivity.this, ReplyScoreDetailActivity.class));
+            public void onItemClick(View view, int position,Long projecId) {
+                Intent intent = new Intent(ReplyDetailActivity.this, ReplyScoreDetailActivity.class);
+                intent.putExtra(Constants.PROJECT_ID,projecId);
+                intent.putExtra(Constants.POSITION,position);
+                startActivityForResult(intent,requestCode);
             }
         });
         mReplyStudentRecyclerView.setAdapter(mAdapter);
@@ -151,5 +156,17 @@ public class ReplyDetailActivity extends MvpActivity<ReplyPresenter> implements 
     @Override
     public void loadFail(String msg) {
 
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (0 == requestCode){
+            int scoreState = data.getIntExtra(Constants.SCORESTATE,-1);
+            int position = data.getIntExtra(Constants.POSITION,-1);
+            mAdapter.getData().get(position);
+            Toast.makeText(mActivity, "返回了", Toast.LENGTH_SHORT).show();
+        }
     }
 }
