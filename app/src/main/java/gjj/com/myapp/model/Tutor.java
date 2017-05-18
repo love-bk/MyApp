@@ -20,11 +20,10 @@ public class Tutor {
     private String no;               //职工号
     private String sex;              //性别
     private String description;
-    @Transient
-    private Department department;       //部门
+    private String departmentName;       //部门
     @Transient
     private List<Student> studentList;       //学生
-    private long replyId;
+    private long replyId;                   //老师所在的答辩小组
 
     @Generated(hash = 1768449379)
     public Tutor(Long id, String name, String no, String sex, String description,
@@ -91,54 +90,12 @@ public class Tutor {
         this.id = id;
     }
 
-    public Department getDepartment() {
-        return department;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setDepartment(Department department) {
-        this.department = department;
-    }
-
-    public class Department {
-        private long id;
-        private String description;
-
-        public long getId() {
-            return id;
-        }
-
-        public void setId(long id) {
-            this.id = id;
-        }
-
-        public String getDescription() {
-            return description;
-        }
-
-        public void setDescription(String description) {
-            this.description = description;
-        }
-
-        @Override
-        public String toString() {
-            return "Department{" +
-                    "id=" + id +
-                    ", description='" + description + '\'' +
-                    '}';
-        }
-    }
-
-    @Override
-    public String toString() {
-        return "Tutor{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", no='" + no + '\'' +
-                ", sex='" + sex + '\'' +
-                ", description='" + description + '\'' +
-                ", department=" + department +
-                ", studentList=" + studentList +
-                '}';
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
     public List<Student> getStudentList() {

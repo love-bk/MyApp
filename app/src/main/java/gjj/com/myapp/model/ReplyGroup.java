@@ -29,7 +29,7 @@ public class ReplyGroup {
     private long tutor_Id;   //登陆用户的id
     private String major; //答辩专业
     @Transient
-    private List<Tutor> tutorId;
+    private List<Tutor> tutor;
     private String replyMembers;
 
     @Generated(hash = 2084684966)
@@ -170,14 +170,6 @@ public class ReplyGroup {
 
     public void setTutor_Id(long tutor_Id) {
         this.tutor_Id = tutor_Id;
-    }
-
-    public List<Tutor> getTutorId() {
-        return tutorId;
-    }
-
-    public void setTutorId(List<Tutor> tutorId) {
-        this.tutorId = tutorId;
     }
 
     public void setBeginTime(Long beginTime) {

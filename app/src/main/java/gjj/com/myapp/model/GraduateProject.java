@@ -19,11 +19,10 @@ public class GraduateProject {
     private String year;
     private String title;                 //题目名称
     private String subTitle;              //副标题
-    private String category;              //题目类别   不需要
+    private String category;              //题目类别
     private String projectType;           //题目类型
     private String projectFidelity;       //题目性质
     private String projectFrom;           //题目来源
-    private Long replyGroup_id;        //该课题所在的答辩小组
     private String content;               //工作内容
     private String basicRequirement;      //基本要求
     private String basicSkill;            //基本技能
@@ -34,17 +33,22 @@ public class GraduateProject {
     private Integer qualityScoreBtGroup;           //论文与实务的质量评分
     private Integer replyScoreByGroup;             //论文内容的答辩陈述评分
     private String remark;                         //指导老师的评语
-    private Long student_id;                     //选该题目学生的id
     @Transient
-    private Student student_name;                     //选该题目学生的姓名
-    private Long tutorId;                      //申报该题目老师的id
+    private Student student;                     //选该题目学生的姓名
+    private Long tutorId;                       //申报该题目老师的id
+    private Long replyGroupId;                 //该课题所在的答辩小组
     private boolean isAllow;                     //是否允许答辩 在commentByTutor中可以找到
     private boolean auditByDirector;           //审核状态
     private int scoresState;                    //登陆用户对该学生的答辩打分
 
 
+    public Long getReplyGroupId() {
+        return replyGroupId;
+    }
 
-
+    public void setReplyGroupId(Long replyGroupId) {
+        this.replyGroupId = replyGroupId;
+    }
 
     public void setAllow(boolean allow) {
         isAllow = allow;
@@ -168,22 +172,6 @@ public class GraduateProject {
         this.title = title;
     }
 
-    public Long getReplyGroup_id() {
-        return replyGroup_id;
-    }
-
-    public void setReplyGroup_id(Long replyGroup_id) {
-        this.replyGroup_id = replyGroup_id;
-    }
-
-    public Long getStudent_id() {
-        return student_id;
-    }
-
-    public void setStudent_id(Long student_id) {
-        this.student_id = student_id;
-    }
-
     public Long getTutorId() {
         return tutorId;
     }
@@ -213,14 +201,6 @@ public class GraduateProject {
         return this.isAllow;
     }
 
-
-    public Student getStudent_name() {
-        return student_name;
-    }
-
-    public void setStudent_name(Student student_name) {
-        this.student_name = student_name;
-    }
 
     public boolean isAuditByDirector() {
         return auditByDirector;
@@ -264,5 +244,13 @@ public class GraduateProject {
 
     public void setReplyScoreByGroup(Integer replyScoreByGroup) {
         this.replyScoreByGroup = replyScoreByGroup;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }
