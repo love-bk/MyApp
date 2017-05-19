@@ -17,12 +17,45 @@ public class Student {
     private String contact;                     //学生的手机号
     private String name;                        //学生的姓名
     private String majorDecription;             //学生所在的专业
-    private String major;                        //学生所在的专业
     private String studentClass;                //学生所在的班级名称
     private Long tutorId;                       //指导老师的id
     private Long projectId;                     //学生答辩课题的id
+    private Long replyGroupId;                     //学生答辩小组的id
 
 
+
+
+
+    @Generated(hash = 1302890017)
+    public Student(Long id, String no, String contact, String name,
+            String majorDecription, String studentClass, Long tutorId,
+            Long projectId, Long replyGroupId) {
+        this.id = id;
+        this.no = no;
+        this.contact = contact;
+        this.name = name;
+        this.majorDecription = majorDecription;
+        this.studentClass = studentClass;
+        this.tutorId = tutorId;
+        this.projectId = projectId;
+        this.replyGroupId = replyGroupId;
+    }
+
+    @Generated(hash = 1556870573)
+    public Student() {
+    }
+
+
+
+
+
+    public Long getReplyGroupId() {
+        return replyGroupId;
+    }
+
+    public void setReplyGroupId(Long replyGroupId) {
+        this.replyGroupId = replyGroupId;
+    }
 
     public Long getTutorId() {
         return tutorId;
@@ -74,14 +107,6 @@ public class Student {
 
     public void setMajorDecription(String majorDecription) {
         this.majorDecription = majorDecription;
-    }
-
-    public String getMajor() {
-        return major;
-    }
-
-    public void setMajor(String major) {
-        this.major = major;
     }
 
     public String getStudentClass() {

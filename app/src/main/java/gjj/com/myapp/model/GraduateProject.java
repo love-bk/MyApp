@@ -34,12 +34,49 @@ public class GraduateProject {
     private Integer replyScoreByGroup;             //论文内容的答辩陈述评分
     private String remark;                         //指导老师的评语
     @Transient
-    private Student student;                     //选该题目学生的姓名
+    private Student student;                     //选该题目学生
     private Long tutorId;                       //申报该题目老师的id
     private Long replyGroupId;                 //该课题所在的答辩小组
-    private boolean isAllow;                     //是否允许答辩 在commentByTutor中可以找到
     private boolean auditByDirector;           //审核状态
     private int scoresState;                    //登陆用户对该学生的答辩打分
+
+
+    @Generated(hash = 1535211335)
+    public GraduateProject(Long id, String year, String title, String subTitle,
+            String category, String projectType, String projectFidelity,
+            String projectFrom, String content, String basicRequirement,
+            String basicSkill, String reference, String major,
+            Integer completenessScoreByGroup, Integer correctnessScoreByGroup,
+            Integer qualityScoreBtGroup, Integer replyScoreByGroup, String remark,
+            Long tutorId, Long replyGroupId, boolean auditByDirector,
+            int scoresState) {
+        this.id = id;
+        this.year = year;
+        this.title = title;
+        this.subTitle = subTitle;
+        this.category = category;
+        this.projectType = projectType;
+        this.projectFidelity = projectFidelity;
+        this.projectFrom = projectFrom;
+        this.content = content;
+        this.basicRequirement = basicRequirement;
+        this.basicSkill = basicSkill;
+        this.reference = reference;
+        this.major = major;
+        this.completenessScoreByGroup = completenessScoreByGroup;
+        this.correctnessScoreByGroup = correctnessScoreByGroup;
+        this.qualityScoreBtGroup = qualityScoreBtGroup;
+        this.replyScoreByGroup = replyScoreByGroup;
+        this.remark = remark;
+        this.tutorId = tutorId;
+        this.replyGroupId = replyGroupId;
+        this.auditByDirector = auditByDirector;
+        this.scoresState = scoresState;
+    }
+
+    @Generated(hash = 1800086101)
+    public GraduateProject() {
+    }
 
 
     public Long getReplyGroupId() {
@@ -50,9 +87,6 @@ public class GraduateProject {
         this.replyGroupId = replyGroupId;
     }
 
-    public void setAllow(boolean allow) {
-        isAllow = allow;
-    }
 
 
     public int getScoresState() {
@@ -94,15 +128,6 @@ public class GraduateProject {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-
-    public boolean isAllow() {
-        return isAllow;
-    }
-
-    public void setIsAllow(boolean isAllow) {
-        this.isAllow = isAllow;
     }
 
 
@@ -195,10 +220,6 @@ public class GraduateProject {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public boolean getIsAllow() {
-        return this.isAllow;
     }
 
 

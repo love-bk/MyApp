@@ -56,7 +56,7 @@ public class ReplyGroup_Dao {
     /**
      * 删除数据库中的数据
      */
-    public void deleteAll(){
+    public void deleteAllData(){
         replyGroupDao.deleteAll();
     }
 }

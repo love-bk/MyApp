@@ -41,7 +41,7 @@ public class Tutor_Dao {
         if (tutor != null){
             List<Tutor> tutors = tutorDao.queryBuilder().where(TutorDao.Properties.Id.eq(tutor.getId())).list();
             if (tutors!=null &&tutors.size()!=0){
-                tutor.setDescription(tutors.get(0).getDescription());
+                tutor.setDepartmentName(tutors.get(0).getDepartmentName());
                 tutorDao.delete(tutors.get(0));
             }
             tutorDao.insert(tutor);
@@ -62,11 +62,11 @@ public class Tutor_Dao {
     /**
      * 删除数据库中的数据
      */
-    public void deleteAll(){
+    public void deleteAllData(){
         tutorDao.deleteAll();
     }
 
-    public List<Tutor> queryTutorsByReplyId(long replyGroupId) {
-        return tutorDao.queryBuilder().where(TutorDao.Properties.ReplyId.eq(replyGroupId)).list();
-    }
+//    public List<Tutor> queryTutorsByReplyId(long replyGroupId) {
+//        return tutorDao.queryBuilder().where(TutorDao.Properties.ReplyId.eq(replyGroupId)).list();
+//    }
 }

@@ -69,43 +69,20 @@ public class ReplyPresenter extends BasePresenter<ReplyView> {
         Gson gson = new Gson();
         List<ReplyGroup> groups = gson.fromJson(model, new TypeToken<List<ReplyGroup>>() {
         }.getType());
-        long tutorId = SPUtil.getTutorIdfromSP(context);
         //将数据保存到数据库中
         if (groups != null && groups.size() != 0) {
             //将数据保存到数据库中
             for (ReplyGroup group : groups) {
-                if (group.getReplyTime() != null) {
-                    group.setBeginTime(group.getReplyTime().getBeginTime());
-                    group.setEndTime(group.getReplyTime().getEndTime());
-                }
-                group.setTutor_Id(tutorId);
                 List<GraduateProject> graduateProjects = group.getGraduateProjects();
-                List<Tutor> tutors = group.getTutorId();
-                //操作答辩小组里的答辩成员
-                if (tutors != null && tutors.size() != 0) {
-                    for (Tutor tutor : tutors) {
-                        tutor.setReplyId(group.getId());
-                        Tutor_Dao.getInstance(context).insert(tutor);
-                    }
-                }
                 //操作答辩小组里的课题
                 if (graduateProjects != null && graduateProjects.size() != 0) {
                     for (GraduateProject project : graduateProjects) {
-                        project.setReplyGroup_id(group.getId());
-                        Student student = project.getStudent_name();
+                        Student student = project.getStudent();
                         if (student != null) {
-                            if (student.getStudentClass() != null) {
-                                student.setClassDescription(student.getStudentClass().getDescription());
-                            }
-                            if (student.getMajor() != null) {
-                                student.setMajorDecription(student.getMajor().getDescription());
-                            }
-                            student.setReplyGraduateProject_id(project.getId());
-                            student.setReplyGroup_id(group.getId());
                             Student_Dao.getInstance(context).insertStudent(student);
                         }
-                        GraduateProject_Dao.getInstance(context).insertProject(project);
                     }
+                    GraduateProject_Dao.getInstance(context).insertProjectList(graduateProjects);
                 }
             }
             ReplyGroup_Dao.getInstance(context).insertReplyGroupList(groups);
@@ -126,9 +103,8 @@ public class ReplyPresenter extends BasePresenter<ReplyView> {
         ReplyGroup replyGroup = ReplyGroup_Dao.getInstance(context).queryReplyGroupById(replyGroupId);
         List<GraduateProject> projects = GraduateProject_Dao.getInstance(context).queryProjectByReplyGroupId(replyGroupId);
         for (GraduateProject project : projects) {
-            project.setStudent_name(Student_Dao.getInstance(context).queryDatasByProjectId(project.getId()));
+            project.setStudent(Student_Dao.getInstance(context).queryDatasByProjectId(project.getId()));
         }
-        replyGroup.setTutorId(Tutor_Dao.getInstance(context).queryTutorsByReplyId(replyGroupId));
         replyGroup.setGraduateProjects(projects);
         replyGroups.add(replyGroup);
         mvpView.loadSucceed(replyGroups);

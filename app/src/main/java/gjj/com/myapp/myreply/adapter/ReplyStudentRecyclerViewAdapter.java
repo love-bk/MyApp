@@ -103,7 +103,7 @@ public class ReplyStudentRecyclerViewAdapter extends RecyclerView.Adapter<ReplyS
         public void setData(GraduateProject graduateProject, int position) {
             mReplyProjectTv.setText(graduateProject.getTitle());
             mSerialNumberTv.setText(String.valueOf(position + 1));
-            mReplyStudentTv.setText(graduateProject.getStudent_name().getName());
+            mReplyStudentTv.setText(graduateProject.getStudent().getName());
             mReamStateTv.setText("已打分");
         }
     }

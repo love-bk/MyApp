@@ -150,10 +150,10 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
         if (projects != null && projects.size() != 0) {
             GraduateProject project = projects.get(0);
             mNameTv.setText(project.getTitle());
-            Student student = project.getStudent_name();
+            Student student = project.getStudent();
             if (student != null) {
                 mStudentNameTv.setText(student.getName());
-                mClassNameTv.setText(student.getClassDescription());
+                mClassNameTv.setText(student.getStudentClass());
                 mNoTv.setText(student.getNo());
                 int completenessScoreByGroup = project.getCompletenessScoreByGroup();
                 int qualityScoreBtGroup = project.getQualityScoreBtGroup();

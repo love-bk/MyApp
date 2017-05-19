@@ -3,8 +3,11 @@ package gjj.com.myapp.dao;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+import org.greenrobot.greendao.database.Database;
+
 import gjj.com.myapp.greendao.gen.DaoMaster;
 import gjj.com.myapp.greendao.gen.DaoSession;
+import gjj.com.myapp.greendao.gen.StudentDao;
 
 /**
  * Created by yyz on 2017/5/3.
@@ -51,4 +54,7 @@ public class DBManager {
         }
         return mDaoSession;
     }
+
+
+
 }

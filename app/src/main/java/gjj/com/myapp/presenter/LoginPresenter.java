@@ -60,21 +60,9 @@ public class LoginPresenter extends BasePresenter<LoginView> {
         //解析数据
         Gson gson = new Gson();
         Tutor tutor = gson.fromJson(tutorStr, Tutor.class);
-        if (tutor.getDepartment() != null) {
-            tutor.setDescription(tutor.getDepartment().getDescription());
-        }
         //将获取到的数据添加到数据库中
         Tutor_Dao.getInstance((LoginActivity) mvpView).insert(tutor);
         if (tutor.getStudentList() != null && tutor.getStudentList().size() !=0){
-            for (Student student : tutor.getStudentList()) {
-                student.setTutorId(tutor.getId());
-                if (student.getStudentClass()!=null){
-                    student.setClassDescription(student.getStudentClass().getDescription());
-                }
-                if (student.getMajor()!=null){
-                    student.setMajorDecription(student.getMajor().getDescription());
-                }
-            }
             Student_Dao.getInstance((LoginActivity) mvpView).insertStudentList(tutor.getStudentList());
         }
         //将账号保存到SP中

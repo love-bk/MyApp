@@ -80,18 +80,9 @@ public class ProjectPresenter extends BasePresenter<ProjectView> {
         //将数据保存到数据库中
         if (projects!=null&&projects.size()!=0){
             //将数据保存到数据库中
-            long tutorId = SPUtil.getTutorIdfromSP(context);
             for (GraduateProject project : projects) {
-                Student student = project.getStudent_name();
+                Student student = project.getStudent();
                 if (student != null){
-                    if (student.getStudentClass()!=null){
-                        student.setClassDescription(student.getStudentClass().getDescription());
-                    }
-                    if (student.getMajor()!=null){
-                        student.setMajorDecription(student.getMajor().getDescription());
-                    }
-                    student.setTutorId(tutorId);
-                    student.setReplyGraduateProject_id(project.getId());
                     Student_Dao.getInstance(context).insertStudent(student);
                 }
                 GraduateProject_Dao.getInstance(context).insertProject(project);
@@ -121,7 +112,7 @@ public class ProjectPresenter extends BasePresenter<ProjectView> {
         }
         for (GraduateProject project : projects) {
             Student student = Student_Dao.getInstance(context).queryDatasByProjectId(project.getId());
-            project.setStudent_name(student);
+            project.setStudent(student);
         }
         mvpView.loadSucceed(projects);
     }
@@ -133,7 +124,7 @@ public class ProjectPresenter extends BasePresenter<ProjectView> {
     public void loadProjectFromDb(long projectId){
         List<GraduateProject> projects = new ArrayList<>();
         GraduateProject project = GraduateProject_Dao.getInstance(context).queryProjectById(projectId);
-        project.setStudent_name(Student_Dao.getInstance(context).queryDatasByProjectId(projectId));
+        project.setStudent(Student_Dao.getInstance(context).queryDatasByProjectId(projectId));
         projects.add(project);
         mvpView.loadSucceed(projects);
     }

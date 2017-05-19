@@ -124,18 +124,7 @@ public class ReplyDetailActivity extends MvpActivity<ReplyPresenter> implements 
         }
 //        mReplyMajorTv.setText(replyGroup.getMajor());
         List<GraduateProject> projects = replyGroup.getGraduateProjects();
-        List<Tutor> tutors = replyGroup.getTutorId();
-        if (tutors != null&&tutors.size()!=0){
-            String members = "";
-            for (Tutor tutor : tutors) {
-                if (tutor.getName()!=null){
-                    members = members+tutor.getName()+"、";
-                }
-            }
-            if (members.contains("、")){
-                mReplyMemberTv.setText(members.substring(0,members.lastIndexOf("、")));
-            }
-        }
+        mReplyMemberTv.setText(replyGroup.getReplyMembers());
         if (projects!=null&&projects.size()!=0){
             mAdapter.addList(projects);
         }

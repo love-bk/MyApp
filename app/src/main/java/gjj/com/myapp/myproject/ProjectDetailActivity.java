@@ -99,11 +99,11 @@ public class ProjectDetailActivity extends MvpActivity<ProjectPresenter> impleme
         } else {
             mApproveStateTv.setText("未审核");
         }
-        if (project.getStudent_name() == null) {
+        if (project.getStudent() == null) {
             mStudentNameTv.setText("该课题还未分配学生");
             mStudentNameTv.setTextColor(Color.RED);
         } else {
-            mStudentNameTv.setText(project.getStudent_name().getName());
+            mStudentNameTv.setText(project.getStudent().getName());
         }
         mContentTv.setText(project.getContent());
         mBasicRequirementTv.setText(project.getBasicRequirement());

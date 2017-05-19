@@ -19,41 +19,22 @@ public class Tutor {
     private String name;             //姓名
     private String no;               //职工号
     private String sex;              //性别
-    private String description;
     private String departmentName;       //部门
     @Transient
     private List<Student> studentList;       //学生
-    private long replyId;                   //老师所在的答辩小组
-
-    @Generated(hash = 1768449379)
-    public Tutor(Long id, String name, String no, String sex, String description,
-            long replyId) {
-        this.id = id;
-        this.name = name;
-        this.no = no;
-        this.sex = sex;
-        this.description = description;
-        this.replyId = replyId;
-    }
 
     @Generated(hash = 380252782)
     public Tutor() {
     }
 
-    public long getReplyId() {
-        return replyId;
-    }
-
-    public void setReplyId(long replyId) {
-        this.replyId = replyId;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    @Generated(hash = 1704961349)
+    public Tutor(Long id, String name, String no, String sex,
+            String departmentName) {
+        this.id = id;
+        this.name = name;
+        this.no = no;
+        this.sex = sex;
+        this.departmentName = departmentName;
     }
 
     public String getName() {

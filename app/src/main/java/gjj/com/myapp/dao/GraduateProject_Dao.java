@@ -51,9 +51,9 @@ public class GraduateProject_Dao {
         if (project != null){
             List<GraduateProject> projects = graduateProjectDao.queryBuilder().where(GraduateProjectDao.Properties.Id.eq(project.getId())).list();
             if (projects!=null&&projects.size()!=0){
-                Long replyGroup_id = projects.get(0).getReplyGroup_id();
+                Long replyGroup_id = projects.get(0).getReplyGroupId();
                 if (replyGroup_id != null){
-                    project.setReplyGroup_id(replyGroup_id);
+                    project.setReplyGroupId(replyGroup_id);
                 }
                 graduateProjectDao.delete(projects.get(0));
             }
@@ -70,12 +70,7 @@ public class GraduateProject_Dao {
             return null;
         }
 
-    /**
-     * 删除数据库中的数据
-     */
-    public void deleteAll(){
-        graduateProjectDao.deleteAll();
-    }
+
 
     public List<GraduateProject> queryProjectListByTutorId(Long tutorId) {
          return graduateProjectDao.queryBuilder().where(GraduateProjectDao.Properties.TutorId.eq(tutorId)).list();
@@ -89,6 +84,10 @@ public class GraduateProject_Dao {
     }
 
     public List<GraduateProject> queryProjectByReplyGroupId(long replyGroupId) {
-        return graduateProjectDao.queryBuilder().where(GraduateProjectDao.Properties.ReplyGroup_id.eq(replyGroupId)).list();
+        return graduateProjectDao.queryBuilder().where(GraduateProjectDao.Properties.ReplyGroupId.eq(replyGroupId)).list();
+    }
+
+    public void deleteAllData(){
+        graduateProjectDao.deleteAll();
     }
 }

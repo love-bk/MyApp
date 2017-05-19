@@ -20,16 +20,12 @@ public class ReplyGroup {
     private String location;                                       //答辩的地点
     private Integer leader_id;                                     //答辩小组组长的id
     private String leader_name;                                     //答辩小组组长的id
-    @Transient
-    private ReplyTime replyTime;
     private long beginTime = -1;                                     //答辩的开始时间
     private long endTime = -1;                                       //答辩的结束时间
     @Transient
     private List<GraduateProject> graduateProjects;
     private long tutor_Id;   //登陆用户的id
     private String major; //答辩专业
-    @Transient
-    private List<Tutor> tutor;
     private String replyMembers;
 
     @Generated(hash = 2084684966)
@@ -102,10 +98,6 @@ public class ReplyGroup {
     }
 
 
-    public ReplyTime getReplyTime() {
-        return replyTime;
-    }
-
     public long getBeginTime() {
         return beginTime;
     }
@@ -120,10 +112,6 @@ public class ReplyGroup {
 
     public void setEndTime(long endTime) {
         this.endTime = endTime;
-    }
-
-    public void setReplyTime(ReplyTime replyTime) {
-        this.replyTime = replyTime;
     }
 
     public Long getId() {

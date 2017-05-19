@@ -52,12 +52,7 @@ public class Notice_Dao {
             noticeDao.insertInTx(notices);
         }
     }
-    /**
-     * 删除数据库中的数据
-     */
-    public void deleteAll(){
-        noticeDao.deleteAll();
-    }
+
 
     public Notice queryNoticeById(long id){
         List<Notice> notices = noticeDao.queryBuilder().where(NoticeDao.Properties.Id.eq(id)).list();
@@ -65,5 +60,9 @@ public class Notice_Dao {
             return notices.get(0);
         }
         return null;
+    }
+
+    public void deleteAllData(){
+        noticeDao.deleteAll();
     }
 }

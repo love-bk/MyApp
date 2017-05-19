@@ -41,9 +41,9 @@ public class Student_Dao {
     public void insertStudent(Student student){
         List<Student> students = studentDao.queryBuilder().where(StudentDao.Properties.Id.eq(student.getId())).list();
         if (students!=null && students.size()!=0){
-            Long replyGroup_id = students.get(0).getReplyGroup_id();
+            Long replyGroup_id = students.get(0).getReplyGroupId();
             if (replyGroup_id != null){
-                student.setReplyGroup_id(replyGroup_id);
+                student.setReplyGroupId(replyGroup_id);
             }
             studentDao.delete(students.get(0));
         }
@@ -55,7 +55,7 @@ public class Student_Dao {
     }
      public Student queryDatasByProjectId(long projectId){
 
-         List<Student> students = studentDao.queryBuilder().where(StudentDao.Properties.ReplyGraduateProject_id.eq(projectId)).list();
+         List<Student> students = studentDao.queryBuilder().where(StudentDao.Properties.ProjectId.eq(projectId)).list();
          if (students!=null && students.size()!=0){
              return students.get(0);
          }
@@ -66,7 +66,7 @@ public class Student_Dao {
     /**
      * 删除数据库中的数据
      */
-    public void deleteAll(){
+    public void deleteAllData(){
         studentDao.deleteAll();
     }
 }
