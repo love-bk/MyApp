@@ -12,9 +12,10 @@
         android:layout_margin="5dp">
         <TextView
             android:id="@+id/serial_number_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
             android:background="@mipmap/item_icon"
+            android:textSize="@dimen/textsize"
             android:gravity="center"
             android:layout_centerVertical="true"
             android:text="1"

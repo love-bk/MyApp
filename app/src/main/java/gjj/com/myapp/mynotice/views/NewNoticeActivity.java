@@ -85,7 +85,7 @@ public class NewNoticeActivity extends MvpActivity<AddresseePresenter> implement
     }
 
     private void initData() {
-        mvpPresenter.loadAddresseesFromDB();
+        mvpPresenter.loadAddressees(String.valueOf(SPUtil.getTutorIdfromSP(this)));
     }
 
 
@@ -128,6 +128,15 @@ public class NewNoticeActivity extends MvpActivity<AddresseePresenter> implement
             notice.setTitle(noticeTitle);
 //            notice.setAddressees(mAddressees);
             notice.setContent(content);
+            //构建收件人
+            List<Long> addresseeIds = new ArrayList<>();
+            List<String> addresseeNames = new ArrayList<>();
+            for (Addressee addressee : mAddressees) {
+                addresseeIds.add(addressee.getId());
+                addresseeNames.add(addressee.getName());
+            }
+            notice.setAddresseeIdList(addresseeIds);
+            notice.setAddresseeNameList(addresseeNames);
             mvpPresenter.sendNotice(notice);
         }
     }
@@ -202,8 +211,6 @@ public class NewNoticeActivity extends MvpActivity<AddresseePresenter> implement
                     tutorList.add(addressee);
                 }
             }
-        }else {
-            mvpPresenter.loadAddressees(String.valueOf(SPUtil.getTutorIdfromSP(this)));
         }
     }
 

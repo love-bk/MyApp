@@ -128,6 +128,11 @@ public class ProjectFragment extends MvpFragment<ProjectPresenter> implements Sw
         }
     }
 
+    @Override
+    public void submitSucceed(Boolean status) {
+
+    }
+
     /**
      * 数据加载失败
      * @param msg

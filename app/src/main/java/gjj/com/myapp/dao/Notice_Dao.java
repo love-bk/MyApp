@@ -32,12 +32,15 @@ public class Notice_Dao {
 
     /**
      * 插入一条数据
-     * @param addressee
+     * @param notice
      */
-    public void insert(Notice addressee){
-        if (addressee != null){
-            noticeDao.deleteAll();
-            noticeDao.insert(addressee);
+    public void insert(Notice notice){
+        if (notice != null){
+            List<Notice> notices = noticeDao.queryBuilder().where(NoticeDao.Properties.Id.eq(notice.getId())).list();
+            if (notices != null&&notices.size()>0) {
+                noticeDao.delete(notices.get(0));
+            }
+            noticeDao.insert(notice);
         }
     }
 

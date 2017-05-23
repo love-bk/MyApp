@@ -24,14 +24,14 @@ public class ReplyGroup {
     private long endTime = -1;                                       //答辩的结束时间
     @Transient
     private List<GraduateProject> graduateProjects;
-    private long tutor_Id;   //登陆用户的id
+    private long tutorId;   //登陆用户的id
     private String major; //答辩专业
     private String replyMembers;
 
-    @Generated(hash = 2084684966)
+    @Generated(hash = 257994268)
     public ReplyGroup(Long id, String description, String location,
             Integer leader_id, String leader_name, long beginTime, long endTime,
-            long tutor_Id, String major, String replyMembers) {
+            long tutorId, String major, String replyMembers) {
         this.id = id;
         this.description = description;
         this.location = location;
@@ -39,13 +39,21 @@ public class ReplyGroup {
         this.leader_name = leader_name;
         this.beginTime = beginTime;
         this.endTime = endTime;
-        this.tutor_Id = tutor_Id;
+        this.tutorId = tutorId;
         this.major = major;
         this.replyMembers = replyMembers;
     }
 
     @Generated(hash = 21646655)
     public ReplyGroup() {
+    }
+
+    public long getTutorId() {
+        return tutorId;
+    }
+
+    public void setTutorId(long tutorId) {
+        this.tutorId = tutorId;
     }
 
     public String getReplyMembers() {
@@ -152,13 +160,7 @@ public class ReplyGroup {
         this.major = major;
     }
 
-    public long getTutor_Id() {
-        return tutor_Id;
-    }
 
-    public void setTutor_Id(long tutor_Id) {
-        this.tutor_Id = tutor_Id;
-    }
 
     public void setBeginTime(Long beginTime) {
         this.beginTime = beginTime;

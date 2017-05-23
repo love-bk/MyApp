@@ -113,6 +113,11 @@ public class ProjectDetailActivity extends MvpActivity<ProjectPresenter> impleme
     }
 
     @Override
+    public void submitSucceed(Boolean status) {
+
+    }
+
+    @Override
     public void loadFail(String msg) {
 
     }

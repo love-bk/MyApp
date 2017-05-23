@@ -14,11 +14,8 @@ import gjj.com.myapp.dao.Addressee_Dao;
 import gjj.com.myapp.dao.Notice_Dao;
 import gjj.com.myapp.model.Addressee;
 import gjj.com.myapp.model.Notice;
-import gjj.com.myapp.model.ServiceAddressee;
 import gjj.com.myapp.mynotice.views.MyNoticeDetailActivity;
 import gjj.com.myapp.mynotice.views.MyNoticeListActivity;
-import gjj.com.myapp.mynotice.views.NewNoticeActivity;
-import gjj.com.myapp.utils.Constants;
 import gjj.com.myapp.views.NoticeView;
 
 /**
@@ -117,7 +114,6 @@ public class NoticePresenter extends BasePresenter<NoticeView> {
     public void loadNoticeFromDB(long noticeId){
         List<Notice> notices = new ArrayList<>();
         Notice notice = Notice_Dao.getInstance(context).queryNoticeById(noticeId);
-//        notice.setAddressees(Addressee_Dao.getInstance(context).queryAddresseeByNoticeId(noticeId));
         notices.add(notice);
         mvpView.loadSucceed(notices);
     }

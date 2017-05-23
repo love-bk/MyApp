@@ -11,25 +11,23 @@ import org.greenrobot.greendao.annotation.Generated;
  */
 @Entity
 public class Scores {
-    @Id(autoincrement = false)
+    @Id(autoincrement = true)
     private Long id;
-    //学生课题的id
-    private Integer graduateProjectId;
+    //课题id
+    private Long projectId;
     private Integer completenessScoreByGroup;      //完成任务规定的要求与水平评分
     private Integer correctnessScoreByGroup;       //回答问题的正确性评分
     private Integer qualityScoreByGroup;           //论文与实务的质量评分
     private Integer replyScoreByGroup;             //论文内容的答辩陈述评分
     private int scoresState = 0;              //答辩打分的状态,未打分、已打分、已提交
 
+    public Scores() {
+    }
 
-
-    @Generated(hash = 1264687982)
-    public Scores(Long id, Integer graduateProjectId,
-            Integer completenessScoreByGroup, Integer correctnessScoreByGroup,
-            Integer qualityScoreByGroup, Integer replyScoreByGroup,
-            int scoresState) {
-        this.id = id;
-        this.graduateProjectId = graduateProjectId;
+    public Scores(Long projectId, Integer completenessScoreByGroup,
+                  Integer correctnessScoreByGroup, Integer qualityScoreByGroup,
+                  Integer replyScoreByGroup, int scoresState) {
+        this.projectId = projectId;
         this.completenessScoreByGroup = completenessScoreByGroup;
         this.correctnessScoreByGroup = correctnessScoreByGroup;
         this.qualityScoreByGroup = qualityScoreByGroup;
@@ -37,20 +35,18 @@ public class Scores {
         this.scoresState = scoresState;
     }
 
-    @Generated(hash = 1245187606)
-    public Scores() {
+    @Generated(hash = 1407328210)
+    public Scores(Long id, Long projectId, Integer completenessScoreByGroup,
+            Integer correctnessScoreByGroup, Integer qualityScoreByGroup,
+            Integer replyScoreByGroup, int scoresState) {
+        this.id = id;
+        this.projectId = projectId;
+        this.completenessScoreByGroup = completenessScoreByGroup;
+        this.correctnessScoreByGroup = correctnessScoreByGroup;
+        this.qualityScoreByGroup = qualityScoreByGroup;
+        this.replyScoreByGroup = replyScoreByGroup;
+        this.scoresState = scoresState;
     }
-
-
-
-    public Integer getGraduateProjectId() {
-        return graduateProjectId;
-    }
-
-    public void setGraduateProjectId(Integer graduateProjectId) {
-        this.graduateProjectId = graduateProjectId;
-    }
-
 
     public Integer getCompletenessScoreByGroup() {
         return completenessScoreByGroup;
@@ -100,4 +96,11 @@ public class Scores {
         this.id = id;
     }
 
+    public Long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Long projectId) {
+        this.projectId = projectId;
+    }
 }

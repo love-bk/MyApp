@@ -12,19 +12,15 @@ import gjj.com.myapp.baseframework.mvp.BasePresenter;
 import gjj.com.myapp.baseframework.retrofit.ApiCallback;
 import gjj.com.myapp.dao.GraduateProject_Dao;
 import gjj.com.myapp.dao.ReplyGroup_Dao;
+import gjj.com.myapp.dao.Scores_Dao;
 import gjj.com.myapp.dao.Student_Dao;
-import gjj.com.myapp.dao.Tutor_Dao;
 import gjj.com.myapp.model.GraduateProject;
 import gjj.com.myapp.model.ReplyGroup;
+import gjj.com.myapp.model.Scores;
 import gjj.com.myapp.model.Student;
-import gjj.com.myapp.model.Tutor;
-import gjj.com.myapp.myproject.ProjectDetailActivity;
-import gjj.com.myapp.myproject.ProjectFragment;
 import gjj.com.myapp.myreply.views.ReplyDetailActivity;
 import gjj.com.myapp.myreply.views.ReplyFragment;
-import gjj.com.myapp.utils.Constants;
 import gjj.com.myapp.utils.SPUtil;
-import gjj.com.myapp.views.ProjectView;
 import gjj.com.myapp.views.ReplyView;
 
 /**
@@ -81,9 +77,17 @@ public class ReplyPresenter extends BasePresenter<ReplyView> {
                         if (student != null) {
                             Student_Dao.getInstance(context).insertStudent(student);
                         }
+                        //处理分数
+                        Integer score0 = project.getCompletenessScoreByGroup();
+                        Integer score1 = project.getCorrectnessScoreByGroup();
+                        Integer score2 = project.getQualityScoreBtGroup();
+                        Integer score3 = project.getReplyScoreByGroup();
+                        Scores scores = new Scores(project.getId(), score0,score1,score2,score3,0);
+                        Scores_Dao.getInstance(context).insert(scores);
+                        GraduateProject_Dao.getInstance(context).insertProject(project);
                     }
-                    GraduateProject_Dao.getInstance(context).insertProjectList(graduateProjects);
                 }
+                group.setTutorId(SPUtil.getTutorIdfromSP(context));
             }
             ReplyGroup_Dao.getInstance(context).insertReplyGroupList(groups);
         }
@@ -94,7 +98,6 @@ public class ReplyPresenter extends BasePresenter<ReplyView> {
     public void loadReplyGroupFromDB() {
         //从数据库中获取数据
         List<ReplyGroup> replyGroups = ReplyGroup_Dao.getInstance(context).queryReplyGroupListByTutorId(SPUtil.getTutorIdfromSP(context));
-
         mvpView.loadSucceed(replyGroups);
     }
 

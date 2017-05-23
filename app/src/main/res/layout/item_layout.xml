@@ -13,8 +13,8 @@
         >
         <TextView
             android:id="@+id/serial_number_tv"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/icon_size"
+            android:layout_height="@dimen/icon_size"
             android:background="@mipmap/design_logo"
             android:gravity="center"
             android:layout_marginTop="5dp"

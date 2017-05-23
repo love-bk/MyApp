@@ -49,7 +49,7 @@ public class ReplyGroup_Dao {
         return null;
     }
     public List<ReplyGroup> queryReplyGroupListByTutorId(long tutorId){
-        return replyGroupDao.queryBuilder().where(ReplyGroupDao.Properties.Tutor_Id.eq(tutorId)).list();
+        return replyGroupDao.queryBuilder().where(ReplyGroupDao.Properties.TutorId.eq(tutorId)).list();
 
     }
 

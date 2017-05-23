@@ -12,6 +12,7 @@ import gjj.com.myapp.model.GraduateProject;
 public interface ProjectView extends BaseView {
 
     void loadSucceed(List<GraduateProject> projects);
+    void submitSucceed(Boolean status);
 
     void loadFail(String msg);
 }

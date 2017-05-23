@@ -13,8 +13,10 @@ import gjj.com.myapp.baseframework.mvp.BasePresenter;
 import gjj.com.myapp.baseframework.retrofit.ApiCallback;
 import gjj.com.myapp.baseframework.retrofit.ApiStores;
 import gjj.com.myapp.dao.GraduateProject_Dao;
+import gjj.com.myapp.dao.Scores_Dao;
 import gjj.com.myapp.dao.Student_Dao;
 import gjj.com.myapp.model.GraduateProject;
+import gjj.com.myapp.model.Scores;
 import gjj.com.myapp.model.Student;
 import gjj.com.myapp.myproject.ProjectDetailActivity;
 import gjj.com.myapp.myproject.ProjectFragment;
@@ -85,6 +87,13 @@ public class ProjectPresenter extends BasePresenter<ProjectView> {
                 if (student != null){
                     Student_Dao.getInstance(context).insertStudent(student);
                 }
+                //处理分数
+                Integer score0 = project.getCompletenessScoreByGroup();
+                Integer score1 = project.getCorrectnessScoreByGroup();
+                Integer score2 = project.getQualityScoreBtGroup();
+                Integer score3 = project.getReplyScoreByGroup();
+                Scores scores = new Scores(project.getId(), score0,score1,score2,score3,0);
+                Scores_Dao.getInstance(context).insert(scores);
                 GraduateProject_Dao.getInstance(context).insertProject(project);
             }
         }
@@ -129,6 +138,30 @@ public class ProjectPresenter extends BasePresenter<ProjectView> {
         mvpView.loadSucceed(projects);
     }
 
+
+    /**
+     * 从服务器获取数据
+     * @param project
+     */
+    public void submitScores(GraduateProject project) {
+        mvpView.showLoading();
+        addSubscription(mApiStores.submitScores(project), new ApiCallback<String>() {
+            @Override
+            public void onSuccess(String model) {
+                mvpView.submitSucceed(true);
+            }
+
+            @Override
+            public void onFailure(String msg) {
+                mvpView.loadFail(msg);
+            }
+
+            @Override
+            public void onFinish() {
+                mvpView.hideLoading();
+            }
+        });
+    }
 
 
 }

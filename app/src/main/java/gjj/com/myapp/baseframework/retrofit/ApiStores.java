@@ -1,5 +1,6 @@
 package gjj.com.myapp.baseframework.retrofit;
 
+import gjj.com.myapp.model.GraduateProject;
 import gjj.com.myapp.model.Notice;
 import gjj.com.myapp.model.User;
 import retrofit2.http.Body;
@@ -14,11 +15,6 @@ import rx.Observable;
 public interface ApiStores {
     //baseUrl
     String API_SERVER_URL = "http://115.159.195.172:8080/bysj3/";
-
-//    @POST("login.json")
-//    Observable<Tutor> loadLoginData(@Body User user);
-//    @POST("login.json")
-//    Call<String> loadLoginData(@Body User user);
     @POST("login.json")
     Observable<String> loadLoginData(@Body User user);
 
@@ -38,7 +34,7 @@ public interface ApiStores {
     Observable<String> loadAddressees(@Body String tutorId);
     @POST("sendMail.json")
     Observable<String> sendNotice(@Body Notice notice);
-
-//            /setScoreWithProjectByGroupMembers.json";
+    @POST("setScoreWithProjectByGroupMembers.json")
+    Observable<String> submitScores(@Body GraduateProject project);
 
 }

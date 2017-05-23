@@ -3,6 +3,7 @@ package gjj.com.myapp.presenter;
 import android.content.Context;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.List;
 import gjj.com.myapp.baseframework.mvp.BasePresenter;
 import gjj.com.myapp.baseframework.retrofit.ApiCallback;
 import gjj.com.myapp.dao.Addressee_Dao;
+import gjj.com.myapp.dao.Notice_Dao;
 import gjj.com.myapp.model.Addressee;
 import gjj.com.myapp.model.Notice;
 import gjj.com.myapp.model.ServiceAddressee;
@@ -102,11 +104,16 @@ public class AddresseePresenter extends BasePresenter<AddresseeView> {
      * 发送通知
      * @param notice
      */
-    public void sendNotice(Notice notice) {
+    public void sendNotice(final Notice notice) {
         mvpView.showLoading();
         addSubscription(mApiStores.sendNotice(notice), new ApiCallback<String>() {
             @Override
             public void onSuccess(String model) {
+                Gson gson = new Gson();
+                SendNoticeResult sendNoticeResult = gson.fromJson(model, SendNoticeResult.class);
+                notice.setId(sendNoticeResult.getMailId());
+                //将数据插入到数据库中
+                Notice_Dao.getInstance(context).insert(notice);
                 mvpView.sendSucceed(model);
             }
 
@@ -120,5 +127,26 @@ public class AddresseePresenter extends BasePresenter<AddresseeView> {
                 mvpView.hideLoading();
             }
         });
+    }
+
+    private class SendNoticeResult {
+        private Long mailId;
+        private boolean status;
+
+        public Long getMailId() {
+            return mailId;
+        }
+
+        public void setMailId(Long mailId) {
+            this.mailId = mailId;
+        }
+
+        public boolean isStatus() {
+            return status;
+        }
+
+        public void setStatus(boolean status) {
+            this.status = status;
+        }
     }
 }

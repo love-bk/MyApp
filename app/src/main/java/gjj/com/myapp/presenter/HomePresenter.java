@@ -13,11 +13,13 @@ import gjj.com.myapp.dao.Addressee_Dao;
 import gjj.com.myapp.dao.GraduateProject_Dao;
 import gjj.com.myapp.dao.Notice_Dao;
 import gjj.com.myapp.dao.ReplyGroup_Dao;
+import gjj.com.myapp.dao.Scores_Dao;
 import gjj.com.myapp.dao.Student_Dao;
 import gjj.com.myapp.dao.Tutor_Dao;
 import gjj.com.myapp.model.GraduateProject;
 import gjj.com.myapp.model.ProjectAndReply;
 import gjj.com.myapp.model.ReplyGroup;
+import gjj.com.myapp.model.Scores;
 import gjj.com.myapp.model.Student;
 import gjj.com.myapp.utils.Constants;
 import gjj.com.myapp.utils.SPUtil;
@@ -75,6 +77,7 @@ public class HomePresenter  extends BasePresenter<HomeView>{
                 for (ReplyGroup group : groups) {
                     List<GraduateProject> graduateProjects = group.getGraduateProjects();
                     //处理答辩小组里的课题
+                    group.setTutorId(SPUtil.getTutorIdfromSP(context));
                     handleProjectAndStudent(graduateProjects);
                 }
                 ReplyGroup_Dao.getInstance(context).insertReplyGroupList(groups);
@@ -94,6 +97,13 @@ public class HomePresenter  extends BasePresenter<HomeView>{
                 if (student != null){
                     Student_Dao.getInstance(context).insertStudent(student);
                 }
+                //处理分数
+                Integer score0 = project.getCompletenessScoreByGroup();
+                Integer score1 = project.getCorrectnessScoreByGroup();
+                Integer score2 = project.getQualityScoreBtGroup();
+                Integer score3 = project.getReplyScoreByGroup();
+                Scores scores = new Scores(project.getId(), score0,score1,score2,score3,0);
+                Scores_Dao.getInstance(context).insert(scores);
                 GraduateProject_Dao.getInstance(context).insertProject(project);
             }
         }

@@ -58,6 +58,11 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
 
     private int scoreState = 0;
     private int position;
+    private GraduateProject mProject;
+    private Integer score01;
+    private Integer score02;
+    private Integer score03;
+    private Integer score04;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +106,12 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
                 break;
             case R.id.submitBtn:
                 //提交分数
+                mProject.setCompletenessScoreByGroup(score01);
+                mProject.setCorrectnessScoreByGroup(score04);
+                mProject.setReplyScoreByGroup(score03);
+                mProject.setQualityScoreBtGroup(score02);
+                mProject.setScoresState(Constants.YTJ);
+                mvpPresenter.submitScores(mProject);
                 Toast.makeText(mActivity, "提交", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.score01_tv:
@@ -138,27 +149,27 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
      * 赋值总分
      */
     private void intTotalScore() {
-        Integer score01 = Integer.valueOf(mScore01Tv.getText().toString());
-        Integer score02 = Integer.valueOf(mScore02Tv.getText().toString());
-        Integer score03 = Integer.valueOf(mScore03Tv.getText().toString());
-        Integer score04 = Integer.valueOf(mScore04Tv.getText().toString());
+        score01 = Integer.valueOf(mScore01Tv.getText().toString());
+        score02 = Integer.valueOf(mScore02Tv.getText().toString());
+        score03 = Integer.valueOf(mScore03Tv.getText().toString());
+        score04 = Integer.valueOf(mScore04Tv.getText().toString());
         mTotalTv.setText(String.valueOf(score01+score02+score03+score04));
     }
 
     @Override
     public void loadSucceed(List<GraduateProject> projects) {
         if (projects != null && projects.size() != 0) {
-            GraduateProject project = projects.get(0);
-            mNameTv.setText(project.getTitle());
-            Student student = project.getStudent();
+            mProject = projects.get(0);
+            mNameTv.setText(mProject.getTitle());
+            Student student = mProject.getStudent();
             if (student != null) {
                 mStudentNameTv.setText(student.getName());
                 mClassNameTv.setText(student.getStudentClass());
                 mNoTv.setText(student.getNo());
-                int completenessScoreByGroup = project.getCompletenessScoreByGroup();
-                int qualityScoreBtGroup = project.getQualityScoreBtGroup();
-                int replyScoreByGroup = project.getReplyScoreByGroup();
-                int correctnessScoreByGroup = project.getCorrectnessScoreByGroup();
+                int completenessScoreByGroup = mProject.getCompletenessScoreByGroup();
+                int qualityScoreBtGroup = mProject.getQualityScoreBtGroup();
+                int replyScoreByGroup = mProject.getReplyScoreByGroup();
+                int correctnessScoreByGroup = mProject.getCorrectnessScoreByGroup();
                 mScore01Tv.setText(String.valueOf(completenessScoreByGroup));
                 mScore02Tv.setText(String.valueOf(qualityScoreBtGroup));
                 mScore03Tv.setText(String.valueOf(replyScoreByGroup));
@@ -169,8 +180,14 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
     }
 
     @Override
+    public void submitSucceed(Boolean status) {
+        //提交分数成功
+        Toast.makeText(mActivity, "提交分数成功", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
     public void loadFail(String msg) {
-        Toast.makeText(mActivity, "加载失败", Toast.LENGTH_SHORT).show();
+        Toast.makeText(mActivity, "加载失败："+msg, Toast.LENGTH_SHORT).show();
     }
 
 
