@@ -49,4 +49,13 @@ public class Scores_Dao {
     }
 
 
+    public Scores queryDatasByProjectId(long projectId){
+
+        List<Scores> scores = scoresDao.queryBuilder().where(ScoresDao.Properties.ProjectId.eq(projectId)).list();
+        if (scores!=null && scores.size()!=0){
+            return scores.get(0);
+        }
+        return null;
+
+    }
 }

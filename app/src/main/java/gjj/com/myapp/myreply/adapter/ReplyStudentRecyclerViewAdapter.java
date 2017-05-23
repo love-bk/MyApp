@@ -16,7 +16,9 @@ import butterknife.ButterKnife;
 import gjj.com.myapp.R;
 import gjj.com.myapp.model.GraduateProject;
 import gjj.com.myapp.model.ReplyGroup;
+import gjj.com.myapp.model.Scores;
 import gjj.com.myapp.model.Student;
+import gjj.com.myapp.utils.Constants;
 
 /**
  * Created by 高娟娟 on 2017/4/4.
@@ -104,7 +106,23 @@ public class ReplyStudentRecyclerViewAdapter extends RecyclerView.Adapter<ReplyS
             mReplyProjectTv.setText(graduateProject.getTitle());
             mSerialNumberTv.setText(String.valueOf(position + 1));
             mReplyStudentTv.setText(graduateProject.getStudent().getName());
-            mReamStateTv.setText("已打分");
+            Scores scores = graduateProject.getScores();
+            if (scores != null) {
+                int scoresState = scores.getScoresState();
+                switch (scoresState){
+                    case Constants.WDF:
+                        mReamStateTv.setText("未打分");
+                        break;
+                    case Constants.YDF:
+                        mReamStateTv.setText("已打分");
+                        break;
+                    case Constants.YTJ:
+                        mReamStateTv.setText("已提交");
+                        break;
+                }
+            }else {
+                mReamStateTv.setText("已打分");
+            }
         }
     }
 

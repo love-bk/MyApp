@@ -19,7 +19,9 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import gjj.com.myapp.R;
 import gjj.com.myapp.baseframework.mvp.MvpActivity;
+import gjj.com.myapp.dao.Scores_Dao;
 import gjj.com.myapp.model.GraduateProject;
+import gjj.com.myapp.model.Scores;
 import gjj.com.myapp.model.Student;
 import gjj.com.myapp.presenter.ProjectPresenter;
 import gjj.com.myapp.utils.Constants;
@@ -56,20 +58,20 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
     @BindView(R.id.submitBtn)
     Button mSubmitBtn;
 
-    private int scoreState = 0;
     private int position;
     private GraduateProject mProject;
     private Integer score01;
     private Integer score02;
     private Integer score03;
     private Integer score04;
+    private Scores scores;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reply_score_detail);
         ButterKnife.bind(this);
-        initTitle();
+        initWidget();
         initData();
     }
 
@@ -87,9 +89,10 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
         }
     }
 
-    private void initTitle() {
+    private void initWidget() {
         mBackIv.setVisibility(View.VISIBLE);
         mTitleTv.setText("答辩打分");
+
     }
 
     @OnClick(R.id.back_iv)
@@ -97,12 +100,25 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
         onBackPressed();
     }
 
-    @OnClick({R.id.score01_tv, R.id.score02_tv, R.id.score03_tv, R.id.score04_tv,R.id.saveBtn, R.id.submitBtn})
+    /**
+     * 处理分数
+     */
+    private Scores creatScores(int scoreState) {
+        scores.setCompletenessScoreByGroup(score01);
+        scores.setCorrectnessScoreByGroup(score04);
+        scores.setQualityScoreByGroup(score02);
+        scores.setReplyScoreByGroup(score03);
+        scores.setScoresState(scoreState);
+        return scores;
+    }
+    @OnClick({R.id.score01_tv, R.id.score02_tv, R.id.score03_tv, R.id.score04_tv, R.id.saveBtn, R.id.submitBtn})
     public void onViewClicked(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.saveBtn:
                 //将数据保存到数据库中
-                Toast.makeText(mActivity, "保存", Toast.LENGTH_SHORT).show();
+                mvpPresenter.saveScoresToDB(creatScores(1));
+                Toast.makeText(mActivity, "保存成功", Toast.LENGTH_SHORT).show();
+                onBackPressed();
                 break;
             case R.id.submitBtn:
                 //提交分数
@@ -110,9 +126,9 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
                 mProject.setCorrectnessScoreByGroup(score04);
                 mProject.setReplyScoreByGroup(score03);
                 mProject.setQualityScoreBtGroup(score02);
-                mProject.setScoresState(Constants.YTJ);
+                mProject.setScores(null);
+                mvpPresenter.saveScoresToDB(creatScores(2));
                 mvpPresenter.submitScores(mProject);
-                Toast.makeText(mActivity, "提交", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.score01_tv:
             case R.id.score02_tv:
@@ -153,7 +169,7 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
         score02 = Integer.valueOf(mScore02Tv.getText().toString());
         score03 = Integer.valueOf(mScore03Tv.getText().toString());
         score04 = Integer.valueOf(mScore04Tv.getText().toString());
-        mTotalTv.setText(String.valueOf(score01+score02+score03+score04));
+        mTotalTv.setText(String.valueOf(score01 + score02 + score03 + score04));
     }
 
     @Override
@@ -162,18 +178,29 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
             mProject = projects.get(0);
             mNameTv.setText(mProject.getTitle());
             Student student = mProject.getStudent();
-            if (student != null) {
-                mStudentNameTv.setText(student.getName());
-                mClassNameTv.setText(student.getStudentClass());
-                mNoTv.setText(student.getNo());
-                int completenessScoreByGroup = mProject.getCompletenessScoreByGroup();
-                int qualityScoreBtGroup = mProject.getQualityScoreBtGroup();
-                int replyScoreByGroup = mProject.getReplyScoreByGroup();
-                int correctnessScoreByGroup = mProject.getCorrectnessScoreByGroup();
-                mScore01Tv.setText(String.valueOf(completenessScoreByGroup));
-                mScore02Tv.setText(String.valueOf(qualityScoreBtGroup));
-                mScore03Tv.setText(String.valueOf(replyScoreByGroup));
-                mScore04Tv.setText(String.valueOf(correctnessScoreByGroup));
+            mStudentNameTv.setText(student.getName());
+            mClassNameTv.setText(student.getStudentClass());
+            mNoTv.setText(student.getNo());
+            scores = mProject.getScores();
+            if (scores != null) {
+                switch (scores.getScoresState()) {
+                    case Constants.YTJ:
+                        mScore01Tv.setClickable(false);
+                        mScore02Tv.setClickable(false);
+                        mScore03Tv.setClickable(false);
+                        mScore04Tv.setClickable(false);
+                        mSaveBtn.setVisibility(View.GONE);
+                        mSubmitBtn.setVisibility(View.GONE);
+                        break;
+                }
+                int completenessScoreByGroup = scores.getCompletenessScoreByGroup();
+                int qualityScoreBtGroup = scores.getQualityScoreByGroup();
+                int replyScoreByGroup = scores.getReplyScoreByGroup();
+                int correctnessScoreByGroup = scores.getCorrectnessScoreByGroup();
+                mScore01Tv.setText(completenessScoreByGroup+"");
+                mScore02Tv.setText(qualityScoreBtGroup+"");
+                mScore03Tv.setText(replyScoreByGroup+"");
+                mScore04Tv.setText(correctnessScoreByGroup+"");
                 mTotalTv.setText(String.valueOf(completenessScoreByGroup + qualityScoreBtGroup + replyScoreByGroup + correctnessScoreByGroup));
             }
         }
@@ -183,20 +210,22 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
     public void submitSucceed(Boolean status) {
         //提交分数成功
         Toast.makeText(mActivity, "提交分数成功", Toast.LENGTH_SHORT).show();
+        onBackPressed();
     }
 
     @Override
     public void loadFail(String msg) {
-        Toast.makeText(mActivity, "加载失败："+msg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mActivity, "加载失败：" + msg, Toast.LENGTH_SHORT).show();
     }
 
 
     @Override
     public void onBackPressed() {
+        mProject.setScores(scores);
         Intent intent = new Intent();
-        intent.putExtra(Constants.SCORESTATE,scoreState);
-        intent.putExtra(Constants.POSITION,position);
-        this.setResult(RESULT_OK,intent);
+        intent.putExtra(Constants.SCORESTATE, mProject.getScores().getScoresState());
+        intent.putExtra(Constants.POSITION, position);
+        this.setResult(RESULT_OK, intent);
         finish();
     }
 }

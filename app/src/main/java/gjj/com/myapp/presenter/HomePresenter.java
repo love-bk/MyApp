@@ -97,16 +97,37 @@ public class HomePresenter  extends BasePresenter<HomeView>{
                 if (student != null){
                     Student_Dao.getInstance(context).insertStudent(student);
                 }
-                //处理分数
-                Integer score0 = project.getCompletenessScoreByGroup();
-                Integer score1 = project.getCorrectnessScoreByGroup();
-                Integer score2 = project.getQualityScoreBtGroup();
-                Integer score3 = project.getReplyScoreByGroup();
-                Scores scores = new Scores(project.getId(), score0,score1,score2,score3,0);
-                Scores_Dao.getInstance(context).insert(scores);
+                if (project.getReplyGroupId()!=null){
+                    //处理分数
+                    project.setScores(handleScore(project));
+                }
                 GraduateProject_Dao.getInstance(context).insertProject(project);
             }
         }
+    }
+
+    /**
+     * 处理分数
+     * @param project
+     */
+    private Scores handleScore(GraduateProject project) {
+        Scores scores = Scores_Dao.getInstance(context).queryDatasByProjectId(project.getId());
+        if (scores == null) {
+            Integer score0 = project.getCompletenessScoreByGroup();
+            Integer score1 = project.getCorrectnessScoreByGroup();
+            Integer score2 = project.getQualityScoreBtGroup();
+            Integer score3 = project.getReplyScoreByGroup();
+            int sum = score0 + score1+score2+score3;
+            int scoresState;
+            if (sum == 0){
+                scoresState = 0;
+            }else {
+                scoresState = 2;
+            }
+            scores = new Scores(project.getId(), score0,score1,score2,score3,scoresState);
+            Scores_Dao.getInstance(context).insert(scores);
+        }
+        return scores;
     }
 
     /**

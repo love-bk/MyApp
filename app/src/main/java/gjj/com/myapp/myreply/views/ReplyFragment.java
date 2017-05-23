@@ -42,7 +42,6 @@ public class ReplyFragment extends MvpFragment<ReplyPresenter> implements SwipeR
     private ReplyRecyclerViewAdapter mAdapter;
 
     public ReplyFragment() {
-        // Required empty public constructor
     }
 
 

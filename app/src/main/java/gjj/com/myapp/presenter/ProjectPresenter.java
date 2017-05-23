@@ -15,6 +15,7 @@ import gjj.com.myapp.baseframework.retrofit.ApiStores;
 import gjj.com.myapp.dao.GraduateProject_Dao;
 import gjj.com.myapp.dao.Scores_Dao;
 import gjj.com.myapp.dao.Student_Dao;
+import gjj.com.myapp.greendao.gen.ScoresDao;
 import gjj.com.myapp.model.GraduateProject;
 import gjj.com.myapp.model.Scores;
 import gjj.com.myapp.model.Student;
@@ -87,17 +88,38 @@ public class ProjectPresenter extends BasePresenter<ProjectView> {
                 if (student != null){
                     Student_Dao.getInstance(context).insertStudent(student);
                 }
-                //处理分数
-                Integer score0 = project.getCompletenessScoreByGroup();
-                Integer score1 = project.getCorrectnessScoreByGroup();
-                Integer score2 = project.getQualityScoreBtGroup();
-                Integer score3 = project.getReplyScoreByGroup();
-                Scores scores = new Scores(project.getId(), score0,score1,score2,score3,0);
-                Scores_Dao.getInstance(context).insert(scores);
+                if (project.getReplyGroupId()!=null){
+                    //处理分数
+                    project.setScores(handleScore(project));
+                }
                 GraduateProject_Dao.getInstance(context).insertProject(project);
             }
         }
         return projects;
+    }
+
+    /**
+     * 处理分数
+     * @param project
+     */
+    private Scores handleScore(GraduateProject project) {
+        Scores scores = Scores_Dao.getInstance(context).queryDatasByProjectId(project.getId());
+        if (scores == null) {
+            Integer score0 = project.getCompletenessScoreByGroup();
+            Integer score1 = project.getCorrectnessScoreByGroup();
+            Integer score2 = project.getQualityScoreBtGroup();
+            Integer score3 = project.getReplyScoreByGroup();
+            int sum = score0 + score1 + score2 + score3;
+            int scoresState;
+            if (sum == 0) {
+                scoresState = 0;
+            } else {
+                scoresState = 2;
+            }
+            scores = new Scores(project.getId(), score0, score1, score2, score3, scoresState);
+            Scores_Dao.getInstance(context).insert(scores);
+        }
+        return scores;
     }
 
     /**
@@ -134,9 +156,11 @@ public class ProjectPresenter extends BasePresenter<ProjectView> {
         List<GraduateProject> projects = new ArrayList<>();
         GraduateProject project = GraduateProject_Dao.getInstance(context).queryProjectById(projectId);
         project.setStudent(Student_Dao.getInstance(context).queryDatasByProjectId(projectId));
+        project.setScores(Scores_Dao.getInstance(context).queryDatasByProjectId(projectId));
         projects.add(project);
         mvpView.loadSucceed(projects);
     }
+
 
 
     /**
@@ -164,4 +188,11 @@ public class ProjectPresenter extends BasePresenter<ProjectView> {
     }
 
 
+    /**
+     * 保存数据到数据库中
+     * @param scores
+     */
+    public void saveScoresToDB(Scores scores) {
+        Scores_Dao.getInstance(context).insert(scores);
+    }
 }

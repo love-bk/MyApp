@@ -6,7 +6,7 @@ import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.Transient;
 
-import java.io.Serializable;
+
 
 /**
  * Created by Administrator on 2016/1/21.
@@ -35,6 +35,8 @@ public class GraduateProject {
     private String remark;                         //指导老师的评语
     @Transient
     private Student student;                     //选该题目学生
+    @Transient
+    private Scores scores;
     private Long tutorId;                       //申报该题目老师的id
     private Long replyGroupId;                 //该课题所在的答辩小组
     private boolean auditByDirector;           //审核状态
@@ -273,5 +275,13 @@ public class GraduateProject {
 
     public void setStudent(Student student) {
         this.student = student;
+    }
+
+    public Scores getScores() {
+        return scores;
+    }
+
+    public void setScores(Scores scores) {
+        this.scores = scores;
     }
 }

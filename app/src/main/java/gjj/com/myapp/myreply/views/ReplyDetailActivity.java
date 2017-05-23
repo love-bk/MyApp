@@ -154,8 +154,9 @@ public class ReplyDetailActivity extends MvpActivity<ReplyPresenter> implements 
         if (0 == requestCode){
             int scoreState = data.getIntExtra(Constants.SCORESTATE,-1);
             int position = data.getIntExtra(Constants.POSITION,-1);
-            mAdapter.getData().get(position);
-            Toast.makeText(mActivity, "返回了", Toast.LENGTH_SHORT).show();
+            GraduateProject project = mAdapter.getData().get(position);
+            project.getScores().setScoresState(scoreState);
+            mAdapter.notifyDataSetChanged();
         }
     }
 }
