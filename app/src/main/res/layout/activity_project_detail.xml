@@ -31,6 +31,7 @@
                 <TextView
                     android:id="@+id/titleName_tv"
                     style="@style/ProjectDetailTv_style"
+                    android:layout_height="match_parent"
                     android:text="@string/title"
                     />
 
@@ -179,12 +180,14 @@
                     android:id="@+id/content_tv"
                     style="@style/ProjectDetailTv_style"
                     android:text="@string/content"
+                    android:layout_height="match_parent"
                     />
 
                 <TextView
                     android:id="@+id/contentTv"
                     style="@style/ProjectDetailValueTv_style"
                     android:layout_toRightOf="@id/content_tv"
+                    android:gravity="left"
                     />
             </RelativeLayout>
 
@@ -195,12 +198,14 @@
                     android:id="@+id/basicRequirement_tv"
                     style="@style/ProjectDetailTv_style"
                     android:text="@string/basicRequirement"
+                    android:layout_height="match_parent"
                     />
 
                 <TextView
                     android:id="@+id/basicRequirementTv"
                     style="@style/ProjectDetailValueTv_style"
                     android:layout_toRightOf="@id/basicRequirement_tv"
+                    android:gravity="left"
                     />
             </RelativeLayout>
 
@@ -211,12 +216,14 @@
                     android:id="@+id/basicSkill_tv"
                     style="@style/ProjectDetailTv_style"
                     android:text="@string/basicSkill"
+                    android:layout_height="match_parent"
                     />
 
                 <TextView
                     android:id="@+id/basicSkillTv"
                     style="@style/ProjectDetailValueTv_style"
                     android:layout_toRightOf="@id/basicSkill_tv"
+                    android:gravity="left"
                     />
             </RelativeLayout>
 
@@ -226,6 +233,7 @@
                 <TextView
                     android:id="@+id/reference_tv"
                     style="@style/ProjectDetailTv_style"
+                    android:layout_height="match_parent"
                     android:text="@string/reference"
                     />
 
@@ -233,6 +241,7 @@
                     android:id="@+id/referenceTv"
                     style="@style/ProjectDetailValueTv_style"
                     android:layout_toRightOf="@id/reference_tv"
+                    android:gravity="left"
                     />
             </RelativeLayout>
         </LinearLayout>

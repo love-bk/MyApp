@@ -32,6 +32,7 @@
                     android:id="@+id/titleName_tv"
                     style="@style/ProjectDetailTv_style"
                     android:text="通知标题"
+                    android:layout_height="match_parent"
                     />
 
                 <TextView

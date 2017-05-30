@@ -101,6 +101,18 @@ public class ReplyPresenter extends BasePresenter<ReplyView> {
             Integer score1 = project.getCorrectnessScoreByGroup();
             Integer score2 = project.getQualityScoreBtGroup();
             Integer score3 = project.getReplyScoreByGroup();
+            if (score0 == null) {
+                score0 = 0;
+            }
+            if (score1 == null) {
+                score1 = 0;
+            }
+            if (score2 == null) {
+                score2 = 0;
+            }
+            if (score3 == null) {
+                score3 = 0;
+            }
             int sum = score0 + score1 + score2 + score3;
             int scoresState;
             if (sum == 0) {

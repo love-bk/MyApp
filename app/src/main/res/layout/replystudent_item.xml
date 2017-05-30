@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:orientation="vertical"
+            android:layout_marginRight="10dp"
             android:layout_toRightOf="@id/serial_number_tv">
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -57,6 +58,8 @@
                     android:id="@+id/replyProject_tv"
                     style="@style/ItemTitleValueTv_style"
                     android:layout_toRightOf="@id/subtitle_tv"
+                    android:maxLines="1"
+                    android:ellipsize="end"
                     />
             </RelativeLayout>
             <RelativeLayout
@@ -76,7 +79,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/enter"
-            android:layout_marginRight="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"/>
     </RelativeLayout>

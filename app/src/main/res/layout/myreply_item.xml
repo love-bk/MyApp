@@ -68,7 +68,8 @@
             android:src="@mipmap/enter"
             android:layout_marginRight="10dp"
             android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"/>
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="10dp"/>
     </RelativeLayout>
 
     <include layout="@layout/line"/>
