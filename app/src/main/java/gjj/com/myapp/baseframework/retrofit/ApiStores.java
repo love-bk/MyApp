@@ -14,7 +14,7 @@ import rx.Observable;
 
 public interface ApiStores {
     //baseUrl
-    String API_SERVER_URL = "http://115.159.195.172:8080/bysj3/";
+    String API_SERVER_URL = "http://115.159.98.161:8080/bysj3/";
     @POST("login.json")
     Observable<String> loadLoginData(@Body User user);
 

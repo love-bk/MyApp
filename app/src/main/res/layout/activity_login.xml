@@ -34,7 +34,7 @@
             android:layout_marginTop="20dp"
             android:hint="账号"
             android:inputType="number"
-            android:text="020081"
+            android:text="020032"
             />
         <View
             android:layout_width="match_parent"
@@ -44,7 +44,7 @@
             android:id="@+id/password_et"
             style="@style/Login_style"
             android:hint="密码"
-            android:text="020081"
+            android:text="020032"
             android:inputType="numberPassword"/>
     </LinearLayout>
 

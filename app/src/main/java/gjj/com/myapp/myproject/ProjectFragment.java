@@ -161,15 +161,15 @@ public class ProjectFragment extends MvpFragment<ProjectPresenter> implements Sw
         switch (category){
             case Constants.ALL:
                 mvpPresenter.loadProjectFromDB(category);
-                Toast.makeText(mActivity, "点击了全部", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mActivity, "点击了全部", Toast.LENGTH_SHORT).show();
                 break;
             case Constants.DESIGN:
                 mvpPresenter.loadProjectFromDB(category);
-                Toast.makeText(mActivity, "点击了设计", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mActivity, "点击了设计", Toast.LENGTH_SHORT).show();
                 break;
             case Constants.PAGE:
                 mvpPresenter.loadProjectFromDB(category);
-                Toast.makeText(mActivity, "点击了论文", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(mActivity, "点击了论文", Toast.LENGTH_SHORT).show();
                 break;
         }
     }

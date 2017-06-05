@@ -33,6 +33,7 @@ import gjj.com.myapp.myproject.ProjectFragment;
 import gjj.com.myapp.myreply.views.ReplyFragment;
 import gjj.com.myapp.presenter.HomePresenter;
 import gjj.com.myapp.utils.Constants;
+import gjj.com.myapp.utils.SPUtil;
 import gjj.com.myapp.views.HomeView;
 
 public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView, View.OnClickListener {
@@ -144,7 +145,7 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
     }
 
     private void initData() {
-        mvpPresenter.loadProjectAndReply("1");
+        mvpPresenter.loadProjectAndReply(String.valueOf(SPUtil.getTutorIdfromSP(this)));
     }
 
     @Override
@@ -189,7 +190,7 @@ public class HomeActivity extends MvpActivity<HomePresenter> implements HomeView
         if (mViewPager.getCurrentItem()==0){
             menuClickCallBack.changerCategory(Constants.ALL);
         }
-        Toast.makeText(mActivity, "数据加载成功", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mActivity, "数据加载成功", Toast.LENGTH_SHORT).show();
     }
 
     @Override

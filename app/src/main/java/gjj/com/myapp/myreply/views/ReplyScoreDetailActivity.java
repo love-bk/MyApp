@@ -193,10 +193,22 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
                         mSubmitBtn.setVisibility(View.GONE);
                         break;
                 }
-                int completenessScoreByGroup = scores.getCompletenessScoreByGroup();
-                int qualityScoreBtGroup = scores.getQualityScoreByGroup();
-                int replyScoreByGroup = scores.getReplyScoreByGroup();
-                int correctnessScoreByGroup = scores.getCorrectnessScoreByGroup();
+                int completenessScoreByGroup = 0;
+                int qualityScoreBtGroup = 0;
+                int replyScoreByGroup = 0;
+                int correctnessScoreByGroup = 0;
+                if (scores.getCompletenessScoreByGroup()!=null){
+                    completenessScoreByGroup = scores.getCompletenessScoreByGroup();
+                }
+                if (scores.getQualityScoreByGroup()!=null){
+                    qualityScoreBtGroup = scores.getQualityScoreByGroup();
+                }
+                if (scores.getReplyScoreByGroup()!=null){
+                    replyScoreByGroup = scores.getReplyScoreByGroup();
+                }
+                if (scores.getCorrectnessScoreByGroup()!=null){
+                    correctnessScoreByGroup = scores.getCorrectnessScoreByGroup();
+                }
                 mScore01Tv.setText(completenessScoreByGroup+"");
                 mScore02Tv.setText(qualityScoreBtGroup+"");
                 mScore03Tv.setText(replyScoreByGroup+"");
