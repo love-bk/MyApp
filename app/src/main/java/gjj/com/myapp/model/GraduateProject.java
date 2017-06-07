@@ -42,8 +42,9 @@ public class GraduateProject {
     private boolean auditByDirector;           //审核状态
     private int scoresState;                    //登陆用户对该学生的答辩打分
 
+    private long userId;
 
-    @Generated(hash = 1535211335)
+    @Generated(hash = 144197301)
     public GraduateProject(Long id, String year, String title, String subTitle,
             String category, String projectType, String projectFidelity,
             String projectFrom, String content, String basicRequirement,
@@ -51,7 +52,7 @@ public class GraduateProject {
             Integer completenessScoreByGroup, Integer correctnessScoreByGroup,
             Integer qualityScoreBtGroup, Integer replyScoreByGroup, String remark,
             Long tutorId, Long replyGroupId, boolean auditByDirector,
-            int scoresState) {
+            int scoresState, long userId) {
         this.id = id;
         this.year = year;
         this.title = title;
@@ -74,12 +75,20 @@ public class GraduateProject {
         this.replyGroupId = replyGroupId;
         this.auditByDirector = auditByDirector;
         this.scoresState = scoresState;
+        this.userId = userId;
     }
 
     @Generated(hash = 1800086101)
     public GraduateProject() {
     }
 
+    public long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
 
     public Long getReplyGroupId() {
         return replyGroupId;

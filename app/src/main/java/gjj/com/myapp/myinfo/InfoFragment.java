@@ -1,15 +1,19 @@
 package gjj.com.myapp.myinfo;
 
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -21,12 +25,13 @@ import gjj.com.myapp.model.Student;
 import gjj.com.myapp.model.Tutor;
 import gjj.com.myapp.myinfo.adapter.MyStudentListAdapter;
 import gjj.com.myapp.presenter.MyInfoPresenter;
+import gjj.com.myapp.utils.Constants;
 import gjj.com.myapp.views.MyInfoView;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InfoFragment extends MvpFragment<MyInfoPresenter> implements MyInfoView {
+public class InfoFragment extends MvpFragment<MyInfoPresenter> implements MyInfoView, MyStudentListAdapter.CallBackListener {
 
 
     @BindView(R.id.nameTv)
@@ -63,6 +68,7 @@ public class InfoFragment extends MvpFragment<MyInfoPresenter> implements MyInfo
         mReplyStudentRecyclerView.setItemAnimator(new DefaultItemAnimator());
         adapter = new MyStudentListAdapter(getActivity());
         mReplyStudentRecyclerView.setAdapter(adapter);
+        adapter.setCallBackListener(this);
     }
 
 
@@ -102,6 +108,30 @@ public class InfoFragment extends MvpFragment<MyInfoPresenter> implements MyInfo
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+
+    }
+
+    /**
+     * 电话和信息图片的点击事件
+     * @param phoneNumber
+     * @param flag
+     */
+    @Override
+    public void onItemClick(String phoneNumber, int flag) {
+        if (!TextUtils.isEmpty(phoneNumber)) {
+            switch (flag){
+                case Constants.PHONE:
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+phoneNumber));
+                    startActivity(intent);
+                    break;
+                case Constants.MESSAGE:
+                    Intent messageIntent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:"+phoneNumber));
+                    startActivity(messageIntent);
+                    break;
+            }
+        }else {
+            Toast.makeText(getActivity(), "手机号不能为空", Toast.LENGTH_SHORT).show();
+        }
 
     }
 }

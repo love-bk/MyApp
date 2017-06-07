@@ -25,6 +25,7 @@ import gjj.com.myapp.model.Scores;
 import gjj.com.myapp.model.Student;
 import gjj.com.myapp.presenter.ProjectPresenter;
 import gjj.com.myapp.utils.Constants;
+import gjj.com.myapp.utils.SPUtil;
 import gjj.com.myapp.views.ProjectView;
 
 public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> implements ProjectView {
@@ -127,7 +128,8 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
                 mProject.setReplyScoreByGroup(score03);
                 mProject.setQualityScoreBtGroup(score02);
                 mProject.setScores(null);
-                mvpPresenter.saveScoresToDB(creatScores(2));
+                mProject.setUserId(SPUtil.getTutorIdfromSP(this));
+
                 mvpPresenter.submitScores(mProject);
                 break;
             case R.id.score01_tv:
@@ -222,6 +224,7 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
     public void submitSucceed(Boolean status) {
         //提交分数成功
         Toast.makeText(mActivity, "提交分数成功", Toast.LENGTH_SHORT).show();
+        mvpPresenter.saveScoresToDB(creatScores(2));
         onBackPressed();
     }
 

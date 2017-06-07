@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -15,7 +16,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import gjj.com.myapp.R;
 import gjj.com.myapp.model.Student;
+import gjj.com.myapp.myinfo.InfoFragment;
 import gjj.com.myapp.myproject.adapter.ProjectRecyclerViewAdapter;
+import gjj.com.myapp.utils.Constants;
+import gjj.com.myapp.views.HomeView;
 
 /**
  * Created by 高娟娟 on 2017/4/3.
@@ -26,7 +30,7 @@ public class MyStudentListAdapter extends RecyclerView.Adapter<MyStudentListAdap
     private Context mContext;
     private List<Student> mData = new ArrayList<>();
     private LayoutInflater mInflater;
-    private OnItemClickListener mOnItemClickListener;
+    private CallBackListener mCallBackListener;
 
 
     public MyStudentListAdapter(Context context) {
@@ -34,12 +38,14 @@ public class MyStudentListAdapter extends RecyclerView.Adapter<MyStudentListAdap
         mInflater = LayoutInflater.from(mContext);
     }
 
-    public interface OnItemClickListener {
-        void onItemClick(View view, int position);
+
+
+    public interface CallBackListener {
+        void onItemClick(String content,int flag);
     }
 
-    public void setOnItemClickListener(OnItemClickListener mOnItemClickListener) {
-        this.mOnItemClickListener = mOnItemClickListener;
+    public void setCallBackListener(CallBackListener mCallBackListener) {
+        this.mCallBackListener = mCallBackListener;
     }
 
     @Override
@@ -50,18 +56,24 @@ public class MyStudentListAdapter extends RecyclerView.Adapter<MyStudentListAdap
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.setData(mData.get(position), position);
         //判断是否设置了监听器
-        if (mOnItemClickListener != null) {
+        if (mCallBackListener != null) {
             //为ItemView设置监听器
-            holder.mystudent_item.setOnClickListener(new View.OnClickListener() {
+            holder.phoneIv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    int position = holder.getLayoutPosition(); // 1
-                    mOnItemClickListener.onItemClick(holder.itemView, position); // 2
+                    mCallBackListener.onItemClick(mData.get(position).getContact(), Constants.PHONE); // / 2
                 }
             });
+            holder.messageIv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCallBackListener.onItemClick(mData.get(position).getContact(), Constants.MESSAGE); // / 2
+                }
+            });
+
         }
     }
 
@@ -85,6 +97,10 @@ public class MyStudentListAdapter extends RecyclerView.Adapter<MyStudentListAdap
         TextView mSerialNumberTv;
         @BindView(R.id.mystudent_item)
         LinearLayout mystudent_item;
+        @BindView(R.id.phone)
+        ImageView phoneIv;
+        @BindView(R.id.message)
+        ImageView messageIv;
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

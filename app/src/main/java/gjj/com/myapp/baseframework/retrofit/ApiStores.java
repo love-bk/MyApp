@@ -4,6 +4,8 @@ import gjj.com.myapp.model.GraduateProject;
 import gjj.com.myapp.model.Notice;
 import gjj.com.myapp.model.User;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import rx.Observable;
@@ -15,6 +17,7 @@ import rx.Observable;
 public interface ApiStores {
     //baseUrl
     String API_SERVER_URL = "http://115.159.98.161:8080/bysj3/";
+//    String API_SERVER_URL = "http://192.168.23.1:8080/bysj3/";
     @POST("login.json")
     Observable<String> loadLoginData(@Body User user);
 

@@ -23,6 +23,8 @@ public class Constants {
     public static final String ACOUNTNAME = "accountname";
     public static final String SCORESTATE = "打分状态";
     public static final String POSITION = "position";
+    public static final int PHONE = 0;
+    public static final int MESSAGE = 1;
     public static  long tutorId = 1;
     public static  final String TUTOR_TYPE = "老师";
     public static  final String STUDENT_TYPE = "学生";

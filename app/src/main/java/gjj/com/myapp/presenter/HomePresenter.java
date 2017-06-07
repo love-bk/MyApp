@@ -156,5 +156,6 @@ public class HomePresenter  extends BasePresenter<HomeView>{
         ReplyGroup_Dao.getInstance(context).deleteAllData();
         Student_Dao.getInstance(context).deleteAllData();
         Tutor_Dao.getInstance(context).deleteAllData();
+        Scores_Dao.getInstance(context).deleteAllData();
     }
 }
