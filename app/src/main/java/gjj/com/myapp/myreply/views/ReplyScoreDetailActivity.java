@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,7 +20,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import gjj.com.myapp.R;
 import gjj.com.myapp.baseframework.mvp.MvpActivity;
-import gjj.com.myapp.dao.Scores_Dao;
 import gjj.com.myapp.model.GraduateProject;
 import gjj.com.myapp.model.Scores;
 import gjj.com.myapp.model.Student;
@@ -58,6 +58,14 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
     Button mSaveBtn;
     @BindView(R.id.submitBtn)
     Button mSubmitBtn;
+    @BindView(R.id.score_rl01)
+    RelativeLayout mScoreRl01;
+    @BindView(R.id.score_rl02)
+    RelativeLayout mScoreRl02;
+    @BindView(R.id.score_rl03)
+    RelativeLayout mScoreRl03;
+    @BindView(R.id.score_rl04)
+    RelativeLayout mScoreRl04;
 
     private int position;
     private GraduateProject mProject;
@@ -112,17 +120,18 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
         scores.setScoresState(scoreState);
         return scores;
     }
-    @OnClick({R.id.score01_tv, R.id.score02_tv, R.id.score03_tv, R.id.score04_tv, R.id.saveBtn, R.id.submitBtn})
+
+    @OnClick({R.id.score_rl01,R.id.score_rl02,R.id.score_rl03,R.id.score_rl04,R.id.score01_tv, R.id.score02_tv, R.id.score03_tv, R.id.score04_tv, R.id.saveBtn, R.id.submitBtn})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.saveBtn:
                 //将数据保存到数据库中
                 mvpPresenter.saveScoresToDB(creatScores(1));
-                Toast.makeText(mActivity, "保存成功", Toast.LENGTH_SHORT).show();
                 onBackPressed();
                 break;
             case R.id.submitBtn:
                 //提交分数
+                intTotalScore();
                 mProject.setCompletenessScoreByGroup(score01);
                 mProject.setCorrectnessScoreByGroup(score04);
                 mProject.setReplyScoreByGroup(score03);
@@ -132,35 +141,50 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
 
                 mvpPresenter.submitScores(mProject);
                 break;
-            case R.id.score01_tv:
-            case R.id.score02_tv:
-            case R.id.score03_tv:
-            case R.id.score04_tv:
-                View outerView = LayoutInflater.from(this).inflate(R.layout.wheel_view, null);
-                WheelView wv = (WheelView) outerView.findViewById(R.id.wheel_view_wv);
-                wv.setOffset(2);
-                wv.setItems(Arrays.asList(PLANETS));
-                wv.setSeletion(Integer.valueOf(((TextView) view).getText().toString()));
-                wv.setView((TextView) view);
-                wv.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
-                    @Override
-                    public void onSelected(int selectedIndex, String item, TextView view) {
-                        view.setText(item);
-                    }
-                });
+//            case R.id.score01_tv:
+//            case R.id.score02_tv:
+//            case R.id.score03_tv:
+//            case R.id.score04_tv:
+            case R.id.score_rl01:
+                showSelectedScore(Integer.valueOf(mScore01Tv.getText().toString()),mScore01Tv);
+                break;
+            case R.id.score_rl02:
+                showSelectedScore(Integer.valueOf(mScore02Tv.getText().toString()),mScore02Tv);
+                break;
+            case R.id.score_rl03:
+                showSelectedScore(Integer.valueOf(mScore03Tv.getText().toString()),mScore03Tv);
+                break;
+            case R.id.score_rl04:
+                showSelectedScore(Integer.valueOf(mScore04Tv.getText().toString()),mScore04Tv);
 
-                new AlertDialog.Builder(this)
-                        .setTitle("请选择分数")
-                        .setView(outerView)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                intTotalScore();
-                            }
-                        })
-                        .show();
                 break;
         }
+    }
+
+    private void showSelectedScore(Integer score, TextView view) {
+        View outerView = LayoutInflater.from(this).inflate(R.layout.wheel_view, null);
+        WheelView wv = (WheelView) outerView.findViewById(R.id.wheel_view_wv);
+        wv.setOffset(2);
+        wv.setItems(Arrays.asList(PLANETS));
+        wv.setSeletion(score);
+        wv.setView(view);
+        wv.setOnWheelViewListener(new WheelView.OnWheelViewListener() {
+            @Override
+            public void onSelected(int selectedIndex, String item, TextView view) {
+                view.setText(item);
+            }
+        });
+
+        new AlertDialog.Builder(this)
+                .setTitle("请选择分数")
+                .setView(outerView)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        intTotalScore();
+                    }
+                })
+                .show();
     }
 
     /**
@@ -199,22 +223,22 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
                 int qualityScoreBtGroup = 0;
                 int replyScoreByGroup = 0;
                 int correctnessScoreByGroup = 0;
-                if (scores.getCompletenessScoreByGroup()!=null){
+                if (scores.getCompletenessScoreByGroup() != null) {
                     completenessScoreByGroup = scores.getCompletenessScoreByGroup();
                 }
-                if (scores.getQualityScoreByGroup()!=null){
+                if (scores.getQualityScoreByGroup() != null) {
                     qualityScoreBtGroup = scores.getQualityScoreByGroup();
                 }
-                if (scores.getReplyScoreByGroup()!=null){
+                if (scores.getReplyScoreByGroup() != null) {
                     replyScoreByGroup = scores.getReplyScoreByGroup();
                 }
-                if (scores.getCorrectnessScoreByGroup()!=null){
+                if (scores.getCorrectnessScoreByGroup() != null) {
                     correctnessScoreByGroup = scores.getCorrectnessScoreByGroup();
                 }
-                mScore01Tv.setText(completenessScoreByGroup+"");
-                mScore02Tv.setText(qualityScoreBtGroup+"");
-                mScore03Tv.setText(replyScoreByGroup+"");
-                mScore04Tv.setText(correctnessScoreByGroup+"");
+                mScore01Tv.setText(completenessScoreByGroup + "");
+                mScore02Tv.setText(qualityScoreBtGroup + "");
+                mScore03Tv.setText(replyScoreByGroup + "");
+                mScore04Tv.setText(correctnessScoreByGroup + "");
                 mTotalTv.setText(String.valueOf(completenessScoreByGroup + qualityScoreBtGroup + replyScoreByGroup + correctnessScoreByGroup));
             }
         }
@@ -243,4 +267,5 @@ public class ReplyScoreDetailActivity extends MvpActivity<ProjectPresenter> impl
         this.setResult(RESULT_OK, intent);
         finish();
     }
+
 }

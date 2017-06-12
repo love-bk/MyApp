@@ -92,8 +92,10 @@ public class ProjectPresenter extends BasePresenter<ProjectView> {
                     //处理分数
                     project.setScores(handleScore(project));
                 }
-                GraduateProject_Dao.getInstance(context).insertProject(project);
+//                GraduateProject_Dao.getInstance(context).insertProject(project);
             }
+            GraduateProject_Dao.getInstance(context).insertProjects(projects,SPUtil.getTutorIdfromSP(context));
+
         }
         return projects;
     }

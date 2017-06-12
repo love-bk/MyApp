@@ -61,18 +61,18 @@ public class MyStudentListAdapter extends RecyclerView.Adapter<MyStudentListAdap
         //判断是否设置了监听器
         if (mCallBackListener != null) {
             //为ItemView设置监听器
-            holder.phoneIv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mCallBackListener.onItemClick(mData.get(position).getContact(), Constants.PHONE); // / 2
-                }
-            });
-            holder.messageIv.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mCallBackListener.onItemClick(mData.get(position).getContact(), Constants.MESSAGE); // / 2
-                }
-            });
+//            holder.phoneIv.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    mCallBackListener.onItemClick(mData.get(position).getContact(), Constants.PHONE); // / 2
+//                }
+//            });
+//            holder.messageIv.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    mCallBackListener.onItemClick(mData.get(position).getContact(), Constants.MESSAGE); // / 2
+//                }
+//            });
 
         }
     }
@@ -97,10 +97,10 @@ public class MyStudentListAdapter extends RecyclerView.Adapter<MyStudentListAdap
         TextView mSerialNumberTv;
         @BindView(R.id.mystudent_item)
         LinearLayout mystudent_item;
-        @BindView(R.id.phone)
-        ImageView phoneIv;
-        @BindView(R.id.message)
-        ImageView messageIv;
+//        @BindView(R.id.phone)
+//        ImageView phoneIv;
+//        @BindView(R.id.message)
+//        ImageView messageIv;
         public MyViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

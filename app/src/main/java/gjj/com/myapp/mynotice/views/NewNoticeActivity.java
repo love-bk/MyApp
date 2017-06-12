@@ -2,6 +2,7 @@ package gjj.com.myapp.mynotice.views;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -91,6 +92,7 @@ public class NewNoticeActivity extends MvpActivity<AddresseePresenter> implement
 
     @OnClick({R.id.ddresseeaTv, R.id.send, R.id.back_iv})
     public void onViewClicked(View view) {
+        hideSoftKeyboard(view);
         switch (view.getId()) {
             case R.id.ddresseeaTv:
                 //请选则收件人
@@ -98,7 +100,6 @@ public class NewNoticeActivity extends MvpActivity<AddresseePresenter> implement
                 initCustomDialog();
                 break;
             case R.id.send:
-                hideSoftKeyboard(view);
                 initNotice();
                 break;
             case R.id.back_iv:
@@ -216,12 +217,17 @@ public class NewNoticeActivity extends MvpActivity<AddresseePresenter> implement
 
     @Override
     public void sendSucceed(String model) {
-        Toast.makeText(mActivity, "通知发送成功:"+model, Toast.LENGTH_SHORT).show();
+        Toast.makeText(mActivity, "通知发送成功", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(NewNoticeActivity.this,MyNoticeListActivity.class);
+        intent.putExtra(Constants.NOTICE_FLAG,Constants.FORWARD_MESSAGE);
+        startActivity(intent);
+        finish();
     }
 
     @Override
     public void loadFail(String msg) {
-        Toast.makeText(mActivity, "加载数据失败"+msg, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mActivity, "通知发送失败", Toast.LENGTH_SHORT).show();
+        mvpPresenter.loadAddresseesFromDB();
     }
 
 }

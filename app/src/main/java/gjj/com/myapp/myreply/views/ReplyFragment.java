@@ -71,6 +71,10 @@ public class ReplyFragment extends MvpFragment<ReplyPresenter> implements SwipeR
         });
         mReplyRecyclerView.setAdapter(mAdapter);
         mReplySwipeRefresh.setOnRefreshListener(this);
+        mReplySwipeRefresh.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
     }
 
 
@@ -113,7 +117,7 @@ public class ReplyFragment extends MvpFragment<ReplyPresenter> implements SwipeR
 
     @Override
     public void loadFail(String msg) {
-
+        mvpPresenter.loadReplyGroupFromDB();
     }
 
     @Override

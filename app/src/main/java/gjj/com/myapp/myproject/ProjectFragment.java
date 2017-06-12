@@ -139,7 +139,8 @@ public class ProjectFragment extends MvpFragment<ProjectPresenter> implements Sw
      */
     @Override
     public void loadFail(String msg) {
-        Toast.makeText(mActivity, "数据加载失败", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mActivity, "数据加载失败", Toast.LENGTH_SHORT).show();
+        mvpPresenter.loadProjectFromDB(category);
     }
 
     @Override

@@ -1,9 +1,12 @@
 package gjj.com.myapp.presenter;
 
 import android.content.Context;
+import android.location.Address;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+
+import org.greenrobot.greendao.annotation.Transient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +19,7 @@ import gjj.com.myapp.model.Addressee;
 import gjj.com.myapp.model.Notice;
 import gjj.com.myapp.mynotice.views.MyNoticeDetailActivity;
 import gjj.com.myapp.mynotice.views.MyNoticeListActivity;
+import gjj.com.myapp.utils.Constants;
 import gjj.com.myapp.views.NoticeView;
 
 /**
@@ -47,7 +51,7 @@ public class NoticePresenter extends BasePresenter<NoticeView> {
         addSubscription(mApiStores.loadMyReceivedNotices(tutorId), new ApiCallback<String>() {
             @Override
             public void onSuccess(String model) {
-                mvpView.loadSucceed(handleData(model));
+                mvpView.loadSucceed(handleData(model,Constants.GET_MESSAGE));
             }
 
             @Override
@@ -71,7 +75,7 @@ public class NoticePresenter extends BasePresenter<NoticeView> {
         addSubscription(mApiStores.loadMyReleasedNotices(tutorId), new ApiCallback<String>() {
             @Override
             public void onSuccess(String model) {
-                mvpView.loadSucceed(handleData(model));
+                mvpView.loadSucceed(handleData(model,Constants.FORWARD_MESSAGE));
             }
 
             @Override
@@ -91,12 +95,12 @@ public class NoticePresenter extends BasePresenter<NoticeView> {
      * @param model
      * @return
      */
-    private List<Notice> handleData(String model) {
+    private List<Notice> handleData(String model,String flag) {
         Gson gson = new Gson();
         List<Notice> notices = gson.fromJson(model, new TypeToken<List<Notice>>() {
         }.getType());
         //保存到数据库中
-        Notice_Dao.getInstance(context).insertNotices(notices);
+        Notice_Dao.getInstance(context).insertNoticesByFlag(notices,flag);
         for (Notice notice : notices) {
             List<Long> addresseeIdList = notice.getAddresseeIdList();
             List<String> addresseeNameList = notice.getAddresseeNameList();
@@ -117,4 +121,26 @@ public class NoticePresenter extends BasePresenter<NoticeView> {
         notices.add(notice);
         mvpView.loadSucceed(notices);
     }
+
+    //从本地加载我收到的通知
+    public void loadReceiveNoticeFormDB(String flag) {
+        List<Notice> notices = Notice_Dao.getInstance(context).queryNoticesByFlag(flag);
+        for (Notice notice : notices) {
+            List<Long> addresseeIdList = new ArrayList<>();
+            List<String> addresseeNameList= new ArrayList<>();
+            List<Addressee> addressees = Addressee_Dao.getInstance(context).queryAddresseeByNoticeId(notice.getId());
+            if (addressees != null && addressees.size()>0){
+                for (Addressee addressee : addressees) {
+                    addresseeIdList.add(addressee.getId());
+                    addresseeNameList.add(addressee.getName());
+                }
+                notice.setAddresseeNameList(addresseeNameList);
+                notice.setAddresseeIdList(addresseeIdList);
+            }
+        }
+        mvpView.loadSucceed(notices);
+
+    }
+    //从本地加载我发送的通知
+
 }

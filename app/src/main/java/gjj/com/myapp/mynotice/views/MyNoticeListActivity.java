@@ -102,6 +102,7 @@ public class MyNoticeListActivity extends MvpActivity<NoticePresenter> implement
 
     @Override
     public void loadFail(String msg) {
-        Toast.makeText(mActivity, "请求失败："+msg, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(mActivity, "请求失败："+msg, Toast.LENGTH_SHORT).show();
+        mvpPresenter.loadReceiveNoticeFormDB(flag);
     }
 }

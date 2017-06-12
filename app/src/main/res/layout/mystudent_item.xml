@@ -59,29 +59,29 @@
             </RelativeLayout>
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true">
-            <ImageView
-                android:id="@+id/phone"
-                android:clickable="true"
-                android:background="@drawable/iphone_selector"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                />
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerInParent="true">-->
+            <!--<ImageView-->
+                <!--android:id="@+id/phone"-->
+                <!--android:clickable="true"-->
+                <!--android:background="@drawable/iphone_selector"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--/>-->
 
-            <ImageView
-                android:id="@+id/message"
-                android:clickable="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:src="@drawable/message_selector"/>
+            <!--<ImageView-->
+                <!--android:id="@+id/message"-->
+                <!--android:clickable="true"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="20dp"-->
+                <!--android:src="@drawable/message_selector"/>-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
     </RelativeLayout>
 
     <include layout="@layout/line"/>

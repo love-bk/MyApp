@@ -104,6 +104,8 @@
             </RelativeLayout>
             <RelativeLayout
                 style="@style/ProjectDetailRL_style"
+                android:id="@+id/score_rl01"
+                android:clickable="true"
                 android:background="@drawable/border_norightbottom"
                 android:padding="10dp">
                 <TextView
@@ -123,6 +125,8 @@
                     android:text="10"/>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/score_rl02"
+                android:clickable="true"
                 style="@style/ProjectDetailRL_style"
                 android:background="@drawable/border_norightbottom"
                 android:padding="10dp">
@@ -143,6 +147,8 @@
                     android:text="10"/>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/score_rl03"
+                android:clickable="true"
                 style="@style/ProjectDetailRL_style"
                 android:background="@drawable/border_norightbottom"
                 android:padding="10dp">
@@ -163,6 +169,8 @@
                     android:text="10"/>
             </RelativeLayout>
             <RelativeLayout
+                android:id="@+id/score_rl04"
+                android:clickable="true"
                 style="@style/ProjectDetailRL_style"
                 android:background="@drawable/border_norightbottom"
                 android:padding="10dp">

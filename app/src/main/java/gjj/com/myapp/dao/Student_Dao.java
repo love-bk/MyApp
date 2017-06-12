@@ -41,10 +41,10 @@ public class Student_Dao {
     public void insertStudent(Student student){
         List<Student> students = studentDao.queryBuilder().where(StudentDao.Properties.Id.eq(student.getId())).list();
         if (students!=null && students.size()!=0){
-            Long replyGroup_id = students.get(0).getReplyGroupId();
-            if (replyGroup_id != null){
-                student.setReplyGroupId(replyGroup_id);
-            }
+//            Long replyGroup_id = students.get(0).getReplyGroupId();
+//            if (replyGroup_id != null){
+//                student.setReplyGroupId(replyGroup_id);
+//            }
             studentDao.delete(students.get(0));
         }
         studentDao.insert(student);
